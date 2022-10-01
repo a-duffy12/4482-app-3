@@ -414,6 +414,17 @@
                 },
                 {
                     "name": "",
+                    "id": "fcce04d5-bd2f-4528-8f5e-cfafc17c2c7f",
+                    "path": "<Keyboard>/leftCtrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "bb700fca-1351-412d-99e6-baebaaa0c6dc",
                     "path": "<Keyboard>/leftShift",
                     "interactions": "",

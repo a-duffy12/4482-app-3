@@ -14,6 +14,11 @@ public class PlayerController : MonoBehaviour
     [Range(0f, 0.5f)] [SerializeField] private float groundRadius = 0.15f;
 
     [Header("Audio")]
+    // move audio
+    // crouch audio
+    // jump audio
+    // dash audio
+    // rewind audio
 
     #endregion public properties
 
@@ -23,6 +28,7 @@ public class PlayerController : MonoBehaviour
     private bool isCrouched;
     private float lastJumpTime;
     private float lastDashTime;
+    private float lastRewindTime;
     private float lastGroundTime;
 
     private float wStrafe = 0f;
@@ -31,10 +37,12 @@ public class PlayerController : MonoBehaviour
     private float dStrafe = 0f;
     private bool jump = false;
     private bool dash = false;
-    private float dashSpeed = 1f;
-    private bool applyDash = false;
+    private bool rewind = false;
 
-    Animator animator;
+    private float timeToRewind;
+    Vector3 positionToRewind;
+
+    //Animator animator;
     AudioSource movementSource;
 
     #endregion private properties
@@ -59,6 +67,7 @@ public class PlayerController : MonoBehaviour
     float newSpeed;
     float control;
     float drop;
+    float dashSpeed;
 
     #endregion math properties
 
@@ -66,13 +75,14 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        animator = GetComponentInChildren<Animator>();
+        //animator = GetComponentInChildren<Animator>();
         movementSource = GetComponent<AudioSource>();
         movementSource.playOnAwake = false;
         movementSource.spatialBlend = 1f;
         movementSource.volume = 0.5f;
 
-        // set up audio source
+        timeToRewind = Time.time;
+        positionToRewind = transform.position;
     }
 
     void FixedUpdate()
@@ -81,29 +91,43 @@ public class PlayerController : MonoBehaviour
 
         if (isGrounded)
         {
-            GroundMove((wStrafe + sStrafe), (aStrafe + dStrafe), jump, dash);
+            GroundMove((wStrafe + sStrafe), (aStrafe + dStrafe), jump);
 
             if (!movementSource.isPlaying && (wStrafe + sStrafe != 0 || aStrafe + dStrafe != 0))
             {
                 if (isCrouched)
                 {
-                    // crouch audio
+                    Config.enemyAggroRadiusModifier = 0.7f; // enemies cannot detect as far
+                    // crouch audio, slower and quieter
                 }
                 else
                 {
+                    Config.enemyAggroRadiusModifier = 1f; // enemies can detect normally
                     // walk audio
                 }
             }
         }
         else
         {
-            AirMove((wStrafe + sStrafe), (aStrafe + dStrafe), dash);
+            AirMove((wStrafe + sStrafe), (aStrafe + dStrafe));
         }
         
         controller.Move(playerVelocity * Time.deltaTime);
 
+        if (Time.time > timeToRewind + Config.rewindAmount)
+        {
+            timeToRewind = Time.time;
+            positionToRewind = transform.position;
+        }
+
+        if (rewind)
+        {
+            transform.position = positionToRewind;
+            rewind = false;
+        }
+
         // set animator based on which strafe direction is being applied
-        if (wStrafe > sStrafe)
+        /*if (wStrafe > sStrafe)
         {
             animator.SetInteger("WSMove", 1);
         }
@@ -127,7 +151,7 @@ public class PlayerController : MonoBehaviour
         else if (aStrafe < dStrafe)
         {
             animator.SetInteger("ADMove", 1);
-        } 
+        }*/
     }
 
     #region movement methods
@@ -138,7 +162,7 @@ public class PlayerController : MonoBehaviour
         lastGroundTime = isGrounded ? Time.time : lastGroundTime;
     }
 
-    void GroundMove(float wsMove, float adMove, bool jump, bool dash)
+    void GroundMove(float wsMove, float adMove, bool jump)
     {
         if (jump)
         {
@@ -162,14 +186,9 @@ public class PlayerController : MonoBehaviour
         {
             Jump();
         }
-
-        if (dash)
-        {
-            Dash();
-        }
     }
 
-    void AirMove(float wsMove, float adMove, bool dash)
+    void AirMove(float wsMove, float adMove)
     {
         wishDirection = new Vector3(adMove, 0, wsMove); // direction inputs want to go in
         wishDirection = transform.TransformDirection(wishDirection); // get direction in world space
@@ -181,17 +200,13 @@ public class PlayerController : MonoBehaviour
         Accelerate(wishDirection, wishSpeed, GetAcceleration());
 
         ApplyGravity();
-
-        if (dash)
-        {
-            Dash();
-        }
     }
 
     void Accelerate(Vector3 wishDirection, float wishSpeed, float accel)
     {
         currentSpeed = Vector3.Dot(playerVelocity, wishDirection); // source magic
         addSpeed = wishSpeed - currentSpeed; // how much speed is needed
+        dashSpeed = 0f; // extra speed to add from dash
 
         if (addSpeed < 0) return;
 
@@ -199,8 +214,14 @@ public class PlayerController : MonoBehaviour
 
         if (accelSpeed > addSpeed) accelSpeed = addSpeed; // prevent over acceleration
 
-        playerVelocity.x += accelSpeed * wishDirection.x;
-        playerVelocity.z += accelSpeed * wishDirection.z;
+        if (dash)
+        {
+            dashSpeed = Config.dashSpeed;
+            dash = false;
+        }
+
+        playerVelocity.x += (accelSpeed + dashSpeed) * wishDirection.x;
+        playerVelocity.z += (accelSpeed + dashSpeed) * wishDirection.z;
     }
 
     void ApplyFriction(float amount)
@@ -243,18 +264,7 @@ public class PlayerController : MonoBehaviour
             playerVelocity.y = Config.jumpSpeed;
             lastJumpTime = Time.time;
             jump = false; // no longer want to jump
-            animator.SetTrigger("Jump");
-        }
-    }
-
-    void Dash()
-    {
-        if (Time.time - lastDashTime > Config.dashCooldown)
-        {
-            lastDashTime = Time.time;
-            dash = false; // no longer want to dash
-            //playerVelocity.x = playerVelocity.x + Config.dashModifier;
-            //playerVelocity.z = playerVelocity.z + Config.dashModifier;
+            //animator.SetTrigger("Jump");
         }
     }
 
@@ -262,7 +272,14 @@ public class PlayerController : MonoBehaviour
     {
         if (isGrounded)
         {
-            return Config.sprintSpeed;
+            if (isCrouched)
+            {
+                return Config.crouchSpeed;
+            }
+            else
+            {
+                return Config.sprintSpeed;
+            }
         }
         else
         {
@@ -274,7 +291,14 @@ public class PlayerController : MonoBehaviour
     {
         if (isGrounded)
         {
-            return Config.acceleration;
+            if (isCrouched)
+            {
+                return Config.crouchAcceleration;
+            }
+            else
+            {
+                return Config.acceleration;
+            }
         }
         else
         {
@@ -333,12 +357,26 @@ public class PlayerController : MonoBehaviour
 
     public void Dash(InputAction.CallbackContext con)
 	{
-		if (con.performed)
+		if (con.performed && Time.time - lastDashTime > Config.dashCooldown)
 		{
-			dash = true;
-            Debug.Log("hello");
+            dash = true;
+            lastDashTime = Time.time;
 		}
 	}
+
+    public void Crouch(InputAction.CallbackContext con)
+    {
+        isCrouched = con.ReadValue<float>() > 0.5f;
+    }
+
+    public void RewindAbility(InputAction.CallbackContext con)
+    {
+        if (con.performed && Time.time - lastRewindTime > Config.rewindCooldown)
+        {
+            rewind = true;
+            lastRewindTime = Time.time;
+        }
+    }
 
     #endregion input functions
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 public class Config
 {
     [Header("Settings")]
-    [Range(0.1f, 10)] public static float sensitivity = 1f;
+    [Range(0.01f, 10)] public static float sensitivity = 1f;
     [Range(60, 110)] public static float fieldOfView = 60f;
 
     [Header("Jumping")]
@@ -20,13 +20,15 @@ public class Config
     [Range(0f, 20)] public static float sprintSpeed = 12f;
     [Range(0f, 20)] public static float acceleration = 14f;
     [Range(0f, 20)] public static float deceleration = 10f;
-    [Range(0f, 20)] public static float crouchSpeed = 8f;
+    [Range(0f, 20)] public static float crouchSpeed = 6f;
     [Range(0f, 20)] public static float crouchAcceleration = 11f;
     [Range(0f, 20)] public static float friction = 6f;
 
     [Header("Speciality Movement")]
-    [Range(0f, 1000)] public static float dashModifier = 10000f;
+    [Range(0f, 1000)] public static float dashSpeed = 100f;
     [Range(0f, 10)] public static float dashCooldown = 2f;
+    [Range(0f, 10)] public static float rewindAmount = 3f;
+    [Range(0f, 60)] public static float rewindCooldown = 20f;
 
     [Header("Modifiers")]
     [Range(0f, 2f)] public static float enemyAggroRadiusModifier = 1f;
