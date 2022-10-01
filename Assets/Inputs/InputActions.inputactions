@@ -211,6 +211,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ToggleHud",
+                    "type": "Button",
+                    "id": "54f11637-d3dc-47f5-8031-440e5ed2346b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -519,6 +528,17 @@
                     "processors": "",
                     "groups": "Keyboard and Mouse",
                     "action": "Enter",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "147da67d-9e17-4fef-8844-c5eaec13544b",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleHud",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

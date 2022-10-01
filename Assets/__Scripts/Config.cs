@@ -6,8 +6,10 @@ using UnityEngine;
 public class Config
 {
     [Header("Settings")]
-    [Range(0.01f, 10)] public static float sensitivity = 1f;
+    [Range(0.1f, 100)] public static float sensitivity = 20f;
     [Range(60, 110)] public static float fieldOfView = 60f;
+    [Range(0, 3)] public static Difficulty.Level difficultyLevel = Difficulty.Level.Normal;
+    [Range(0, 2)] public static float difficultyMod = 0.4f;
 
     [Header("Jumping")]
     [Range(0f, 100)] public static float gravity = -9.81f;
