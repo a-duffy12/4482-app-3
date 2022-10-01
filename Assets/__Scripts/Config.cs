@@ -6,8 +6,8 @@ using UnityEngine;
 public class Config
 {
     [Header("Settings")]
-    [Range(0.1f, 100)] public static float sensitivity = 20f;
     [Range(60, 110)] public static float fieldOfView = 60f;
+    [Range(0.1f, 100)] public static float sensitivity = 20f;
     [Range(0, 3)] public static Difficulty.Level difficultyLevel = Difficulty.Level.Normal;
     [Range(0, 2)] public static float difficultyMod = 0.4f;
 
@@ -36,4 +36,19 @@ public class Config
     [Range(0f, 2f)] public static float enemyAggroRadiusModifier = 1f;
 
     [HideInInspector] public static float levelCount = 0f;
+
+    public static void GetSaveData()
+    {
+        GameData savedData = SaveLoad.LoadData(); // load serialized data
+
+        if (savedData != null)
+        {
+            Config.fieldOfView = savedData.fieldOfView;
+            Config.sensitivity = savedData.sensitivity;
+            Config.difficultyLevel = savedData.difficultyLevel == 0 ? Difficulty.Level.Easy : savedData.difficultyLevel == 1 ? Difficulty.Level.Normal : savedData.difficultyLevel == 2 ? Difficulty.Level.Hard : savedData.difficultyLevel == 3 ? Difficulty.Level.Fun : Difficulty.Level.Normal;
+            Config.difficultyMod = savedData.difficultyMod;
+        
+            Config.levelCount = savedData.levelCount;
+        }
+    }
 }

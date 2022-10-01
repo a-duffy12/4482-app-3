@@ -56,8 +56,6 @@ public class PlayerUI : MonoBehaviour
         hardButton.onClick.AddListener(Hard);
         funButton.onClick.AddListener(Fun);
 
-        playing = true;
-
         eyes = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         uiSource = GameObject.FindGameObjectWithTag("UI").GetComponent<AudioSource>();
         uiSource.playOnAwake = false;
@@ -66,6 +64,7 @@ public class PlayerUI : MonoBehaviour
         input = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
 
         // load saved settings
+        Config.GetSaveData();
 
         // set settings values
         fovSlider.minValue = 60;
@@ -140,6 +139,7 @@ public class PlayerUI : MonoBehaviour
 
     void ReturnToMenu()
     {
+        SaveLoad.SaveData();
         SceneManager.LoadScene("Menu");
     }
  
@@ -156,6 +156,7 @@ public class PlayerUI : MonoBehaviour
 
     void ClosePauseMenu()
     {
+        SaveLoad.SaveData();
         pauseMenu.SetActive(false);
 
         Cursor.visible = false;
