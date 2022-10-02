@@ -11,7 +11,15 @@ public class GameData
     public int difficultyLevel;
     public float difficultyMod;
     
-    public float levelCount;
+    [Header("Game Status")]
+    public int levelCount;
+    public bool assaultRifleUnlocked;
+    public bool shotgunUnlocked;
+    public bool sniperUnlocked;
+    public bool flamethrowerUnlocked;
+    public bool knifeUnlocked;
+    public bool grenadeUnlocked;
+    public bool rewindUnlocked;
 
     // function to get all data that needs saving
     public GameData()
@@ -22,5 +30,12 @@ public class GameData
         difficultyMod = Config.difficultyMod;
         
         levelCount = Config.levelCount;
+        assaultRifleUnlocked = Config.assaultRifleUnlocked;
+        shotgunUnlocked = Config.shotgunUnlocked;
+        sniperUnlocked = Config.sniperUnlocked;
+        flamethrowerUnlocked = Config.flamethrowerUnlocked;
+        knifeUnlocked = Config.knifeUnlocked;
+        grenadeUnlocked = Config.grenadeUnlocked;
+        rewindUnlocked = Config.rewindUnlocked;
     }
 }

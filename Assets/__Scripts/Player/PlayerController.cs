@@ -71,12 +71,17 @@ public class PlayerController : MonoBehaviour
 
     #endregion math properties
 
+    void Awake()
+    {
+        //animator = GetComponentInChildren<Animator>();
+        movementSource = GetComponent<AudioSource>();
+    }
+
     void Start()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        //animator = GetComponentInChildren<Animator>();
-        movementSource = GetComponent<AudioSource>();
+        
         movementSource.playOnAwake = false;
         movementSource.spatialBlend = 1f;
         movementSource.volume = 0.5f;
@@ -371,7 +376,7 @@ public class PlayerController : MonoBehaviour
 
     public void RewindAbility(InputAction.CallbackContext con)
     {
-        if (con.performed && Time.time - lastRewindTime > Config.rewindCooldown)
+        if (con.performed && Config.rewindUnlocked && Time.time - lastRewindTime > Config.rewindCooldown)
         {
             rewind = true;
             lastRewindTime = Time.time;

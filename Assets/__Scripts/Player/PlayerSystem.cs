@@ -6,9 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerSystem : MonoBehaviour
 {
     [Header("Stats")]
-
-    [Header("GameObjects")]
-    public Transform firePoint;
+    public int maxHp;
 
     // Start is called before the first frame update
     void Start()

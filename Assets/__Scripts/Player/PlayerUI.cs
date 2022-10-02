@@ -40,9 +40,21 @@ public class PlayerUI : MonoBehaviour
     private string hardText = "HARD";
     private string funText = "FUN";
 
+    void Awake()
+    {
+        // load saved settings
+        Config.GetSaveData();
+
+        eyes = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        uiSource = GameObject.FindGameObjectWithTag("UI").GetComponent<AudioSource>();
+        input = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        eyes.fieldOfView = Config.fieldOfView;
+
         Time.timeScale = 1f;
 
         pauseMenu.SetActive(false);
@@ -56,15 +68,10 @@ public class PlayerUI : MonoBehaviour
         hardButton.onClick.AddListener(Hard);
         funButton.onClick.AddListener(Fun);
 
-        eyes = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        uiSource = GameObject.FindGameObjectWithTag("UI").GetComponent<AudioSource>();
         uiSource.playOnAwake = false;
         uiSource.spatialBlend = 1f;
         uiSource.volume = 1f;
-        input = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
-
-        // load saved settings
-        Config.GetSaveData();
+        
 
         // set settings values
         fovSlider.minValue = 60;

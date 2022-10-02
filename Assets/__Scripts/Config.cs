@@ -6,7 +6,7 @@ using UnityEngine;
 public class Config
 {
     [Header("Settings")]
-    [Range(60, 110)] public static float fieldOfView = 60f;
+    [Range(60, 110)] public static float fieldOfView = 90f;
     [Range(0.1f, 100)] public static float sensitivity = 20f;
     [Range(0, 3)] public static Difficulty.Level difficultyLevel = Difficulty.Level.Normal;
     [Range(0, 2)] public static float difficultyMod = 0.4f;
@@ -35,7 +35,43 @@ public class Config
     [Header("Modifiers")]
     [Range(0f, 2f)] public static float enemyAggroRadiusModifier = 1f;
 
-    [HideInInspector] public static float levelCount = 0f;
+    [Header("Game Status")]
+    [HideInInspector] public static int levelCount = 0;
+    [HideInInspector] public static bool assaultRifleUnlocked = true;
+    [HideInInspector] public static bool shotgunUnlocked = true;
+    [HideInInspector] public static bool sniperUnlocked = true;
+    [HideInInspector] public static bool flamethrowerUnlocked = true;
+    [HideInInspector] public static bool knifeUnlocked = true;
+    [HideInInspector] public static bool grenadeUnlocked = true;
+    [HideInInspector] public static bool rewindUnlocked = true;
+
+    [Header("Assault Rifle")]
+    [HideInInspector] public static float assaultRifleFireRate = 12.0f;
+    [HideInInspector] public static float assaultRifleReloadTime = 3.0f;
+    [HideInInspector] public static int assaultRifleMaxAmmo = 400;
+    [HideInInspector] public static float assaultRifleDamage = 25;
+    [HideInInspector] public static float assaultRifleFireVelocity = 4500;
+
+    [Header("Shotgun")]
+    [HideInInspector] public static float shotgunFireRate = 1.2f;
+    [HideInInspector] public static float shotgunReloadTime = 2.6f;
+    [HideInInspector] public static int shotgunMaxAmmo = 60;
+    [HideInInspector] public static float shotgunDamage = 14;
+    [HideInInspector] public static float shotgunFireVelocity = 1200;
+
+    [Header("Sniper")]
+    [HideInInspector] public static float sniperFireRate = 0.8f;
+    [HideInInspector] public static float sniperReloadTime = 4.0f;
+    [HideInInspector] public static int sniperMaxAmmo = 45;
+    [HideInInspector] public static float sniperDamage = 145;
+    [HideInInspector] public static float sniperFireVelocity = 7000;
+
+    [Header("Flamethrower")]
+    [HideInInspector] public static float flamethrowerFireRate = 20f;
+    [HideInInspector] public static float flamethrowerReloadTime = 4.5f;
+    [HideInInspector] public static int flamethrowerMaxAmmo = 500;
+    [HideInInspector] public static float flamethrowerDamage = 10;
+    [HideInInspector] public static float flamethrowerFireVelocity = 1000;
 
     public static void GetSaveData()
     {
@@ -49,6 +85,13 @@ public class Config
             Config.difficultyMod = savedData.difficultyMod;
         
             Config.levelCount = savedData.levelCount;
+            Config.assaultRifleUnlocked = savedData.assaultRifleUnlocked;
+            Config.shotgunUnlocked = savedData.shotgunUnlocked;
+            Config.sniperUnlocked = savedData.sniperUnlocked;
+            Config.flamethrowerUnlocked = savedData.flamethrowerUnlocked;
+            Config.knifeUnlocked = savedData.knifeUnlocked;
+            Config.grenadeUnlocked = savedData.grenadeUnlocked;
+            Config.rewindUnlocked = savedData.rewindUnlocked;
         }
     }
 }
