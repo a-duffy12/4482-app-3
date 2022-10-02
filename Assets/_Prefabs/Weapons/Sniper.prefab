@@ -50,6 +50,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   muzzleFlash: {fileID: 2639449659353409412}
+  bulletHole: {fileID: 7671925515065079834, guid: 4e4133586ada00946a7be2a08cdde054, type: 3}
   weaponName: sniper
   weaponInt: 2
   automatic: 0

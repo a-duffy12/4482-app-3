@@ -7,6 +7,8 @@ public class Sniper : MonoBehaviour
     [Header("Stats")]
     [SerializeField] private LayerMask hitMask;
     [SerializeField] private ParticleSystem muzzleFlash;
+    [SerializeField] private GameObject bulletHole;
+    [SerializeField] private GameObject adsOverlay;
     public string weaponName = "sniper";
     public int weaponInt = 2;
     public bool automatic = false;
@@ -20,16 +22,20 @@ public class Sniper : MonoBehaviour
     float damage;
     float fireVelocity;
     float range;
+    float adsFov;
 
     AudioSource audioSource;
+    Camera eyes;
 
     [HideInInspector] public int ammo { get { return currentAmmo; } }
+    [HideInInspector] public bool scoped;
     private int currentAmmo;
     private float lastFireTime;
 
     void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        eyes = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
     }
 
     // Start is called before the first frame update
@@ -41,6 +47,7 @@ public class Sniper : MonoBehaviour
         damage = Config.sniperDamage;
         fireVelocity = Config.sniperFireVelocity;
         range = Config.sniperRange;
+        adsFov = Config.sniperAdsFov;
 
         currentAmmo = maxAmmo;
 
@@ -48,6 +55,20 @@ public class Sniper : MonoBehaviour
         audioSource.spatialBlend = 1f;
         audioSource.volume = 1f;
         audioSource.priority = 150;
+
+        adsOverlay.SetActive(false);
+    }
+
+    void Update()
+    {
+        if (scoped)
+        {
+            adsOverlay.SetActive(true);
+        }
+        else
+        {
+            adsOverlay.SetActive(false);
+        }
     }
 
     public void Fire(Transform firePoint)
@@ -70,6 +91,8 @@ public class Sniper : MonoBehaviour
                 muzzleFlash.Stop();
             }
             muzzleFlash.Play();
+            
+            Hipfire(); // force unscope after shooting
         }
     }
 
@@ -81,5 +104,21 @@ public class Sniper : MonoBehaviour
     public void OverrideLastFireTime() // allows weapon to fire as soon as it is swapped to
     {
         lastFireTime = Time.time - (1/fireRate);
+    }
+
+    public void AimDownSights() // go from hipfire to ads
+    {
+        scoped = true;
+        eyes.fieldOfView = adsFov;
+
+        // play audio
+    }
+
+    public void Hipfire() // go from ads to hipfire
+    {
+        scoped = false;
+        eyes.fieldOfView = Config.fieldOfView;
+
+        // play audio
     }
 }

@@ -68,6 +68,7 @@ public class Config
     [HideInInspector] public static float sniperDamage = 145;
     [HideInInspector] public static float sniperFireVelocity = 7000;
     [HideInInspector] public static float sniperRange = 500;
+    [HideInInspector] public static float sniperAdsFov = 30;
 
     [Header("Flamethrower")]
     [HideInInspector] public static float flamethrowerFireRate = 20f;

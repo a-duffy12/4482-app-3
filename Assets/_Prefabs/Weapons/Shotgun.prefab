@@ -82,6 +82,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   muzzleFlash: {fileID: 779257172720112177}
+  bulletHole: {fileID: 7671925515065079834, guid: 4e4133586ada00946a7be2a08cdde054, type: 3}
   weaponName: shotgun
   weaponInt: 1
   automatic: 0

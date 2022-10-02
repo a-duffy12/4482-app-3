@@ -7,6 +7,7 @@ public class Shotgun : MonoBehaviour
     [Header("Stats")]
     [SerializeField] private LayerMask hitMask;
     [SerializeField] private ParticleSystem muzzleFlash;
+    [SerializeField] private GameObject bulletHole;
     public string weaponName = "shotgun";
     public int weaponInt = 1;
     public bool automatic = false;
@@ -54,9 +55,67 @@ public class Shotgun : MonoBehaviour
     {
         if (Time.time > (lastFireTime + (1/fireRate)) && currentAmmo > 0) // has ammo and can fire
         {
-            if (Physics.Raycast(firePoint.position, firePoint.transform.forward, out RaycastHit hit, range, hitMask))
+            Vector3 downPellet = Quaternion.Euler(-3.0f, 0, 0) * firePoint.transform.forward;
+            Vector3 upPellet = Quaternion.Euler(3.0f, 0, 0) * firePoint.transform.forward;
+            Vector3 rightPellet = Quaternion.Euler(0, 3.0f, 0) * firePoint.transform.forward;
+            Vector3 leftPellet = Quaternion.Euler(0, -3.0f, 0) * firePoint.transform.forward;
+            Vector3 downleftPellet = Quaternion.Euler(-2.25f, -2.25f, 0) * firePoint.transform.forward;
+            Vector3 upleftPellet = Quaternion.Euler(2.25f, -2.25f, 0) * firePoint.transform.forward;
+            Vector3 downrightPellet = Quaternion.Euler(-2.25f, 2.25f, 0) * firePoint.transform.forward;
+            Vector3 uprightPellet = Quaternion.Euler(2.25f, 2.25f, 0) * firePoint.transform.forward;
+
+            if (Physics.Raycast(firePoint.position, firePoint.transform.forward, out RaycastHit hi1t, range, hitMask))
             {
                 // hit enemy
+                Debug.Log("1");
+            }
+
+            if (Physics.Raycast(firePoint.position, downPellet, out RaycastHit hit2, range, hitMask))
+            {
+                // hit enemy
+                Debug.Log("2");
+            }
+
+            if (Physics.Raycast(firePoint.position, upPellet, out RaycastHit hit3, range, hitMask))
+            {
+                // hit enemy
+                Debug.Log("3");
+            }
+
+            if (Physics.Raycast(firePoint.position, rightPellet, out RaycastHit hit4, range, hitMask))
+            {
+                // hit enemy
+                Debug.Log("4");
+            }
+
+            if (Physics.Raycast(firePoint.position, leftPellet, out RaycastHit hit5, range, hitMask))
+            {
+                // hit enemy
+                Debug.Log("5");
+            }
+
+            if (Physics.Raycast(firePoint.position, downleftPellet, out RaycastHit hit6, range, hitMask))
+            {
+                // hit enemy
+                Debug.Log("6");
+            }
+
+            if (Physics.Raycast(firePoint.position, upleftPellet, out RaycastHit hit7, range, hitMask))
+            {
+                // hit enemy
+                Debug.Log("7");
+            }
+
+            if (Physics.Raycast(firePoint.position, downrightPellet, out RaycastHit hit8, range, hitMask))
+            {
+                // hit enemy
+                Debug.Log("8");
+            }
+
+            if (Physics.Raycast(firePoint.position, uprightPellet, out RaycastHit hit9, range, hitMask))
+            {
+                // hit enemy
+                Debug.Log("9");
             }
 
             currentAmmo--;

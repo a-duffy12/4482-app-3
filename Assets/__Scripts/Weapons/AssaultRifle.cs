@@ -7,6 +7,7 @@ public class AssaultRifle : MonoBehaviour
     [Header("Stats")]
     [SerializeField] private LayerMask hitMask;
     [SerializeField] private ParticleSystem muzzleFlash;
+    [SerializeField] private GameObject bulletHole;
     public string weaponName = "assault_rifle";
     public int weaponInt = 0;
     public bool automatic = true;
@@ -57,6 +58,8 @@ public class AssaultRifle : MonoBehaviour
             if (Physics.Raycast(firePoint.position, firePoint.transform.forward, out RaycastHit hit, range, hitMask))
             {
                 // hit enemy
+
+                //Instantiate(bulletHole, hit.point + (hit.normal * 0.05f), Quaternion.LookRotation(hit.normal));
             }
 
             currentAmmo--;

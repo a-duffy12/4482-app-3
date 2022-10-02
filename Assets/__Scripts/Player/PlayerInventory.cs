@@ -69,6 +69,7 @@ public class PlayerInventory : MonoBehaviour
             flamethrowerPrefab.SetActive(false);
             
             assaultRifle.OverrideLastFireTime(); // allow shooting right after swapping
+            sniper.scoped = false;
         }
         else if (currentWeaponInt == 1)
         {
@@ -78,6 +79,7 @@ public class PlayerInventory : MonoBehaviour
             flamethrowerPrefab.SetActive(false);
 
             shotgun.OverrideLastFireTime(); // allow shooting right after swapping
+            sniper.scoped = false;
         }
         else if (currentWeaponInt == 2)
         {
@@ -87,6 +89,7 @@ public class PlayerInventory : MonoBehaviour
             flamethrowerPrefab.SetActive(false);
 
             sniper.OverrideLastFireTime(); // allow shooting right after swapping
+            sniper.scoped = false;
         }
         else if (currentWeaponInt == 3)
         {
@@ -96,6 +99,7 @@ public class PlayerInventory : MonoBehaviour
             flamethrowerPrefab.SetActive(true);
 
             flamethrower.OverrideLastFireTime(); // allow shooting right after swapping
+            sniper.scoped = false;
         }
     }
 
@@ -120,7 +124,17 @@ public class PlayerInventory : MonoBehaviour
 
     public void Aim(InputAction.CallbackContext con)
     {
-       
+        if (currentWeaponInt == 2)
+        {
+            if (con.ReadValue<float>() > 0.5f && !sniper.scoped) // not scoped but should be
+            {
+                sniper.AimDownSights();
+            }
+            else if (con.ReadValue<float>() < 0.5f && sniper.scoped) // scoped but should not be
+            {
+                sniper.Hipfire();
+            }
+        }
     }
 
     public void Reload(InputAction.CallbackContext con)
