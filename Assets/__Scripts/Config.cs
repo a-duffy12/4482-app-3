@@ -46,11 +46,12 @@ public class Config
     [HideInInspector] public static bool rewindUnlocked = true;
 
     [Header("Assault Rifle")]
-    [HideInInspector] public static float assaultRifleFireRate = 12.0f;
+    [HideInInspector] public static float assaultRifleFireRate = 10.0f;
     [HideInInspector] public static float assaultRifleReloadTime = 3.0f;
     [HideInInspector] public static int assaultRifleMaxAmmo = 400;
     [HideInInspector] public static float assaultRifleDamage = 25;
     [HideInInspector] public static float assaultRifleFireVelocity = 4500;
+    [HideInInspector] public static float assaultRifleRange = 150;
 
     [Header("Shotgun")]
     [HideInInspector] public static float shotgunFireRate = 1.2f;
@@ -58,6 +59,7 @@ public class Config
     [HideInInspector] public static int shotgunMaxAmmo = 60;
     [HideInInspector] public static float shotgunDamage = 14;
     [HideInInspector] public static float shotgunFireVelocity = 1200;
+    [HideInInspector] public static float shotgunRange = 20;
 
     [Header("Sniper")]
     [HideInInspector] public static float sniperFireRate = 0.8f;
@@ -65,6 +67,7 @@ public class Config
     [HideInInspector] public static int sniperMaxAmmo = 45;
     [HideInInspector] public static float sniperDamage = 145;
     [HideInInspector] public static float sniperFireVelocity = 7000;
+    [HideInInspector] public static float sniperRange = 500;
 
     [Header("Flamethrower")]
     [HideInInspector] public static float flamethrowerFireRate = 20f;
@@ -72,6 +75,7 @@ public class Config
     [HideInInspector] public static int flamethrowerMaxAmmo = 500;
     [HideInInspector] public static float flamethrowerDamage = 10;
     [HideInInspector] public static float flamethrowerFireVelocity = 1000;
+    [HideInInspector] public static float flamethrowerRange = 25;
 
     public static void GetSaveData()
     {

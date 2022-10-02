@@ -20,6 +20,8 @@ public class PlayerInventory : MonoBehaviour
     
     [HideInInspector] public int currentWeaponInt;
 
+    private float shootAutoWeapon;
+
     void Awake()
     {
         inventorySource = GameObject.FindGameObjectWithTag("Inventory").GetComponent<AudioSource>();
@@ -36,17 +38,23 @@ public class PlayerInventory : MonoBehaviour
         inventorySource.spatialBlend = 1f;
         inventorySource.volume = 1f;
 
-        currentWeaponInt = assaultRifle.weaponInt;
-        assaultRiflePrefab.SetActive(true);
-        shotgunPrefab.SetActive(false);
-        sniperPrefab.SetActive(false);
-        flamethrowerPrefab.SetActive(false);
+        SwitchWeapons(assaultRifle.weaponInt);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (shootAutoWeapon == 1) // fire automatic weapons by holding down the trigger
+        {
+            if (currentWeaponInt == 0)
+            {
+                assaultRifle.Fire(firePoint);
+            }
+            else if (currentWeaponInt == 3)
+            {
+                flamethrower.Fire(firePoint);
+            }
+        }
     }
 
     void SwitchWeapons(int weaponInt)
@@ -59,6 +67,8 @@ public class PlayerInventory : MonoBehaviour
             shotgunPrefab.SetActive(false);
             sniperPrefab.SetActive(false);
             flamethrowerPrefab.SetActive(false);
+            
+            assaultRifle.OverrideLastFireTime(); // allow shooting right after swapping
         }
         else if (currentWeaponInt == 1)
         {
@@ -66,6 +76,8 @@ public class PlayerInventory : MonoBehaviour
             shotgunPrefab.SetActive(true);
             sniperPrefab.SetActive(false);
             flamethrowerPrefab.SetActive(false);
+
+            shotgun.OverrideLastFireTime(); // allow shooting right after swapping
         }
         else if (currentWeaponInt == 2)
         {
@@ -73,6 +85,8 @@ public class PlayerInventory : MonoBehaviour
             shotgunPrefab.SetActive(false);
             sniperPrefab.SetActive(true);
             flamethrowerPrefab.SetActive(false);
+
+            sniper.OverrideLastFireTime(); // allow shooting right after swapping
         }
         else if (currentWeaponInt == 3)
         {
@@ -80,6 +94,8 @@ public class PlayerInventory : MonoBehaviour
             shotgunPrefab.SetActive(false);
             sniperPrefab.SetActive(false);
             flamethrowerPrefab.SetActive(true);
+
+            flamethrower.OverrideLastFireTime(); // allow shooting right after swapping
         }
     }
 
@@ -87,7 +103,19 @@ public class PlayerInventory : MonoBehaviour
 
     public void Shoot(InputAction.CallbackContext con)
     {
-       
+        if (con.performed) // key press and semi-auto weapon
+       {
+            if (currentWeaponInt == 1)
+            {
+                shotgun.Fire(firePoint);
+            }
+            else if (currentWeaponInt == 2)
+            {
+                sniper.Fire(firePoint);
+            }
+       }
+
+       shootAutoWeapon = con.ReadValue<float>(); // key hold and auto weapon
     }
 
     public void Aim(InputAction.CallbackContext con)
@@ -113,7 +141,6 @@ public class PlayerInventory : MonoBehaviour
         if (Config.shotgunUnlocked && con.performed)
         {
             SwitchWeapons(shotgun.weaponInt);
-            Debug.Log("2");
         }
     }
 
@@ -122,7 +149,6 @@ public class PlayerInventory : MonoBehaviour
         if (Config.sniperUnlocked && con.performed)
         {
             SwitchWeapons(sniper.weaponInt);
-            Debug.Log("3");
         }
     }
 
@@ -131,7 +157,6 @@ public class PlayerInventory : MonoBehaviour
         if (Config.flamethrowerUnlocked && con.performed)
         {
             SwitchWeapons(flamethrower.weaponInt);
-            Debug.Log("4");
         }
     }
 
