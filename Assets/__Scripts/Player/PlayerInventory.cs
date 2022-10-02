@@ -70,6 +70,7 @@ public class PlayerInventory : MonoBehaviour
             
             assaultRifle.OverrideLastFireTime(); // allow shooting right after swapping
             sniper.scoped = false;
+            Config.sniperScopedIn = false;
         }
         else if (currentWeaponInt == 1)
         {
@@ -80,6 +81,7 @@ public class PlayerInventory : MonoBehaviour
 
             shotgun.OverrideLastFireTime(); // allow shooting right after swapping
             sniper.scoped = false;
+            Config.sniperScopedIn = false;
         }
         else if (currentWeaponInt == 2)
         {
@@ -90,6 +92,7 @@ public class PlayerInventory : MonoBehaviour
 
             sniper.OverrideLastFireTime(); // allow shooting right after swapping
             sniper.scoped = false;
+            Config.sniperScopedIn = false;
         }
         else if (currentWeaponInt == 3)
         {
@@ -100,6 +103,7 @@ public class PlayerInventory : MonoBehaviour
 
             flamethrower.OverrideLastFireTime(); // allow shooting right after swapping
             sniper.scoped = false;
+            Config.sniperScopedIn = false;
         }
     }
 

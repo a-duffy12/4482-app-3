@@ -10,6 +10,7 @@ public class MouseLook : MonoBehaviour
     [SerializeField] private float sensMod; // tweak this to get sens close to source values
 
     float xRotation = 0f;
+    float scopedMod = 1f;
 
     private float xMouse;
     private float yMouse;
@@ -25,12 +26,21 @@ public class MouseLook : MonoBehaviour
     void Update()
     {
         Look(xMouse, yMouse);
+
+        if (Config.sniperScopedIn)
+        {
+            scopedMod = Config.sniperAdsSensitivityMod;
+        }
+        else
+        {
+            scopedMod = 1f;
+        }
     }
 
     void Look(float x, float y)
     {
-        float xLook = x * Config.sensitivity * sensMod * Time.deltaTime;
-        float yLook = y * Config.sensitivity * sensMod * Time.deltaTime;
+        float xLook = x * Config.sensitivity * sensMod * scopedMod * Time.deltaTime;
+        float yLook = y * Config.sensitivity * sensMod * scopedMod * Time.deltaTime;
         
         xRotation -= yLook;
         xRotation = Mathf.Clamp(xRotation, -90f, 75f); // restrict up and down head movement

@@ -109,6 +109,7 @@ public class Sniper : MonoBehaviour
     public void AimDownSights() // go from hipfire to ads
     {
         scoped = true;
+        Config.sniperScopedIn = true;
         eyes.fieldOfView = adsFov;
 
         // play audio
@@ -117,6 +118,7 @@ public class Sniper : MonoBehaviour
     public void Hipfire() // go from ads to hipfire
     {
         scoped = false;
+        Config.sniperScopedIn = false;
         eyes.fieldOfView = Config.fieldOfView;
 
         // play audio
