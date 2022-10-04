@@ -77,7 +77,11 @@ public class Sniper : MonoBehaviour
         {
             if (Physics.Raycast(firePoint.position, firePoint.transform.forward, out RaycastHit hit, range, hitMask))
             {
-                // hit enemy
+                Enemy enemy = hit.collider.gameObject.GetComponent<Enemy>();
+                if (enemy != null)
+                {
+                    enemy.DamageEnemy(damage);
+                }
             }
 
             currentAmmo--;

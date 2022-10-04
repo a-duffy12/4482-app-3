@@ -64,58 +64,85 @@ public class Shotgun : MonoBehaviour
             Vector3 downrightPellet = Quaternion.Euler(-2.25f, 2.25f, 0) * firePoint.transform.forward;
             Vector3 uprightPellet = Quaternion.Euler(2.25f, 2.25f, 0) * firePoint.transform.forward;
 
-            if (Physics.Raycast(firePoint.position, firePoint.transform.forward, out RaycastHit hi1t, range, hitMask))
+            if (Physics.Raycast(firePoint.position, firePoint.transform.forward, out RaycastHit hit1, range, hitMask))
             {
-                // hit enemy
-                Debug.Log("1");
+                Enemy enemy = hit1.collider.gameObject.GetComponent<Enemy>();
+                if (enemy != null)
+                {
+                    enemy.DamageEnemy(damage);
+                }
             }
 
             if (Physics.Raycast(firePoint.position, downPellet, out RaycastHit hit2, range, hitMask))
             {
-                // hit enemy
-                Debug.Log("2");
+                Enemy enemy = hit2.collider.gameObject.GetComponent<Enemy>();
+                if (enemy != null)
+                {
+                    enemy.DamageEnemy(damage);
+                }
             }
 
             if (Physics.Raycast(firePoint.position, upPellet, out RaycastHit hit3, range, hitMask))
             {
-                // hit enemy
-                Debug.Log("3");
+                Enemy enemy = hit3.collider.gameObject.GetComponent<Enemy>();
+                if (enemy != null)
+                {
+                    enemy.DamageEnemy(damage);
+                }
             }
 
             if (Physics.Raycast(firePoint.position, rightPellet, out RaycastHit hit4, range, hitMask))
             {
-                // hit enemy
-                Debug.Log("4");
+                Enemy enemy = hit4.collider.gameObject.GetComponent<Enemy>();
+                if (enemy != null)
+                {
+                    enemy.DamageEnemy(damage);
+                }
             }
 
             if (Physics.Raycast(firePoint.position, leftPellet, out RaycastHit hit5, range, hitMask))
             {
-                // hit enemy
-                Debug.Log("5");
+                Enemy enemy = hit5.collider.gameObject.GetComponent<Enemy>();
+                if (enemy != null)
+                {
+                    enemy.DamageEnemy(damage);
+                }
             }
 
             if (Physics.Raycast(firePoint.position, downleftPellet, out RaycastHit hit6, range, hitMask))
             {
-                // hit enemy
-                Debug.Log("6");
+                Enemy enemy = hit6.collider.gameObject.GetComponent<Enemy>();
+                if (enemy != null)
+                {
+                    enemy.DamageEnemy(damage);
+                }
             }
 
             if (Physics.Raycast(firePoint.position, upleftPellet, out RaycastHit hit7, range, hitMask))
             {
-                // hit enemy
-                Debug.Log("7");
+                Enemy enemy = hit7.collider.gameObject.GetComponent<Enemy>();
+                if (enemy != null)
+                {
+                    enemy.DamageEnemy(damage);
+                }
             }
 
             if (Physics.Raycast(firePoint.position, downrightPellet, out RaycastHit hit8, range, hitMask))
             {
-                // hit enemy
-                Debug.Log("8");
+                Enemy enemy = hit8.collider.gameObject.GetComponent<Enemy>();
+                if (enemy != null)
+                {
+                    enemy.DamageEnemy(damage);
+                }
             }
 
             if (Physics.Raycast(firePoint.position, uprightPellet, out RaycastHit hit9, range, hitMask))
             {
-                // hit enemy
-                Debug.Log("9");
+                Enemy enemy = hit9.collider.gameObject.GetComponent<Enemy>();
+                if (enemy != null)
+                {
+                    enemy.DamageEnemy(damage);
+                }
             }
 
             currentAmmo--;

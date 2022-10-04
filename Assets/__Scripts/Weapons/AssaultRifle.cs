@@ -57,7 +57,11 @@ public class AssaultRifle : MonoBehaviour
         {
             if (Physics.Raycast(firePoint.position, firePoint.transform.forward, out RaycastHit hit, range, hitMask))
             {
-                // hit enemy
+                Enemy enemy = hit.collider.gameObject.GetComponent<Enemy>();
+                if (enemy != null)
+                {
+                    enemy.DamageEnemy(damage);
+                }
 
                 //Instantiate(bulletHole, hit.point + (hit.normal * 0.05f), Quaternion.LookRotation(hit.normal));
             }

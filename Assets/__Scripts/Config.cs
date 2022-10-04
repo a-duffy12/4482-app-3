@@ -80,6 +80,13 @@ public class Config
     [HideInInspector] public static float flamethrowerFireVelocity = 1000;
     [HideInInspector] public static float flamethrowerRange = 25;
 
+    [Header("Cyclops")]
+    [HideInInspector] public static float ogreMaxHp = 100;
+    [HideInInspector] public static float ogreMovementSpeed = 9f;
+    [HideInInspector] public static float ogreAggroDistance = 30f;
+    [HideInInspector] public static float ogreAttackDistance = 1.0f;
+    [HideInInspector] public static float ogreDamage = 60f;
+
     public static void GetSaveData()
     {
         GameData savedData = SaveLoad.LoadData(); // load serialized data
