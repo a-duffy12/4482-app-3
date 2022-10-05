@@ -12,34 +12,62 @@ public class Ogre : Enemy
     float aggroDistance;
     float attackDistance;
     float damage;
+    float attackRate;
 
-    AudioSource ogreSource;
-
-    void Awake()
-    {
-        ogreSource = GetComponent<AudioSource>();
-    }
+    private float lastAttackTime;
+    PlayerSystem system;
 
     void Start()
     {
-        ogreSource.playOnAwake = false;
-        ogreSource.spatialBlend = 1f;
-        ogreSource.volume = 1f;
-        ogreSource.priority = 120;
+        system = player.GetComponent<PlayerSystem>();
 
-        maxHp = Config.ogreMovementSpeed;
+        maxHp = Config.ogreMaxHp;
         currentHp = maxHp;
 
+        enemyName = Config.ogreName;
         movementSpeed = Config.ogreMovementSpeed;
         aggroDistance = Config.ogreAggroDistance;
         attackDistance = Config.ogreAttackDistance;
         damage = Config.ogreDamage;
+        attackRate = Config.ogreAttackRate;
     }
 
     void Update()
     {
-        // move
+        float distancetoplayer = Vector3.Distance(player.transform.position, transform.position);
 
-        // if in range, attack
+        transform.LookAt(player.transform.position);
+
+        if (distancetoplayer <= (aggroDistance * Config.enemyAggroRadiusModifier) && distancetoplayer > (attackDistance - 0.5f) && Time.time > lastAttackTime + (1/attackRate)) // only move towards player if within aggro range, not too close, and is ready to attack
+        {
+            Move();
+        }
+
+        if (distancetoplayer <= attackDistance)
+        {
+            Attack(distancetoplayer);
+        }
+    }
+
+    void Move()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, movementSpeed * Time.deltaTime);
+
+        // move audio
+    }
+
+    void Attack(float distancetoplayer)
+    {
+        if (Time.time > lastAttackTime + (1/attackRate))
+        {
+            if (distancetoplayer <= attackDistance)
+            {
+                system.DamagePlayer(damage * Config.difficultyMod, enemyName);
+            }
+
+            lastAttackTime = Time.time;
+
+            // attack audio
+        }
     }
 }

@@ -69,7 +69,7 @@ public class Shotgun : MonoBehaviour
                 Enemy enemy = hit1.collider.gameObject.GetComponent<Enemy>();
                 if (enemy != null)
                 {
-                    enemy.DamageEnemy(damage);
+                    enemy.DamageEnemy(damage, weaponName);
                 }
             }
 
@@ -78,7 +78,7 @@ public class Shotgun : MonoBehaviour
                 Enemy enemy = hit2.collider.gameObject.GetComponent<Enemy>();
                 if (enemy != null)
                 {
-                    enemy.DamageEnemy(damage);
+                    enemy.DamageEnemy(damage, weaponName);
                 }
             }
 
@@ -87,7 +87,7 @@ public class Shotgun : MonoBehaviour
                 Enemy enemy = hit3.collider.gameObject.GetComponent<Enemy>();
                 if (enemy != null)
                 {
-                    enemy.DamageEnemy(damage);
+                    enemy.DamageEnemy(damage, weaponName);
                 }
             }
 
@@ -96,7 +96,7 @@ public class Shotgun : MonoBehaviour
                 Enemy enemy = hit4.collider.gameObject.GetComponent<Enemy>();
                 if (enemy != null)
                 {
-                    enemy.DamageEnemy(damage);
+                    enemy.DamageEnemy(damage, weaponName);
                 }
             }
 
@@ -105,7 +105,7 @@ public class Shotgun : MonoBehaviour
                 Enemy enemy = hit5.collider.gameObject.GetComponent<Enemy>();
                 if (enemy != null)
                 {
-                    enemy.DamageEnemy(damage);
+                    enemy.DamageEnemy(damage, weaponName);
                 }
             }
 
@@ -114,7 +114,7 @@ public class Shotgun : MonoBehaviour
                 Enemy enemy = hit6.collider.gameObject.GetComponent<Enemy>();
                 if (enemy != null)
                 {
-                    enemy.DamageEnemy(damage);
+                    enemy.DamageEnemy(damage, weaponName);
                 }
             }
 
@@ -123,7 +123,7 @@ public class Shotgun : MonoBehaviour
                 Enemy enemy = hit7.collider.gameObject.GetComponent<Enemy>();
                 if (enemy != null)
                 {
-                    enemy.DamageEnemy(damage);
+                    enemy.DamageEnemy(damage, weaponName);
                 }
             }
 
@@ -132,7 +132,7 @@ public class Shotgun : MonoBehaviour
                 Enemy enemy = hit8.collider.gameObject.GetComponent<Enemy>();
                 if (enemy != null)
                 {
-                    enemy.DamageEnemy(damage);
+                    enemy.DamageEnemy(damage, weaponName);
                 }
             }
 
@@ -141,7 +141,7 @@ public class Shotgun : MonoBehaviour
                 Enemy enemy = hit9.collider.gameObject.GetComponent<Enemy>();
                 if (enemy != null)
                 {
-                    enemy.DamageEnemy(damage);
+                    enemy.DamageEnemy(damage, weaponName);
                 }
             }
 

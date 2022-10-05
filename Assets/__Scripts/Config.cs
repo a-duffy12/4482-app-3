@@ -45,6 +45,17 @@ public class Config
     [HideInInspector] public static bool grenadeUnlocked = true;
     [HideInInspector] public static bool rewindUnlocked = true;
 
+    [Header("Player")]
+    [HideInInspector] public static float playerMaxHp = 100f;
+    [HideInInspector] public static float assaultRifleHpReturnMod = -0.08f;
+    [HideInInspector] public static float shotgunHpReturnMod = -0.05f;
+    [HideInInspector] public static float sniperRifleHpReturnMod = -0.006f;
+    [HideInInspector] public static float flamethrowerRifleHpReturnMod = -0.1f;
+    [HideInInspector] public static float assaultRifleMaxHpReturn = 20f;
+    [HideInInspector] public static float shotgunHpMaxReturn = 36f;
+    [HideInInspector] public static float sniperRifleMaxHpReturn = 10f;
+    [HideInInspector] public static float flamethrowerRifleMaxHpReturn = 50f;
+
     [Header("Assault Rifle")]
     [HideInInspector] public static float assaultRifleFireRate = 10.0f;
     [HideInInspector] public static float assaultRifleReloadTime = 3.0f;
@@ -80,12 +91,14 @@ public class Config
     [HideInInspector] public static float flamethrowerFireVelocity = 1000;
     [HideInInspector] public static float flamethrowerRange = 25;
 
-    [Header("Cyclops")]
+    [Header("Ogre")]
+    [HideInInspector] public static string ogreName = "Ogre";
     [HideInInspector] public static float ogreMaxHp = 100;
     [HideInInspector] public static float ogreMovementSpeed = 9f;
     [HideInInspector] public static float ogreAggroDistance = 30f;
-    [HideInInspector] public static float ogreAttackDistance = 1.0f;
+    [HideInInspector] public static float ogreAttackDistance = 2.0f;
     [HideInInspector] public static float ogreDamage = 60f;
+    [HideInInspector] public static float ogreAttackRate = 0.6f;
 
     public static void GetSaveData()
     {

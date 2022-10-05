@@ -60,7 +60,7 @@ public class AssaultRifle : MonoBehaviour
                 Enemy enemy = hit.collider.gameObject.GetComponent<Enemy>();
                 if (enemy != null)
                 {
-                    enemy.DamageEnemy(damage);
+                    enemy.DamageEnemy(damage, weaponName);
                 }
 
                 //Instantiate(bulletHole, hit.point + (hit.normal * 0.05f), Quaternion.LookRotation(hit.normal));

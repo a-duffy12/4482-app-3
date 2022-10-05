@@ -80,7 +80,7 @@ public class Sniper : MonoBehaviour
                 Enemy enemy = hit.collider.gameObject.GetComponent<Enemy>();
                 if (enemy != null)
                 {
-                    enemy.DamageEnemy(damage);
+                    enemy.DamageEnemy(damage, weaponName);
                 }
             }
 

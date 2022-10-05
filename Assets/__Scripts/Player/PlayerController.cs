@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         //animator = GetComponentInChildren<Animator>();
-        movementSource = GetComponent<AudioSource>();
+        movementSource = groundCheck.gameObject.GetComponent<AudioSource>();
     }
 
     void Start()
