@@ -93,12 +93,24 @@ public class Config
 
     [Header("Ogre")]
     [HideInInspector] public static string ogreName = "Ogre";
-    [HideInInspector] public static float ogreMaxHp = 100;
+    [HideInInspector] public static float ogreMaxHp = 200;
     [HideInInspector] public static float ogreMovementSpeed = 9f;
-    [HideInInspector] public static float ogreAggroDistance = 30f;
-    [HideInInspector] public static float ogreAttackDistance = 2.0f;
+    [HideInInspector] public static float ogreAggroDistance = 40f;
+    [HideInInspector] public static float ogreAttackDistance = 2.4f;
     [HideInInspector] public static float ogreDamage = 60f;
     [HideInInspector] public static float ogreAttackRate = 0.6f;
+
+    [Header("Demon")]
+    [HideInInspector] public static string demonName = "Demon";
+    [HideInInspector] public static float demonMaxHp = 150;
+    [HideInInspector] public static float demonMovementSpeed = 7f;
+    [HideInInspector] public static float demonAggroDistance = 60f;
+    [HideInInspector] public static float demonMinDistance = 20f;
+    [HideInInspector] public static float demonMaxDistance = 30f;
+    [HideInInspector] public static float demonDamage = 50f;
+    [HideInInspector] public static float demonAttackRate = 0.4f;
+    [HideInInspector] public static float demonFireballSpeed = 1800f;
+    [HideInInspector] public static float demonFireballFlyTime = 5.0f;
 
     public static void GetSaveData()
     {

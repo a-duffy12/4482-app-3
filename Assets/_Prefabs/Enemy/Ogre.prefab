@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 8416250360610856118}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 1.8, y: 1.8, z: 1.8}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8413753711024415059}
@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beadeed80121f50479c726d90685f586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyName: ogre
   maxHp: 100
   invulnerable: 0
   nonflammable: 0
@@ -153,6 +154,7 @@ MonoBehaviour:
   currentHp: 0
   player: {fileID: 0}
   enemySource: {fileID: 0}
+  playerSystem: {fileID: 0}
   moveAudio: {fileID: 0}
   attackAudio: {fileID: 0}
 --- !u!65 &8003595000019543555
@@ -166,8 +168,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.75, y: 1, z: 0.75}
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Size: {x: 0.75, y: 1.05, z: 0.7}
+  m_Center: {x: 0, y: 0.525, z: 0.025}
 --- !u!54 &7874909586853092640
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -176,7 +178,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8416250360610856118}
   serializedVersion: 2
-  m_Mass: 100
+  m_Mass: 180
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1

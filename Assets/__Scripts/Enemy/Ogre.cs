@@ -34,18 +34,18 @@ public class Ogre : Enemy
 
     void Update()
     {
-        float distancetoplayer = Vector3.Distance(player.transform.position, transform.position);
+        float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
 
         transform.LookAt(player.transform.position);
 
-        if (distancetoplayer <= (aggroDistance * Config.enemyAggroRadiusModifier) && distancetoplayer > (attackDistance - 0.5f) && Time.time > lastAttackTime + (1/attackRate)) // only move towards player if within aggro range, not too close, and is ready to attack
+        if (distanceToPlayer <= (aggroDistance * Config.enemyAggroRadiusModifier) && distanceToPlayer > (attackDistance - 0.5f) && Time.time > lastAttackTime + (1/attackRate)) // only move towards player if within aggro range, not too close, and is ready to attack
         {
             Move();
         }
 
-        if (distancetoplayer <= attackDistance)
+        if (distanceToPlayer <= attackDistance)
         {
-            Attack(distancetoplayer);
+            Attack(distanceToPlayer);
         }
     }
 
@@ -56,11 +56,11 @@ public class Ogre : Enemy
         // move audio
     }
 
-    void Attack(float distancetoplayer)
+    void Attack(float distanceToPlayer)
     {
         if (Time.time > lastAttackTime + (1/attackRate))
         {
-            if (distancetoplayer <= attackDistance)
+            if (distanceToPlayer <= attackDistance)
             {
                 system.DamagePlayer(damage * Config.difficultyMod, enemyName);
             }

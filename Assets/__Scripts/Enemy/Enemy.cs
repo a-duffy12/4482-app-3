@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     public bool nonflammable;
     [HideInInspector] public bool onFire;
 
-    [Header("Audio")]
+    [Header("Generic Audio")]
     public AudioClip damageAudio;
     public AudioClip deathAudio;
 
