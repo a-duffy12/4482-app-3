@@ -18,9 +18,12 @@ public class Demon : Enemy
     float maxDistance;
     float damage;
     float attackRate;
+    float startleDelay;
     float fireballSpeed;
 
     private float lastAttackTime;
+    private float lastStartleTime;
+    private bool startled;
 
     void Start()
     {
@@ -35,6 +38,7 @@ public class Demon : Enemy
         maxDistance = Config.demonMaxDistance;
         damage = Config.demonDamage;
         attackRate = Config.demonAttackRate;
+        startleDelay = Config.demonStartleDelay;
         fireballSpeed = Config.demonFireballSpeed;
     }
 
@@ -46,8 +50,22 @@ public class Demon : Enemy
 
         if (distanceToPlayer <= (aggroDistance * Config.enemyAggroRadiusModifier)) // only move towards player if within aggro range
         {
-            Move(distanceToPlayer);
-            Attack(distanceToPlayer);
+            if (Time.time > lastStartleTime + startleDelay)
+            {
+                Move(distanceToPlayer);
+                Attack(distanceToPlayer);
+                startled = false;
+            }
+            
+        }
+
+        if (distanceToPlayer <= minDistance) // demon gets startled when you get to close
+        {
+            if (!startled)
+            {
+                lastStartleTime = Time.time;
+                startled = true;
+            }
         }
     }
 

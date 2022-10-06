@@ -15,6 +15,7 @@ public class Sniper : MonoBehaviour
 
     [Header("Audio")]
     public AudioClip fireAudio;
+    public AudioClip emptyAudio;
     
     float fireRate;
     float reloadTime;
@@ -80,7 +81,14 @@ public class Sniper : MonoBehaviour
                 Enemy enemy = hit.collider.gameObject.GetComponent<Enemy>();
                 if (enemy != null)
                 {
-                    enemy.DamageEnemy(damage, weaponName);
+                    if (Config.sniperScopedIn)
+                    {
+                        enemy.DamageEnemy(damage, weaponName);
+                    }
+                    else
+                    {
+                        enemy.DamageEnemy(damage * Config.sniperUnAdsDamageMod, weaponName);
+                    }
                 }
             }
 
@@ -97,6 +105,10 @@ public class Sniper : MonoBehaviour
             muzzleFlash.Play();
             
             Hipfire(); // force unscope after shooting
+        }
+        else if (Time.time > (lastFireTime + (1/fireRate))) // no ammo and can fire
+        {
+            // empty mag sound
         }
     }
 

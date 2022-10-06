@@ -28,7 +28,7 @@ public class Config
 
     [Header("Speciality Movement")]
     [Range(0f, 1000)] public static float dashSpeed = 100f;
-    [Range(0f, 10)] public static float dashCooldown = 2f;
+    [Range(0f, 10)] public static float dashCooldown = 1.5f;
     [Range(0f, 10)] public static float rewindAmount = 3f;
     [Range(0f, 60)] public static float rewindCooldown = 20f;
 
@@ -47,9 +47,9 @@ public class Config
 
     [Header("Player")]
     [HideInInspector] public static float playerMaxHp = 100f;
-    [HideInInspector] public static float assaultRifleHpReturnMod = -0.08f;
+    [HideInInspector] public static float assaultRifleHpReturnMod = -0.05f;
     [HideInInspector] public static float shotgunHpReturnMod = -0.05f;
-    [HideInInspector] public static float sniperRifleHpReturnMod = -0.006f;
+    [HideInInspector] public static float sniperRifleHpReturnMod = -0.005f;
     [HideInInspector] public static float flamethrowerRifleHpReturnMod = -0.1f;
     [HideInInspector] public static float assaultRifleMaxHpReturn = 20f;
     [HideInInspector] public static float shotgunHpMaxReturn = 36f;
@@ -80,6 +80,7 @@ public class Config
     [HideInInspector] public static float sniperFireVelocity = 7000;
     [HideInInspector] public static float sniperRange = 500;
     [HideInInspector] public static bool sniperScopedIn = false;
+    [HideInInspector] public static float sniperUnAdsDamageMod = 0.5f;
     [HideInInspector] public static float sniperAdsFov = 30;
     [HideInInspector] public static float sniperAdsSensitivityMod = 0.6f;
 
@@ -109,6 +110,7 @@ public class Config
     [HideInInspector] public static float demonMaxDistance = 30f;
     [HideInInspector] public static float demonDamage = 50f;
     [HideInInspector] public static float demonAttackRate = 0.4f;
+    [HideInInspector] public static float demonStartleDelay = 2.0f;
     [HideInInspector] public static float demonFireballSpeed = 1800f;
     [HideInInspector] public static float demonFireballFlyTime = 5.0f;
 

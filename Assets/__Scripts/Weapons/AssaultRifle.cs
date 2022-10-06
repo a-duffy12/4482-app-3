@@ -14,6 +14,7 @@ public class AssaultRifle : MonoBehaviour
 
     [Header("Audio")]
     public AudioClip fireAudio;
+    public AudioClip emptyAudio;
     
     float fireRate;
     float reloadTime;
@@ -77,6 +78,10 @@ public class AssaultRifle : MonoBehaviour
                 muzzleFlash.Stop();
             }
             muzzleFlash.Play();
+        }
+        else if (Time.time > (lastFireTime + (1/fireRate))) // no ammo and can fire
+        {
+            // empty mag sound
         }
     }
 

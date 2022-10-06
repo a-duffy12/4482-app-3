@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -15,6 +16,10 @@ public class Enemy : MonoBehaviour
     [Header("Generic Audio")]
     public AudioClip damageAudio;
     public AudioClip deathAudio;
+
+    [Header("Gameobjects")]
+    public Image healthBar;
+    public Canvas healthBarCanvas;
 
     [HideInInspector] public float hp { get { return currentHp; } }
     [HideInInspector] public float currentHp;
@@ -35,11 +40,23 @@ public class Enemy : MonoBehaviour
         enemySource.spatialBlend = 1f;
         enemySource.volume = 1f;
         enemySource.priority = 120;
+
+        healthBar.fillAmount = Mathf.Clamp(currentHp/maxHp, 0, maxHp);
+    }
+
+    void Update()
+    {
+        // make health bar canvas always face the player
+        Vector3 healthBarFaceDirection = player.transform.position - healthBarCanvas.transform.position;
+        healthBarFaceDirection.x = healthBarFaceDirection.z = 0f;
+        healthBarCanvas.transform.LookAt(player.transform.position - healthBarFaceDirection);
+        healthBarCanvas.transform.Rotate(0, 180, 0);
     }
 
     public void DamageEnemy(float damage, string blow = "")
     {
         currentHp -= damage;
+        healthBar.fillAmount = Mathf.Clamp(currentHp/maxHp, 0, maxHp);
         
         if (currentHp <= 0)
         {

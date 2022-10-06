@@ -45,9 +45,14 @@ public class PlayerSystem : MonoBehaviour
         if (currentHp <= 0)
         {
             // death audio
+
             if (attacker == Config.ogreName)
             {
                 Debug.Log("wow you suck lmao");
+            }
+            else if (attacker == Config.demonName)
+            {
+                Debug.Log("welcome to hell buddy");
             }
             
             Time.timeScale = 0f;

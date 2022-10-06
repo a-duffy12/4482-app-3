@@ -14,6 +14,7 @@ public class Shotgun : MonoBehaviour
 
     [Header("Audio")]
     public AudioClip fireAudio;
+    public AudioClip emptyAudio;
     
     float fireRate;
     float reloadTime;
@@ -156,6 +157,10 @@ public class Shotgun : MonoBehaviour
                 muzzleFlash.Stop();
             }
             muzzleFlash.Play();
+        }
+        else if (Time.time > (lastFireTime + (1/fireRate))) // no ammo and can fire
+        {
+            // empty mag sound
         }
     }
 

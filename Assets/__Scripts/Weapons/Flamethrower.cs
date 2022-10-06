@@ -13,6 +13,7 @@ public class Flamethrower : MonoBehaviour
 
     [Header("Audio")]
     public AudioClip fireAudio;
+    public AudioClip emptyAudio;
     
     float fireRate;
     float reloadTime;
@@ -70,6 +71,10 @@ public class Flamethrower : MonoBehaviour
                 sparkFlash.Stop();
             }
             sparkFlash.Play();
+        }
+        else if (Time.time > (lastFireTime + (1/fireRate))) // no ammo and can fire
+        {
+            // empty mag sound
         }
     }
 
