@@ -54,7 +54,7 @@ public class Sniper : MonoBehaviour
 
         audioSource.playOnAwake = false;
         audioSource.spatialBlend = 1f;
-        audioSource.volume = 1f;
+        audioSource.volume = 0.8f;
         audioSource.priority = 150;
 
         adsOverlay.SetActive(false);

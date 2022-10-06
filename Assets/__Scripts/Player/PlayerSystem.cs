@@ -8,8 +8,10 @@ public class PlayerSystem : MonoBehaviour
     [Header("Stats")]
     public float maxHp;
 
+    [Header("GameObjects")]
+    [SerializeField] private GameObject damageOverlay;
+
     [Header("Audio")]
-    public AudioClip damageAudio;
     public AudioClip deathAudio;
 
     [HideInInspector] public float hp { get { return currentHp; } }
@@ -27,11 +29,13 @@ public class PlayerSystem : MonoBehaviour
     {
         playerSource.playOnAwake = false;
         playerSource.spatialBlend = 1f;
-        playerSource.volume = 0.8f;
+        playerSource.volume = 1f;
         playerSource.priority = 100;
 
         maxHp = Config.playerMaxHp;
         currentHp = maxHp;
+
+        damageOverlay.SetActive(false);
     }
 
     public void DamagePlayer(float damage, string attacker = "")
@@ -41,10 +45,15 @@ public class PlayerSystem : MonoBehaviour
         {
             currentHp = maxHp;
         }
+        else
+        {
+            StartCoroutine(DamagePlayerOverlay(0.1f)); // show damage overlay
+        }
         
         if (currentHp <= 0)
         {
-            // death audio
+            playerSource.clip = deathAudio;
+            playerSource.Play();
 
             if (attacker == Config.ogreName)
             {
@@ -62,6 +71,15 @@ public class PlayerSystem : MonoBehaviour
             // damage audio
             Debug.Log("hp: " + currentHp);
         }
+    }
+
+    IEnumerator DamagePlayerOverlay(float duration)
+    {
+        damageOverlay.SetActive(true);
+        
+        yield return new WaitForSeconds(duration);
+
+        damageOverlay.SetActive(false);
     }
 
     #region input functions

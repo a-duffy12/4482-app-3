@@ -5,6 +5,7 @@ using UnityEngine;
 public class Ogre : Enemy
 {
     [Header("Audio")]
+    public AudioClip hurtAudio;
     public AudioClip moveAudio;
     public AudioClip attackAudio;
 
@@ -20,6 +21,11 @@ public class Ogre : Enemy
     void Start()
     {
         system = player.GetComponent<PlayerSystem>();
+
+        enemySource.playOnAwake = false;
+        enemySource.spatialBlend = 1f;
+        enemySource.volume = 1f;
+        enemySource.priority = 120;
 
         maxHp = Config.ogreMaxHp;
         currentHp = maxHp;
@@ -48,13 +54,19 @@ public class Ogre : Enemy
         {
             Attack(distanceToPlayer);
         }
+
+        HandleDamageAudio();
     }
 
     void Move()
     {
         transform.position = Vector3.MoveTowards(transform.position, player.transform.position, movementSpeed * Time.deltaTime);
 
-        // move audio
+        if (!enemySource.isPlaying && rb.velocity.magnitude > 0.1f)
+        {
+            enemySource.clip = moveAudio;
+            enemySource.Play();
+        }
     }
 
     void Attack(float distanceToPlayer)
@@ -68,7 +80,19 @@ public class Ogre : Enemy
 
             lastAttackTime = Time.time;
 
-            // attack audio
+            enemySource.clip = attackAudio;
+            enemySource.Play();
+        }
+    }
+
+    void HandleDamageAudio()
+    {
+        // play audio relating to enemy hp status
+        if (damaged)
+        {
+            enemySource.clip = hurtAudio;
+            enemySource.Play();
+            damaged = false;
         }
     }
 }

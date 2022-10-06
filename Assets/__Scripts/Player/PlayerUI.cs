@@ -21,11 +21,13 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private Button normalButton;
     [SerializeField] private Button hardButton;
     [SerializeField] private Button funButton;
+    [SerializeField] private Button nsfwButton;
 
     [Header("Text")]
     [SerializeField] private Text fovText;
     [SerializeField] private Text sensText;
     [SerializeField] private Text difficultyText;
+    [SerializeField] private Text nsfwText;
 
     [Header("Audio")]
 
@@ -67,6 +69,7 @@ public class PlayerUI : MonoBehaviour
         normalButton.onClick.AddListener(Normal);
         hardButton.onClick.AddListener(Hard);
         funButton.onClick.AddListener(Fun);
+        nsfwButton.onClick.AddListener(Nsfw);
 
         uiSource.playOnAwake = false;
         uiSource.spatialBlend = 1f;
@@ -100,6 +103,15 @@ public class PlayerUI : MonoBehaviour
         else if (Config.difficultyLevel == Difficulty.Level.Fun)
         {
            difficultyText.text = funText; 
+        }
+
+        if (Config.nsfwEnabled)
+        {
+            nsfwText.text = "Enabled";
+        }
+        else
+        {
+            nsfwText.text = "Disabled";
         }
     }
 
@@ -142,6 +154,20 @@ public class PlayerUI : MonoBehaviour
         Config.difficultyLevel = Difficulty.Level.Fun;
         Config.difficultyMod = 1f;
         difficultyText.text = funText;
+    }
+
+    void Nsfw()
+    {
+        if (Config.nsfwEnabled)
+        {
+            Config.nsfwEnabled = false;
+            nsfwText.text = "Disabled";
+        }
+        else
+        {
+            Config.nsfwEnabled = true;
+            nsfwText.text = "Enabled";
+        }
     }
 
     void ReturnToMenu()

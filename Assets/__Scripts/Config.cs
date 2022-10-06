@@ -10,6 +10,7 @@ public class Config
     [Range(0.1f, 100)] public static float sensitivity = 20f;
     [Range(0, 3)] public static Difficulty.Level difficultyLevel = Difficulty.Level.Normal;
     [Range(0, 2)] public static float difficultyMod = 0.4f;
+    public static bool nsfwEnabled = true;
 
     [Header("Jumping")]
     [Range(0f, 100)] public static float gravity = -9.81f;
@@ -126,6 +127,7 @@ public class Config
             Config.sensitivity = savedData.sensitivity;
             Config.difficultyLevel = savedData.difficultyLevel == 0 ? Difficulty.Level.Easy : savedData.difficultyLevel == 1 ? Difficulty.Level.Normal : savedData.difficultyLevel == 2 ? Difficulty.Level.Hard : savedData.difficultyLevel == 3 ? Difficulty.Level.Fun : Difficulty.Level.Normal;
             Config.difficultyMod = savedData.difficultyMod;
+            Config.nsfwEnabled = savedData.nsfwEnabled;
         
             Config.levelCount = savedData.levelCount;
             Config.assaultRifleUnlocked = savedData.assaultRifleUnlocked;

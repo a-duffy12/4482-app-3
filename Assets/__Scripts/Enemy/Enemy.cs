@@ -14,10 +14,6 @@ public class Enemy : MonoBehaviour
     public bool nonflammable;
     [HideInInspector] public bool onFire;
 
-    [Header("Generic Audio")]
-    public AudioClip damageAudio;
-    public AudioClip deathAudio;
-
     [Header("Gameobjects")]
     public Image healthBar;
     public Canvas healthBarCanvas;
@@ -25,24 +21,22 @@ public class Enemy : MonoBehaviour
 
     [HideInInspector] public float hp { get { return currentHp; } }
     [HideInInspector] public float currentHp;
+    [HideInInspector] public bool damaged;
 
     [HideInInspector] public GameObject player;
     [HideInInspector] public AudioSource enemySource;
+    [HideInInspector] public Rigidbody rb;
     [HideInInspector] public PlayerSystem playerSystem;
 
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         enemySource = GetComponent<AudioSource>();
+        rb = GetComponent<Rigidbody>();
     }
 
     void Start()
     {
-        enemySource.playOnAwake = false;
-        enemySource.spatialBlend = 1f;
-        enemySource.volume = 1f;
-        enemySource.priority = 120;
-
         healthBar.fillAmount = Mathf.Clamp(currentHp/maxHp, 0, maxHp);
     }
 
@@ -62,8 +56,6 @@ public class Enemy : MonoBehaviour
         
         if (currentHp <= 0)
         {
-            // death audio
-
             playerSystem = player.GetComponent<PlayerSystem>();
             
             if (blow == "assault_rifle")
@@ -83,12 +75,16 @@ public class Enemy : MonoBehaviour
                 playerSystem.DamagePlayer(Math.Min(Config.flamethrowerRifleHpReturnMod * maxHp, Config.flamethrowerRifleMaxHpReturn));
             }
 
-            Instantiate(deathParticle, transform.position + new Vector3(0, deathPosition, 0), transform.rotation);
+            if (Config.nsfwEnabled) // only show gore if nsfw is enabled
+            {
+                Instantiate(deathParticle, transform.position + new Vector3(0, deathPosition, 0), transform.rotation);
+            }
+            
             Destroy(gameObject);
         }
         else
         {
-            // damage audio
+            damaged = true;
         }
     }
 }

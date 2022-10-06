@@ -5,6 +5,7 @@ using UnityEngine;
 public class Demon : Enemy
 {
     [Header("Audio")]
+    public AudioClip hurtAudio;
     public AudioClip moveAudio;
     public AudioClip attackAudio;
 
@@ -27,6 +28,11 @@ public class Demon : Enemy
 
     void Start()
     {
+        enemySource.playOnAwake = false;
+        enemySource.spatialBlend = 1f;
+        enemySource.volume = 1f;
+        enemySource.priority = 120;
+
         maxHp = Config.demonMaxHp;
         currentHp = maxHp;
         nonflammable = true;
@@ -57,7 +63,6 @@ public class Demon : Enemy
                 Attack(distanceToPlayer);
                 startled = false;
             }
-            
         }
 
         if (distanceToPlayer <= minDistance) // demon gets startled when you get to close
@@ -68,6 +73,8 @@ public class Demon : Enemy
                 startled = true;
             }
         }
+
+        HandleDamageAudio();
     }
 
     void Move(float distanceToPlayer)
@@ -75,14 +82,16 @@ public class Demon : Enemy
         if (distanceToPlayer > maxDistance) // wants to get closer to player
         {
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, movementSpeed * Time.deltaTime);
-
-            // move audio    
         }
         else if (distanceToPlayer < minDistance) // wants to get further from player
         {
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, -1 * movementSpeed * Time.deltaTime);
+        }
 
-            // move audio
+        if (!enemySource.isPlaying && rb.velocity.magnitude > 0.1f)
+        {
+            enemySource.clip = moveAudio;
+            enemySource.Play();
         }
     }
 
@@ -96,7 +105,19 @@ public class Demon : Enemy
 
             lastAttackTime = Time.time;
 
-            // attack audio
+            enemySource.clip = attackAudio;
+            enemySource.Play();
+        }
+    }
+
+    void HandleDamageAudio()
+    {
+        // play audio relating to enemy hp status
+        if (damaged)
+        {
+            enemySource.clip = hurtAudio;
+            enemySource.Play();
+            damaged = false;
         }
     }
 }

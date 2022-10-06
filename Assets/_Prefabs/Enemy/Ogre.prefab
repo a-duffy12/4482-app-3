@@ -401,11 +401,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: ogre
   maxHp: 100
+  deathPosition: 0
   invulnerable: 0
   nonflammable: 0
   onFire: 0
-  damageAudio: {fileID: 0}
-  deathAudio: {fileID: 0}
+  hurtAudio: {fileID: 8300000, guid: 4b7373210833f194fa0c1891dd17394f, type: 3}
+  deathAudio: {fileID: 8300000, guid: 58df498e7bee165469217b7eb810f861, type: 3}
   healthBar: {fileID: 125624641094762906}
   healthBarCanvas: {fileID: 7218590184275480830}
   deathParticle: {fileID: 3363900976838243673, guid: abccc726eb2c74c41b0741406151cc0f, type: 3}
@@ -413,8 +414,8 @@ MonoBehaviour:
   player: {fileID: 0}
   enemySource: {fileID: 0}
   playerSystem: {fileID: 0}
-  moveAudio: {fileID: 0}
-  attackAudio: {fileID: 0}
+  moveAudio: {fileID: 8300000, guid: 9d2f117993c35dd4184e3243c45531d5, type: 3}
+  attackAudio: {fileID: 8300000, guid: 29c3afa319a76cf46a442ee94aaebd68, type: 3}
 --- !u!65 &8003595000019543555
 BoxCollider:
   m_ObjectHideFlags: 0

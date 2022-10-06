@@ -11,6 +11,9 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private GameObject shotgunPrefab;
     [SerializeField] private GameObject sniperPrefab;
     [SerializeField] private GameObject flamethrowerPrefab;
+
+    [Header("Audio")]
+    public AudioClip switchWeaponAudio;
     
     AudioSource inventorySource;
     AssaultRifle assaultRifle;
@@ -59,7 +62,12 @@ public class PlayerInventory : MonoBehaviour
 
     void SwitchWeapons(int weaponInt)
     {
-        currentWeaponInt = weaponInt;
+        if (weaponInt != currentWeaponInt)
+        {
+            currentWeaponInt = weaponInt;
+            inventorySource.clip = switchWeaponAudio;
+            inventorySource.Play();
+        }
 
         if (currentWeaponInt == 0)
         {

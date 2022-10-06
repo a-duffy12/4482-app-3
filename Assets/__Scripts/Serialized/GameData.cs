@@ -10,6 +10,7 @@ public class GameData
     public float sensitivity;
     public int difficultyLevel;
     public float difficultyMod;
+    public bool nsfwEnabled;
     
     [Header("Game Status")]
     public int levelCount;
@@ -28,6 +29,7 @@ public class GameData
         sensitivity = Config.sensitivity;
         difficultyLevel = (int) Config.difficultyLevel;
         difficultyMod = Config.difficultyMod;
+        nsfwEnabled = Config.nsfwEnabled;
         
         levelCount = Config.levelCount;
         assaultRifleUnlocked = Config.assaultRifleUnlocked;

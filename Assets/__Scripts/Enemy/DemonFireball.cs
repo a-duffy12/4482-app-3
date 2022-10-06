@@ -55,7 +55,8 @@ public class DemonFireball : MonoBehaviour
         {
             system.DamagePlayer(Config.demonDamage * Config.difficultyMod, Config.demonName);
             
-            // play impact audio
+            fireballSource.clip = fireballImpactAudio;
+            fireballSource.Play();
         }
     }
 }

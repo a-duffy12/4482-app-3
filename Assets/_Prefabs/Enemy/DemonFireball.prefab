@@ -4954,4 +4954,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flyTime: 5
-  fireballImpactAudio: {fileID: 0}
+  fireballImpactAudio: {fileID: 8300000, guid: b57a5b81c8663e14bbf70a3cc6ff01ad, type: 3}

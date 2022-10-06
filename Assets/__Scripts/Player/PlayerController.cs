@@ -14,11 +14,11 @@ public class PlayerController : MonoBehaviour
     [Range(0f, 0.5f)] [SerializeField] private float groundRadius = 0.15f;
 
     [Header("Audio")]
-    // move audio
-    // crouch audio
-    // jump audio
-    // dash audio
-    // rewind audio
+    public AudioClip sprintAudio;
+    public AudioClip crouchAudio;
+    public AudioClip jumpAudio;
+    public AudioClip dashAudio;
+    public AudioClip rewindAudio;
 
     #endregion public properties
 
@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
         
         movementSource.playOnAwake = false;
         movementSource.spatialBlend = 1f;
-        movementSource.volume = 0.5f;
+        movementSource.volume = 0.4f;
 
         timeToRewind = Time.time;
         positionToRewind = transform.position;
@@ -103,12 +103,24 @@ public class PlayerController : MonoBehaviour
                 if (isCrouched)
                 {
                     Config.enemyAggroRadiusModifier = 0.7f; // enemies cannot detect as far
-                    // crouch audio, slower and quieter
+                    
+                    movementSource.volume = 0.2f;
+                    if (!movementSource.isPlaying && (wStrafe + sStrafe != 0 || aStrafe + dStrafe != 0))
+                    {
+                        movementSource.clip = crouchAudio;
+                        movementSource.Play();
+                    }
                 }
                 else
                 {
                     Config.enemyAggroRadiusModifier = 1f; // enemies can detect normally
-                    // walk audio
+                    
+                    movementSource.volume = 0.4f;
+                    if (!movementSource.isPlaying && (wStrafe + sStrafe != 0 || aStrafe + dStrafe != 0))
+                    {
+                        movementSource.clip = sprintAudio;
+                        movementSource.Play();
+                    }
                 }
             }
         }
@@ -129,6 +141,8 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = positionToRewind;
             rewind = false;
+            movementSource.clip = rewindAudio;
+            movementSource.Play();
         }
 
         // set animator based on which strafe direction is being applied
@@ -223,6 +237,8 @@ public class PlayerController : MonoBehaviour
         {
             dashSpeed = Config.dashSpeed;
             dash = false;
+            movementSource.clip = dashAudio;
+            movementSource.Play();
         }
 
         playerVelocity.x += (accelSpeed + dashSpeed) * wishDirection.x;
@@ -270,6 +286,8 @@ public class PlayerController : MonoBehaviour
             lastJumpTime = Time.time;
             jump = false; // no longer want to jump
             //animator.SetTrigger("Jump");
+            movementSource.clip = jumpAudio;
+            movementSource.Play();
         }
     }
 

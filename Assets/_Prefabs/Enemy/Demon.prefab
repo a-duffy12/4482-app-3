@@ -147,20 +147,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: demon
   maxHp: 150
+  deathPosition: 0
   invulnerable: 0
   nonflammable: 1
   onFire: 0
-  damageAudio: {fileID: 0}
-  deathAudio: {fileID: 0}
   healthBar: {fileID: 4616037848961179013}
   healthBarCanvas: {fileID: 4239771277043873189}
   deathParticle: {fileID: 3363900976838243673, guid: abccc726eb2c74c41b0741406151cc0f, type: 3}
   currentHp: 0
+  damaged: 0
   player: {fileID: 0}
   enemySource: {fileID: 0}
+  rb: {fileID: 0}
   playerSystem: {fileID: 0}
-  moveAudio: {fileID: 0}
-  attackAudio: {fileID: 0}
+  hurtAudio: {fileID: 8300000, guid: 7c2bab62df7a3ef4d80f587b4cc0fe98, type: 3}
+  moveAudio: {fileID: 8300000, guid: 93524281fb7d0594c91566161c027e45, type: 3}
+  attackAudio: {fileID: 8300000, guid: da5aeec65dfce4d449024607b399a5ec, type: 3}
   fireballPrefab: {fileID: 6083553794739048112, guid: 59a25548774b9d94dbb13a09427a4eea, type: 3}
   firePoint: {fileID: 7633841637358731373}
 --- !u!65 &2629975335041372345
