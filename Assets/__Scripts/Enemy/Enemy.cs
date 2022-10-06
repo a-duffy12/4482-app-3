@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     [Header("Stats")]
     public string enemyName;
     public float maxHp;
+    public float deathPosition;
     public bool invulnerable;
     public bool nonflammable;
     [HideInInspector] public bool onFire;
@@ -20,6 +21,7 @@ public class Enemy : MonoBehaviour
     [Header("Gameobjects")]
     public Image healthBar;
     public Canvas healthBarCanvas;
+    public ParticleSystem deathParticle;
 
     [HideInInspector] public float hp { get { return currentHp; } }
     [HideInInspector] public float currentHp;
@@ -81,6 +83,7 @@ public class Enemy : MonoBehaviour
                 playerSystem.DamagePlayer(Math.Min(Config.flamethrowerRifleHpReturnMod * maxHp, Config.flamethrowerRifleMaxHpReturn));
             }
 
+            Instantiate(deathParticle, transform.position + new Vector3(0, deathPosition, 0), transform.rotation);
             Destroy(gameObject);
         }
         else

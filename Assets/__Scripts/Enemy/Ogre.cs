@@ -25,6 +25,7 @@ public class Ogre : Enemy
         currentHp = maxHp;
 
         enemyName = Config.ogreName;
+        deathPosition = Config.ogreDeathPosition;
         movementSpeed = Config.ogreMovementSpeed;
         aggroDistance = Config.ogreAggroDistance;
         attackDistance = Config.ogreAttackDistance;

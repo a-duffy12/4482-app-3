@@ -95,6 +95,7 @@ public class Config
     [Header("Ogre")]
     [HideInInspector] public static string ogreName = "Ogre";
     [HideInInspector] public static float ogreMaxHp = 200;
+    [HideInInspector] public static float ogreDeathPosition = 0.5f;
     [HideInInspector] public static float ogreMovementSpeed = 9f;
     [HideInInspector] public static float ogreAggroDistance = 40f;
     [HideInInspector] public static float ogreAttackDistance = 2.4f;
@@ -104,6 +105,7 @@ public class Config
     [Header("Demon")]
     [HideInInspector] public static string demonName = "Demon";
     [HideInInspector] public static float demonMaxHp = 150;
+    [HideInInspector] public static float demonDeathPosition = 0.5f;
     [HideInInspector] public static float demonMovementSpeed = 7f;
     [HideInInspector] public static float demonAggroDistance = 60f;
     [HideInInspector] public static float demonMinDistance = 20f;

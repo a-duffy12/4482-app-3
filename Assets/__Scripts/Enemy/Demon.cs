@@ -32,6 +32,7 @@ public class Demon : Enemy
         nonflammable = true;
 
         enemyName = Config.demonName;
+        deathPosition = Config.demonDeathPosition;
         movementSpeed = Config.demonMovementSpeed;
         aggroDistance = Config.demonAggroDistance;
         minDistance = Config.demonMinDistance;

@@ -154,6 +154,7 @@ MonoBehaviour:
   deathAudio: {fileID: 0}
   healthBar: {fileID: 4616037848961179013}
   healthBarCanvas: {fileID: 4239771277043873189}
+  deathParticle: {fileID: 3363900976838243673, guid: abccc726eb2c74c41b0741406151cc0f, type: 3}
   currentHp: 0
   player: {fileID: 0}
   enemySource: {fileID: 0}
