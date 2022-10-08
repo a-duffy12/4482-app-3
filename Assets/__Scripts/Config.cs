@@ -89,9 +89,11 @@ public class Config
     [HideInInspector] public static float flamethrowerFireRate = 20f;
     [HideInInspector] public static float flamethrowerReloadTime = 4.5f;
     [HideInInspector] public static int flamethrowerMaxAmmo = 500;
-    [HideInInspector] public static float flamethrowerDamage = 10;
+    [HideInInspector] public static float flamethrowerDamage = 8.0f;
     [HideInInspector] public static float flamethrowerFireVelocity = 1000;
     [HideInInspector] public static float flamethrowerRange = 25;
+    [HideInInspector] public static float flamethrowerBurnTime = 5.0f;
+    [HideInInspector] public static float flamethrowerBurnDamage = 0.5f;
 
     [Header("Grenade")]
     [HideInInspector] public static float grenadeCooldown = 10.0f;

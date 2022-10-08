@@ -21,6 +21,7 @@ public class Flamethrower : MonoBehaviour
     float damage;
     float fireVelocity;
     float range;
+    float burnTime;
 
     AudioSource audioSource;
 
@@ -42,6 +43,7 @@ public class Flamethrower : MonoBehaviour
         damage = Config.flamethrowerDamage;
         fireVelocity = Config.flamethrowerFireVelocity;
         range = Config.flamethrowerRange;
+        burnTime = Config.flamethrowerBurnTime;
 
         currentAmmo = maxAmmo;
 
@@ -57,7 +59,12 @@ public class Flamethrower : MonoBehaviour
         {
             if (Physics.Raycast(firePoint.position, firePoint.transform.forward, out RaycastHit hit, range, hitMask))
             {
-                // hit enemy
+                Enemy enemy = hit.collider.gameObject.GetComponent<Enemy>();
+                if (enemy != null)
+                {
+                    enemy.DamageEnemy(damage, weaponName);
+                    enemy.IgniteEnemy(burnTime);
+                }
             }
 
             currentAmmo--;

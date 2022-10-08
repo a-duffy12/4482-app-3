@@ -11,8 +11,8 @@ public class Enemy : MonoBehaviour
     public float maxHp;
     public float deathPosition;
     public bool invulnerable;
+    public bool unstunnable;
     public bool nonflammable;
-    [HideInInspector] public bool onFire;
 
     [Header("Gameobjects")]
     public Image healthBar;
@@ -23,13 +23,16 @@ public class Enemy : MonoBehaviour
     [HideInInspector] public float currentHp;
     [HideInInspector] public bool damaged;
     [HideInInspector] public bool stunned;
+    [HideInInspector] public bool onFire;
 
     [HideInInspector] public GameObject player;
     [HideInInspector] public AudioSource enemySource;
     [HideInInspector] public Rigidbody rb;
     [HideInInspector] public PlayerSystem playerSystem;
 
-    public float unStunTime;
+    [HideInInspector] public float unStunTime;
+    [HideInInspector] public float unFireTime;
+    [HideInInspector] public float nextFireTickTime;
 
     void Awake()
     {
@@ -54,46 +57,62 @@ public class Enemy : MonoBehaviour
 
     public void DamageEnemy(float damage, string blow = "")
     {
-        currentHp -= damage;
-        healthBar.fillAmount = Mathf.Clamp(currentHp/maxHp, 0, maxHp);
-        
-        if (currentHp <= 0)
+        if (!invulnerable)
         {
-            playerSystem = player.GetComponent<PlayerSystem>();
+            currentHp -= damage;
+            healthBar.fillAmount = Mathf.Clamp(currentHp/maxHp, 0, maxHp);
             
-            if (blow == "assault_rifle")
+            if (currentHp <= 0)
             {
-                playerSystem.DamagePlayer(Math.Min(Config.assaultRifleHpReturnMod * maxHp, Config.assaultRifleMaxHpReturn));
-            }
-            else if (blow == "shotgun")
-            {
-                playerSystem.DamagePlayer(Math.Min(Config.shotgunHpReturnMod * maxHp, Config.shotgunHpMaxReturn));
-            }
-            else if (blow == "sniper")
-            {
-                playerSystem.DamagePlayer(Math.Min(Config.sniperRifleHpReturnMod * maxHp, Config.sniperRifleMaxHpReturn));
-            }
-            else if (blow == "flamethrower")
-            {
-                playerSystem.DamagePlayer(Math.Min(Config.flamethrowerRifleHpReturnMod * maxHp, Config.flamethrowerRifleMaxHpReturn));
-            }
+                playerSystem = player.GetComponent<PlayerSystem>();
+                
+                if (blow == "assault_rifle")
+                {
+                    playerSystem.DamagePlayer(Math.Min(Config.assaultRifleHpReturnMod * maxHp, Config.assaultRifleMaxHpReturn));
+                }
+                else if (blow == "shotgun")
+                {
+                    playerSystem.DamagePlayer(Math.Min(Config.shotgunHpReturnMod * maxHp, Config.shotgunHpMaxReturn));
+                }
+                else if (blow == "sniper")
+                {
+                    playerSystem.DamagePlayer(Math.Min(Config.sniperRifleHpReturnMod * maxHp, Config.sniperRifleMaxHpReturn));
+                }
+                else if (blow == "flamethrower")
+                {
+                    playerSystem.DamagePlayer(Math.Min(Config.flamethrowerRifleHpReturnMod * maxHp, Config.flamethrowerRifleMaxHpReturn));
+                }
 
-            if (Config.nsfwEnabled) // only show gore if nsfw is enabled
-            {
-                Instantiate(deathParticle, transform.position + new Vector3(0, deathPosition, 0), transform.rotation);
+                if (Config.nsfwEnabled) // only show gore if nsfw is enabled
+                {
+                    Instantiate(deathParticle, transform.position + new Vector3(0, deathPosition, 0), transform.rotation);
+                }
+                
+                Destroy(gameObject);
             }
-            
-            Destroy(gameObject);
-        }
-        else
-        {
-            damaged = true;
+            else
+            {
+                damaged = true;
+            }
         }
     }
 
     public void StunEnemy(float duration)
     {
-        stunned = true;
-        unStunTime = Time.time + duration;
+        if (!unstunnable)
+        {
+            stunned = true;
+            unStunTime = Time.time + duration;
+        }
+    }
+
+    public void IgniteEnemy(float duration)
+    {
+        if (!nonflammable)
+        {
+            onFire = true;
+            unFireTime = Time.time + duration;
+            nextFireTickTime = Time.time + (1/Config.flamethrowerFireRate);
+        }
     }
 }

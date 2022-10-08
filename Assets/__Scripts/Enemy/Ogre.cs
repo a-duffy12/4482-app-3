@@ -9,6 +9,9 @@ public class Ogre : Enemy
     public AudioClip moveAudio;
     public AudioClip attackAudio;
 
+    [Header("GameObjects")]
+    public GameObject fireParticle;
+
     float movementSpeed;
     float aggroDistance;
     float attackDistance;
@@ -21,6 +24,7 @@ public class Ogre : Enemy
     void Start()
     {
         system = player.GetComponent<PlayerSystem>();
+        fireParticle.SetActive(false);
 
         enemySource.playOnAwake = false;
         enemySource.spatialBlend = 1f;
@@ -57,6 +61,7 @@ public class Ogre : Enemy
 
         HandleDamageAudio();
         HandleStun();
+        HandleBurn();
     }
 
     void Move()
@@ -102,7 +107,29 @@ public class Ogre : Enemy
         if (stunned && Time.time >= unStunTime)
         {
             stunned = false;
-            Debug.Log("unstunned");
+        }
+    }
+
+    void HandleBurn()
+    {
+        if (!nonflammable && onFire && Time.time >= unFireTime)
+        {
+            onFire = false;
+
+            if (fireParticle.activeInHierarchy)
+            {
+                fireParticle.SetActive(false);
+            }
+        }
+        else if (!nonflammable && onFire && Time.time >= nextFireTickTime)
+        {
+            DamageEnemy(Config.flamethrowerBurnDamage, "flamethrower");
+            nextFireTickTime = Time.time + (1/Config.flamethrowerFireRate);
+    
+            if (!fireParticle.activeInHierarchy)
+            {
+                fireParticle.SetActive(true);
+            }
         }
     }
 }

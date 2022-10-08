@@ -73,6 +73,9 @@ public class PlayerInventory : MonoBehaviour
             inventorySource.Play();
         }
 
+        sniper.scoped = false;
+        Config.sniperScopedIn = false;
+
         if (currentWeaponInt == 0)
         {
             assaultRiflePrefab.SetActive(true);
@@ -81,8 +84,6 @@ public class PlayerInventory : MonoBehaviour
             flamethrowerPrefab.SetActive(false);
             
             assaultRifle.OverrideLastFireTime(); // allow shooting right after swapping
-            sniper.scoped = false;
-            Config.sniperScopedIn = false;
         }
         else if (currentWeaponInt == 1)
         {
@@ -92,8 +93,6 @@ public class PlayerInventory : MonoBehaviour
             flamethrowerPrefab.SetActive(false);
 
             shotgun.OverrideLastFireTime(); // allow shooting right after swapping
-            sniper.scoped = false;
-            Config.sniperScopedIn = false;
         }
         else if (currentWeaponInt == 2)
         {
@@ -103,8 +102,6 @@ public class PlayerInventory : MonoBehaviour
             flamethrowerPrefab.SetActive(false);
 
             sniper.OverrideLastFireTime(); // allow shooting right after swapping
-            sniper.scoped = false;
-            Config.sniperScopedIn = false;
         }
         else if (currentWeaponInt == 3)
         {
@@ -114,8 +111,6 @@ public class PlayerInventory : MonoBehaviour
             flamethrowerPrefab.SetActive(true);
 
             flamethrower.OverrideLastFireTime(); // allow shooting right after swapping
-            sniper.scoped = false;
-            Config.sniperScopedIn = false;
         }
     }
 
@@ -131,6 +126,11 @@ public class PlayerInventory : MonoBehaviour
             inventorySource.clip = throwGrenadeAudio;
             inventorySource.Play();
         }
+    }
+
+    void UseKnife()
+    {
+        
     }
 
     #region input functions
@@ -209,6 +209,14 @@ public class PlayerInventory : MonoBehaviour
         if (Config.grenadeUnlocked && con.performed)
         {
             ThrowGrenade();
+        }
+    }
+
+    public void Melee(InputAction.CallbackContext con)
+    {
+        if (Config.knifeUnlocked && con.performed)
+        {
+            UseKnife();
         }
     }
 

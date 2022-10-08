@@ -78,6 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionParticle: {fileID: 2933643391773466371, guid: 099aa18a8ab19b14d9c1eb2116468e56, type: 3}
+  grenadeModel: {fileID: 7794746362220252839}
   weaponName: grenade
   explodeAudio: {fileID: 8300000, guid: 954567727c61cc248b8c857c34622f58, type: 3}
 --- !u!82 &7796746809406848180
@@ -249,6 +250,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e7b8a3fff5997a4aade619e2796c5ea, type: 3}
+--- !u!1 &7794746362220252839 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 7e7b8a3fff5997a4aade619e2796c5ea, type: 3}
+  m_PrefabInstance: {fileID: 7794746362220349447}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7794746362220745351 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 7e7b8a3fff5997a4aade619e2796c5ea, type: 3}

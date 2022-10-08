@@ -47,6 +47,8 @@ public class Demon : Enemy
         attackRate = Config.demonAttackRate;
         startleDelay = Config.demonStartleDelay;
         fireballSpeed = Config.demonFireballSpeed;
+
+        nonflammable = true; // demons cannot be lit on fire
     }
 
     void Update()

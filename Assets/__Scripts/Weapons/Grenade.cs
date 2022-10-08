@@ -6,6 +6,7 @@ public class Grenade : MonoBehaviour
 {
     [Header("Stats")]
     [SerializeField] private ParticleSystem explosionParticle;
+    [SerializeField] private GameObject grenadeModel;
     public string weaponName = "grenade";
 
     [Header("Audio")]
@@ -67,6 +68,7 @@ public class Grenade : MonoBehaviour
             }
         }
 
+        grenadeModel.SetActive(false);
         Destroy(gameObject, audioSource.clip.length);
     }
 }
