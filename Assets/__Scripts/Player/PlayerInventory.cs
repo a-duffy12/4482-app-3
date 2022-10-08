@@ -7,13 +7,16 @@ public class PlayerInventory : MonoBehaviour
 {
     [Header("GameObjects")]
     public Transform firePoint;
+    public Transform throwPoint;
     [SerializeField] private GameObject assaultRiflePrefab;
     [SerializeField] private GameObject shotgunPrefab;
     [SerializeField] private GameObject sniperPrefab;
     [SerializeField] private GameObject flamethrowerPrefab;
+    [SerializeField] private GameObject grenadePrefab;
 
     [Header("Audio")]
     public AudioClip switchWeaponAudio;
+    public AudioClip throwGrenadeAudio;
     
     AudioSource inventorySource;
     AssaultRifle assaultRifle;
@@ -24,6 +27,7 @@ public class PlayerInventory : MonoBehaviour
     [HideInInspector] public int currentWeaponInt;
 
     private float shootAutoWeapon;
+    private float lastGrenadeTime;
 
     void Awake()
     {
@@ -115,6 +119,20 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
+    void ThrowGrenade()
+    {
+        if (Time.time > lastGrenadeTime + Config.grenadeCooldown)
+        {
+            GameObject grenadeObject = Instantiate(grenadePrefab, throwPoint.position, Random.rotation);
+            grenadeObject.GetComponent<Rigidbody>().AddForce(throwPoint.transform.forward * Config.grenadeThrowForce);
+
+            lastGrenadeTime = Time.time;
+
+            inventorySource.clip = throwGrenadeAudio;
+            inventorySource.Play();
+        }
+    }
+
     #region input functions
 
     public void Shoot(InputAction.CallbackContext con)
@@ -183,6 +201,14 @@ public class PlayerInventory : MonoBehaviour
         if (Config.flamethrowerUnlocked && con.performed)
         {
             SwitchWeapons(flamethrower.weaponInt);
+        }
+    }
+
+    public void Throwable(InputAction.CallbackContext con)
+    {
+        if (Config.grenadeUnlocked && con.performed)
+        {
+            ThrowGrenade();
         }
     }
 

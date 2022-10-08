@@ -93,6 +93,15 @@ public class Config
     [HideInInspector] public static float flamethrowerFireVelocity = 1000;
     [HideInInspector] public static float flamethrowerRange = 25;
 
+    [Header("Grenade")]
+    [HideInInspector] public static float grenadeCooldown = 10.0f;
+    [HideInInspector] public static float grenadeThrowForce = 1500f;
+    [HideInInspector] public static float grenadeFuseTime = 2.0f;
+    [HideInInspector] public static float grenadeBlastRadius = 3.0f;
+    [HideInInspector] public static float grenadeDamage = 10f;
+    [HideInInspector] public static float grenadeKnockbackForce = 200f;
+    [HideInInspector] public static float grenadeStunDuration = 2.0f;
+
     [Header("Ogre")]
     [HideInInspector] public static string ogreName = "Ogre";
     [HideInInspector] public static float ogreMaxHp = 200;

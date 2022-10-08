@@ -159,6 +159,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Throwable",
+                    "type": "Button",
+                    "id": "909fffcc-b4c1-4445-b89a-59f6d587fc82",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Ability1",
                     "type": "Button",
                     "id": "4bd26f6d-10e2-4d66-9562-c5679c506479",
@@ -539,6 +548,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ToggleHud",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5b1a4c6c-042d-469b-9a6b-f0ad77e1d2ba",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Throwable",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
