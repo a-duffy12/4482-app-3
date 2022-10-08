@@ -58,12 +58,12 @@ public class Grenade : MonoBehaviour
 
             if (enemy != null)
             {
-                Debug.Log("doing something");
                 float distance = Vector3.Distance(col.transform.position, transform.position);
                 Rigidbody rb = col.transform.GetComponent<Rigidbody>();
 
                 enemy.DamageEnemy(damage / (blastRadius - distance + 0.1f) , weaponName);
                 rb.AddForce((transform.position + col.transform.position) * (knockbackForce / (blastRadius - distance + 0.1f)));
+                enemy.StunEnemy(stunDuration);
             }
         }
 

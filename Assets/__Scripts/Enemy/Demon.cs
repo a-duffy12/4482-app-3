@@ -57,7 +57,7 @@ public class Demon : Enemy
 
         if (distanceToPlayer <= (aggroDistance * Config.enemyAggroRadiusModifier)) // only move towards player if within aggro range
         {
-            if (Time.time > lastStartleTime + startleDelay)
+            if (Time.time > lastStartleTime + startleDelay && !stunned)
             {
                 Move(distanceToPlayer);
                 Attack(distanceToPlayer);
@@ -75,6 +75,7 @@ public class Demon : Enemy
         }
 
         HandleDamageAudio();
+        HandleStun();
     }
 
     void Move(float distanceToPlayer)
@@ -118,6 +119,14 @@ public class Demon : Enemy
             enemySource.clip = hurtAudio;
             enemySource.Play();
             damaged = false;
+        }
+    }
+
+    void HandleStun()
+    {
+        if (stunned && Time.time >= unStunTime)
+        {
+            stunned = false;
         }
     }
 }

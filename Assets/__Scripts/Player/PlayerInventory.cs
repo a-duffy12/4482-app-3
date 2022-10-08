@@ -27,7 +27,7 @@ public class PlayerInventory : MonoBehaviour
     [HideInInspector] public int currentWeaponInt;
 
     private float shootAutoWeapon;
-    private float lastGrenadeTime;
+    private float nextGrenadeTime;
 
     void Awake()
     {
@@ -121,12 +121,12 @@ public class PlayerInventory : MonoBehaviour
 
     void ThrowGrenade()
     {
-        if (Time.time > lastGrenadeTime + Config.grenadeCooldown)
+        if (Time.time >= nextGrenadeTime)
         {
             GameObject grenadeObject = Instantiate(grenadePrefab, throwPoint.position, Random.rotation);
             grenadeObject.GetComponent<Rigidbody>().AddForce(throwPoint.transform.forward * Config.grenadeThrowForce);
 
-            lastGrenadeTime = Time.time;
+            nextGrenadeTime = Time.time + Config.grenadeCooldown;
 
             inventorySource.clip = throwGrenadeAudio;
             inventorySource.Play();

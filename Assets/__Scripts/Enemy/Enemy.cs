@@ -22,11 +22,14 @@ public class Enemy : MonoBehaviour
     [HideInInspector] public float hp { get { return currentHp; } }
     [HideInInspector] public float currentHp;
     [HideInInspector] public bool damaged;
+    [HideInInspector] public bool stunned;
 
     [HideInInspector] public GameObject player;
     [HideInInspector] public AudioSource enemySource;
     [HideInInspector] public Rigidbody rb;
     [HideInInspector] public PlayerSystem playerSystem;
+
+    public float unStunTime;
 
     void Awake()
     {
@@ -86,5 +89,11 @@ public class Enemy : MonoBehaviour
         {
             damaged = true;
         }
+    }
+
+    public void StunEnemy(float duration)
+    {
+        stunned = true;
+        unStunTime = Time.time + duration;
     }
 }

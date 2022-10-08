@@ -49,11 +49,11 @@ public class Config
     [Header("Player")]
     [HideInInspector] public static float playerMaxHp = 100f;
     [HideInInspector] public static float assaultRifleHpReturnMod = -0.05f;
-    [HideInInspector] public static float shotgunHpReturnMod = -0.05f;
+    [HideInInspector] public static float shotgunHpReturnMod = -0.04f;
     [HideInInspector] public static float sniperRifleHpReturnMod = -0.005f;
     [HideInInspector] public static float flamethrowerRifleHpReturnMod = -0.1f;
     [HideInInspector] public static float assaultRifleMaxHpReturn = 20f;
-    [HideInInspector] public static float shotgunHpMaxReturn = 36f;
+    [HideInInspector] public static float shotgunHpMaxReturn = 20f;
     [HideInInspector] public static float sniperRifleMaxHpReturn = 10f;
     [HideInInspector] public static float flamethrowerRifleMaxHpReturn = 50f;
 
@@ -95,11 +95,11 @@ public class Config
 
     [Header("Grenade")]
     [HideInInspector] public static float grenadeCooldown = 10.0f;
-    [HideInInspector] public static float grenadeThrowForce = 1500f;
-    [HideInInspector] public static float grenadeFuseTime = 2.0f;
+    [HideInInspector] public static float grenadeThrowForce = 1800f;
+    [HideInInspector] public static float grenadeFuseTime = 1.8f;
     [HideInInspector] public static float grenadeBlastRadius = 3.0f;
     [HideInInspector] public static float grenadeDamage = 10f;
-    [HideInInspector] public static float grenadeKnockbackForce = 200f;
+    [HideInInspector] public static float grenadeKnockbackForce = 500f;
     [HideInInspector] public static float grenadeStunDuration = 2.0f;
 
     [Header("Ogre")]
@@ -107,7 +107,7 @@ public class Config
     [HideInInspector] public static float ogreMaxHp = 200;
     [HideInInspector] public static float ogreDeathPosition = 0.5f;
     [HideInInspector] public static float ogreMovementSpeed = 9f;
-    [HideInInspector] public static float ogreAggroDistance = 40f;
+    [HideInInspector] public static float ogreAggroDistance = 50f;
     [HideInInspector] public static float ogreAttackDistance = 2.4f;
     [HideInInspector] public static float ogreDamage = 60f;
     [HideInInspector] public static float ogreAttackRate = 0.6f;
@@ -121,7 +121,7 @@ public class Config
     [HideInInspector] public static float demonMinDistance = 20f;
     [HideInInspector] public static float demonMaxDistance = 30f;
     [HideInInspector] public static float demonDamage = 50f;
-    [HideInInspector] public static float demonAttackRate = 0.4f;
+    [HideInInspector] public static float demonAttackRate = 0.3f;
     [HideInInspector] public static float demonStartleDelay = 2.0f;
     [HideInInspector] public static float demonFireballSpeed = 1800f;
     [HideInInspector] public static float demonFireballFlyTime = 5.0f;

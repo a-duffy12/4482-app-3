@@ -45,17 +45,18 @@ public class Ogre : Enemy
 
         transform.LookAt(player.transform.position);
 
-        if (distanceToPlayer <= (aggroDistance * Config.enemyAggroRadiusModifier) && distanceToPlayer > (attackDistance - 0.5f) && Time.time > lastAttackTime + (1/attackRate)) // only move towards player if within aggro range, not too close, and is ready to attack
+        if (distanceToPlayer <= (aggroDistance * Config.enemyAggroRadiusModifier) && distanceToPlayer > (attackDistance - 0.5f) && Time.time > lastAttackTime + (1/attackRate) && !stunned) // only move towards player if within aggro range, not too close, and is ready to attack
         {
             Move();
         }
 
-        if (distanceToPlayer <= attackDistance)
+        if (distanceToPlayer <= attackDistance && !stunned)
         {
             Attack(distanceToPlayer);
         }
 
         HandleDamageAudio();
+        HandleStun();
     }
 
     void Move()
@@ -93,6 +94,15 @@ public class Ogre : Enemy
             enemySource.clip = hurtAudio;
             enemySource.Play();
             damaged = false;
+        }
+    }
+
+    void HandleStun()
+    {
+        if (stunned && Time.time >= unStunTime)
+        {
+            stunned = false;
+            Debug.Log("unstunned");
         }
     }
 }

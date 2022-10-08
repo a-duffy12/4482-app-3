@@ -27,9 +27,9 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     private bool isCrouched;
     private float lastJumpTime;
-    private float lastDashTime;
-    private float lastRewindTime;
     private float lastGroundTime;
+    private float nextDashTime;
+    private float nextRewindTime;
 
     private float wStrafe = 0f;
     private float sStrafe = 0f;
@@ -380,10 +380,10 @@ public class PlayerController : MonoBehaviour
 
     public void Dash(InputAction.CallbackContext con)
 	{
-		if (con.performed && Time.time - lastDashTime > Config.dashCooldown)
+		if (con.performed && Time.time >= nextDashTime)
 		{
             dash = true;
-            lastDashTime = Time.time;
+            nextDashTime = Time.time + Config.dashCooldown;
 		}
 	}
 
@@ -394,10 +394,10 @@ public class PlayerController : MonoBehaviour
 
     public void RewindAbility(InputAction.CallbackContext con)
     {
-        if (con.performed && Config.rewindUnlocked && Time.time - lastRewindTime > Config.rewindCooldown)
+        if (con.performed && Config.rewindUnlocked && Time.time >= nextRewindTime)
         {
             rewind = true;
-            lastRewindTime = Time.time;
+            nextRewindTime = Time.time + Config.rewindCooldown;
         }
     }
 
