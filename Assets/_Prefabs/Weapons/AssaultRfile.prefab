@@ -82,11 +82,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   muzzleFlash: {fileID: 779623141471132407}
-  bulletHole: {fileID: 7671925515065079834, guid: 4e4133586ada00946a7be2a08cdde054, type: 3}
   weaponName: assault_rifle
   weaponInt: 0
   automatic: 1
   fireAudio: {fileID: 8300000, guid: 678a04a3b67328a428dd7f328b0d9b88, type: 3}
+  emptyAudio: {fileID: 8300000, guid: 45d090b8b2eb639468ae7da31d270ec9, type: 3}
 --- !u!82 &7881152765252507924
 AudioSource:
   m_ObjectHideFlags: 0

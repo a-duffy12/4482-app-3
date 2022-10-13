@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private Transform groundCheck;
     [Range(0f, 0.5f)] [SerializeField] private float groundRadius = 0.15f;
+    [SerializeField] private Transform inventory;
 
     [Header("Audio")]
     public AudioClip sprintAudio;
@@ -38,11 +39,12 @@ public class PlayerController : MonoBehaviour
     private bool jump = false;
     private bool dash = false;
     private bool rewind = false;
+    private float wsTilt = 0f;
+    private float adTilt = 0f;
 
     private float timeToRewind;
     Vector3 positionToRewind;
 
-    //Animator animator;
     AudioSource movementSource;
 
     #endregion private properties
@@ -73,7 +75,6 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        //animator = GetComponentInChildren<Animator>();
         movementSource = groundCheck.gameObject.GetComponent<AudioSource>();
     }
 
@@ -145,32 +146,34 @@ public class PlayerController : MonoBehaviour
             movementSource.Play();
         }
 
-        // set animator based on which strafe direction is being applied
-        /*if (wStrafe > sStrafe)
+        // set inventory rotation based on which strafe direction is being applied
+        if (Mathf.Abs(wStrafe) > Mathf.Abs(sStrafe))
         {
-            animator.SetInteger("WSMove", 1);
+            wsTilt = 5f;
         }
-        else if (wStrafe == sStrafe)
+        else if (Mathf.Abs(wStrafe) == Mathf.Abs(sStrafe))
         {
-            animator.SetInteger("WSMove", 0);
+            wsTilt = 0f;
         }
-        else if (wStrafe < sStrafe)
+        else if (Mathf.Abs(wStrafe) < Mathf.Abs(sStrafe))
         {
-            animator.SetInteger("WSMove", -1);
+            wsTilt = -5f;
         }
         
-        if (aStrafe > dStrafe)
+        if (Mathf.Abs(aStrafe) > Mathf.Abs(dStrafe))
         {
-            animator.SetInteger("ADMove", -1);
+            adTilt = 5f;
         }
-        else if (aStrafe == dStrafe)
+        else if (Mathf.Abs(aStrafe) == Mathf.Abs(dStrafe))
         {
-            animator.SetInteger("ADMove", 0);
+            adTilt = 0f;
         }
-        else if (aStrafe < dStrafe)
+        else if (Mathf.Abs(aStrafe) < Mathf.Abs(dStrafe))
         {
-            animator.SetInteger("ADMove", 1);
-        }*/
+            adTilt = -5f;
+        }
+
+        inventory.localRotation = Quaternion.Euler(wsTilt, -10, adTilt);
     }
 
     #region movement methods
@@ -285,7 +288,6 @@ public class PlayerController : MonoBehaviour
             playerVelocity.y = Config.jumpSpeed;
             lastJumpTime = Time.time;
             jump = false; // no longer want to jump
-            //animator.SetTrigger("Jump");
             movementSource.clip = jumpAudio;
             movementSource.Play();
         }

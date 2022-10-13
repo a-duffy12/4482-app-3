@@ -23,6 +23,7 @@ public class Sniper : MonoBehaviour
     float damage;
     float fireVelocity;
     float range;
+    float recoil;
     float adsFov;
 
     AudioSource audioSource;
@@ -32,6 +33,9 @@ public class Sniper : MonoBehaviour
     [HideInInspector] public bool scoped;
     private int currentAmmo;
     private float lastFireTime;
+    private float resetRecoilTime;
+    private Vector3 weaponRotation;
+    private bool needsReset;
 
     void Awake()
     {
@@ -49,6 +53,7 @@ public class Sniper : MonoBehaviour
         fireVelocity = Config.sniperFireVelocity;
         range = Config.sniperRange;
         adsFov = Config.sniperAdsFov;
+        recoil = Config.sniperRecoil;
 
         currentAmmo = maxAmmo;
 
@@ -69,6 +74,11 @@ public class Sniper : MonoBehaviour
         else
         {
             adsOverlay.SetActive(false);
+        }
+
+        if (needsReset && Time.time >= resetRecoilTime)
+        {
+            ResetRecoil();
         }
     }
 
@@ -105,16 +115,24 @@ public class Sniper : MonoBehaviour
             muzzleFlash.Play();
             
             Hipfire(); // force unscope after shooting
+
+            if (!needsReset) // only get weapon position on initial shot
+            {
+                needsReset = true;
+                weaponRotation = transform.localEulerAngles;
+            }
+
+            float upRecoil = Random.Range(-0.4f, -0.5f) * recoil; // get veritcal recoil
+            float sideRecoil = Random.Range(-0.2f, 0.2f) * recoil; // get horizontal recoil
+            
+            transform.localEulerAngles += new Vector3(upRecoil, 0, sideRecoil); // add recoil
+            resetRecoilTime = Time.time + Config.recoilResetDelay; // set time to lower weapon
         }
         else if (Time.time > (lastFireTime + (1/fireRate))) // no ammo and can fire
         {
-            // empty mag sound
+            audioSource.clip = emptyAudio;
+            audioSource.Play();
         }
-    }
-
-    public void Reload()
-    {
-        Debug.Log("Reload " + weaponName);
     }
 
     public void OverrideLastFireTime() // allows weapon to fire as soon as it is swapped to
@@ -138,5 +156,11 @@ public class Sniper : MonoBehaviour
         eyes.fieldOfView = Config.fieldOfView;
 
         // play audio
+    }
+
+    void ResetRecoil() // set weapon, camera, and player rotation back to what it was before
+    {
+        needsReset = false;
+        transform.localEulerAngles = weaponRotation;
     }
 }

@@ -28,6 +28,8 @@ public class Shotgun : MonoBehaviour
     [HideInInspector] public int ammo { get { return currentAmmo; } }
     private int currentAmmo;
     private float lastFireTime;
+    private bool cycle;
+    private float cycleCounter;
 
     void Awake()
     {
@@ -50,6 +52,20 @@ public class Shotgun : MonoBehaviour
         audioSource.spatialBlend = 1f;
         audioSource.volume = 1f;
         audioSource.priority = 150;
+    }
+
+    void FixedUpdate()
+    {
+        if (cycleCounter == 20)
+        {
+            cycle = false;
+        }
+
+        if (cycle && cycleCounter < 20)
+        {
+            cycleCounter++;
+            transform.localEulerAngles = new Vector3(-18f * cycleCounter, 0, 0);
+        }
     }
 
     public void Fire(Transform firePoint)
@@ -157,16 +173,19 @@ public class Shotgun : MonoBehaviour
                 muzzleFlash.Stop();
             }
             muzzleFlash.Play();
+
+            if (!cycle) // spin shotgun if isn't already spinning
+            {
+                cycle = true;
+                cycleCounter = 1;
+                transform.localEulerAngles = new Vector3(-18f * cycleCounter, 0, 0);
+            }
         }
         else if (Time.time > (lastFireTime + (1/fireRate))) // no ammo and can fire
         {
-            // empty mag sound
+            audioSource.clip = emptyAudio;
+            audioSource.Play();
         }
-    }
-
-    public void Reload()
-    {
-        Debug.Log("Reload " + weaponName);
     }
 
     public void OverrideLastFireTime() // allows weapon to fire as soon as it is swapped to

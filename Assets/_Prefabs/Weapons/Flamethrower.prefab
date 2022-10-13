@@ -54,6 +54,7 @@ MonoBehaviour:
   weaponInt: 3
   automatic: 1
   fireAudio: {fileID: 8300000, guid: b880c244d62221340817e290f7694319, type: 3}
+  emptyAudio: {fileID: 8300000, guid: ec459cb516247284a9aa50a502784cc6, type: 3}
 --- !u!82 &5677529416901267061
 AudioSource:
   m_ObjectHideFlags: 0

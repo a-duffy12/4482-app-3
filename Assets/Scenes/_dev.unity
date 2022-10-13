@@ -5239,6 +5239,7 @@ MonoBehaviour:
     m_Bits: 64
   groundCheck: {fileID: 1570853092}
   groundRadius: 0.15
+  inventory: {fileID: 23296044}
   sprintAudio: {fileID: 8300000, guid: cf99179b5f7e3924d973198ea23d8b9a, type: 3}
   crouchAudio: {fileID: 8300000, guid: f4f39bb97a090c54ca2a135d1157ac68, type: 3}
   jumpAudio: {fileID: 8300000, guid: 4b91825a27b2b7d4790a27c4bdf57eb3, type: 3}

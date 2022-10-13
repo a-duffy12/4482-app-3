@@ -51,10 +51,13 @@ MonoBehaviour:
     m_Bits: 256
   muzzleFlash: {fileID: 2639449659353409412}
   bulletHole: {fileID: 7671925515065079834, guid: 4e4133586ada00946a7be2a08cdde054, type: 3}
+  adsOverlay: {fileID: 0}
   weaponName: sniper
   weaponInt: 2
   automatic: 0
   fireAudio: {fileID: 8300000, guid: 6a2a9227565fc6046b86ca398285dcdf, type: 3}
+  emptyAudio: {fileID: 8300000, guid: 15034d4afa5967b44a4d8e0333a7936b, type: 3}
+  scoped: 0
 --- !u!82 &4917023348793797047
 AudioSource:
   m_ObjectHideFlags: 0

@@ -56,19 +56,21 @@ public class Config
     [HideInInspector] public static float shotgunHpMaxReturn = 20f;
     [HideInInspector] public static float sniperRifleMaxHpReturn = 10f;
     [HideInInspector] public static float flamethrowerRifleMaxHpReturn = 50f;
+    [HideInInspector] public static float recoilResetDelay = 0.3f;
 
     [Header("Assault Rifle")]
     [HideInInspector] public static float assaultRifleFireRate = 10.0f;
     [HideInInspector] public static float assaultRifleReloadTime = 3.0f;
-    [HideInInspector] public static int assaultRifleMaxAmmo = 400;
+    [HideInInspector] public static int assaultRifleMaxAmmo = 200;
     [HideInInspector] public static float assaultRifleDamage = 25;
     [HideInInspector] public static float assaultRifleFireVelocity = 4500;
     [HideInInspector] public static float assaultRifleRange = 150;
+    [HideInInspector] public static float assaultRifleRecoil = 2.5f;
 
     [Header("Shotgun")]
     [HideInInspector] public static float shotgunFireRate = 1.2f;
     [HideInInspector] public static float shotgunReloadTime = 2.6f;
-    [HideInInspector] public static int shotgunMaxAmmo = 60;
+    [HideInInspector] public static int shotgunMaxAmmo = 20;
     [HideInInspector] public static float shotgunDamage = 14;
     [HideInInspector] public static float shotgunFireVelocity = 1200;
     [HideInInspector] public static float shotgunRange = 20;
@@ -76,10 +78,11 @@ public class Config
     [Header("Sniper")]
     [HideInInspector] public static float sniperFireRate = 0.8f;
     [HideInInspector] public static float sniperReloadTime = 4.0f;
-    [HideInInspector] public static int sniperMaxAmmo = 45;
+    [HideInInspector] public static int sniperMaxAmmo = 20;
     [HideInInspector] public static float sniperDamage = 145;
     [HideInInspector] public static float sniperFireVelocity = 7000;
     [HideInInspector] public static float sniperRange = 500;
+    [HideInInspector] public static float sniperRecoil = 50f;
     [HideInInspector] public static bool sniperScopedIn = false;
     [HideInInspector] public static float sniperUnAdsDamageMod = 0.5f;
     [HideInInspector] public static float sniperAdsFov = 30;
@@ -88,7 +91,7 @@ public class Config
     [Header("Flamethrower")]
     [HideInInspector] public static float flamethrowerFireRate = 20f;
     [HideInInspector] public static float flamethrowerReloadTime = 4.5f;
-    [HideInInspector] public static int flamethrowerMaxAmmo = 500;
+    [HideInInspector] public static int flamethrowerMaxAmmo = 250;
     [HideInInspector] public static float flamethrowerDamage = 8.0f;
     [HideInInspector] public static float flamethrowerFireVelocity = 1000;
     [HideInInspector] public static float flamethrowerRange = 25;

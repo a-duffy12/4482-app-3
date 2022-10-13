@@ -81,13 +81,9 @@ public class Flamethrower : MonoBehaviour
         }
         else if (Time.time > (lastFireTime + (1/fireRate))) // no ammo and can fire
         {
-            // empty mag sound
+            audioSource.clip = emptyAudio;
+            audioSource.Play();
         }
-    }
-
-    public void Reload()
-    {
-        Debug.Log("Reload " + weaponName);
     }
 
     public void OverrideLastFireTime() // allows weapon to fire as soon as it is swapped to
