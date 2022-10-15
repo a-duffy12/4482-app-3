@@ -25,8 +25,7 @@ public class Flamethrower : MonoBehaviour
 
     AudioSource audioSource;
 
-    [HideInInspector] public int ammo { get { return currentAmmo; } }
-    private int currentAmmo;
+    [HideInInspector] public int currentAmmo;
     private float lastFireTime;
 
     void Awake()
@@ -51,6 +50,14 @@ public class Flamethrower : MonoBehaviour
         audioSource.spatialBlend = 1f;
         audioSource.volume = 1f;
         audioSource.priority = 150;
+    }
+
+    void Update()
+    {
+        if (currentAmmo > maxAmmo)
+        {
+            currentAmmo = maxAmmo;
+        }
     }
 
     public void Fire(Transform firePoint)

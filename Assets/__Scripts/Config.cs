@@ -107,6 +107,13 @@ public class Config
     [HideInInspector] public static float grenadeKnockbackForce = 500f;
     [HideInInspector] public static float grenadeStunDuration = 2.0f;
 
+    [Header("Knife")]
+    [HideInInspector] public static float knifeCooldown = 5.0f;
+    [HideInInspector] public static float knifeRefillFraction = 0.5f;
+    [HideInInspector] public static float knifeDamage = 500f;
+    [HideInInspector] public static float knifeRange = 2.0f;
+    [HideInInspector] public static float knifeDuration = 0.6f;
+
     [Header("Ogre")]
     [HideInInspector] public static string ogreName = "Ogre";
     [HideInInspector] public static float ogreMaxHp = 200;

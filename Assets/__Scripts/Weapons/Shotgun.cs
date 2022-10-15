@@ -7,7 +7,6 @@ public class Shotgun : MonoBehaviour
     [Header("Stats")]
     [SerializeField] private LayerMask hitMask;
     [SerializeField] private ParticleSystem muzzleFlash;
-    [SerializeField] private GameObject bulletHole;
     public string weaponName = "shotgun";
     public int weaponInt = 1;
     public bool automatic = false;
@@ -25,8 +24,7 @@ public class Shotgun : MonoBehaviour
 
     AudioSource audioSource;
 
-    [HideInInspector] public int ammo { get { return currentAmmo; } }
-    private int currentAmmo;
+    [HideInInspector] public int currentAmmo;
     private float lastFireTime;
     private bool cycle;
     private float cycleCounter;
@@ -52,6 +50,14 @@ public class Shotgun : MonoBehaviour
         audioSource.spatialBlend = 1f;
         audioSource.volume = 1f;
         audioSource.priority = 150;
+    }
+
+    void Update()
+    {
+        if (currentAmmo > maxAmmo)
+        {
+            currentAmmo = maxAmmo;
+        }
     }
 
     void FixedUpdate()

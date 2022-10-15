@@ -25,8 +25,7 @@ public class AssaultRifle : MonoBehaviour
 
     AudioSource audioSource;
 
-    [HideInInspector] public int ammo { get { return currentAmmo; } }
-    private int currentAmmo;
+    [HideInInspector] public int currentAmmo;
     private float lastFireTime;
     private float resetRecoilTime;
     private Vector3 weaponRotation;
@@ -61,6 +60,11 @@ public class AssaultRifle : MonoBehaviour
         if (needsReset && Time.time >= resetRecoilTime)
         {
             ResetRecoil();
+        }
+
+        if (currentAmmo > maxAmmo)
+        {
+            currentAmmo = maxAmmo;
         }
     }
 

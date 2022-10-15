@@ -13,6 +13,7 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private GameObject sniperPrefab;
     [SerializeField] private GameObject flamethrowerPrefab;
     [SerializeField] private GameObject grenadePrefab;
+    [SerializeField] private GameObject knifePrefab;
 
     [Header("Audio")]
     public AudioClip switchWeaponAudio;
@@ -23,11 +24,14 @@ public class PlayerInventory : MonoBehaviour
     Shotgun shotgun;
     Sniper sniper;
     Flamethrower flamethrower;
+    Knife knife;
     
     [HideInInspector] public int currentWeaponInt;
+    [HideInInspector] public bool refill;
 
     private float shootAutoWeapon;
     private float nextGrenadeTime;
+    private float nextKnifeTime;
 
     void Awake()
     {
@@ -36,6 +40,7 @@ public class PlayerInventory : MonoBehaviour
         shotgun = shotgunPrefab.GetComponent<Shotgun>();
         sniper = sniperPrefab.GetComponent<Sniper>();
         flamethrower = flamethrowerPrefab.GetComponent<Flamethrower>();
+        knife = knifePrefab.GetComponent<Knife>();
     }
 
     // Start is called before the first frame update
@@ -46,6 +51,7 @@ public class PlayerInventory : MonoBehaviour
         inventorySource.volume = 1f;
 
         SwitchWeapons(assaultRifle.weaponInt);
+        knifePrefab.SetActive(false);
     }
 
     // Update is called once per frame
@@ -61,6 +67,15 @@ public class PlayerInventory : MonoBehaviour
             {
                 flamethrower.Fire(firePoint);
             }
+        }
+
+        if (refill) // knife hit, refill ammo
+        {
+            refill = false;
+            assaultRifle.currentAmmo += (int) (Config.assaultRifleMaxAmmo * Config.knifeRefillFraction);
+            shotgun.currentAmmo += (int) (Config.shotgunMaxAmmo * Config.knifeRefillFraction);
+            sniper.currentAmmo += (int) (Config.sniperMaxAmmo * Config.knifeRefillFraction);
+            flamethrower.currentAmmo += (int) (Config.flamethrowerMaxAmmo * Config.knifeRefillFraction);
         }
     }
 
@@ -128,9 +143,19 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
-    void UseKnife()
+    IEnumerator UseKnife(float duration)
     {
-        
+        if (Time.time >= nextKnifeTime)
+        {
+            knifePrefab.SetActive(true);
+            StartCoroutine(knife.SwingKnife(firePoint));
+            
+            nextKnifeTime = Time.time + Config.knifeCooldown;
+
+            yield return new WaitForSeconds(duration);
+
+            knifePrefab.SetActive(false);
+        }
     }
 
     #region input functions
@@ -216,7 +241,7 @@ public class PlayerInventory : MonoBehaviour
     {
         if (Config.knifeUnlocked && con.performed)
         {
-            UseKnife();
+            StartCoroutine(UseKnife(Config.knifeDuration));
         }
     }
 

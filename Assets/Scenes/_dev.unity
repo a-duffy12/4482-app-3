@@ -123,6 +123,77 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &8964441
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 23296044}
+    m_Modifications:
+    - target: {fileID: 2022174984669497281, guid: adb8c5d7d88c31f47909348532a5d800, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2022174984669497281, guid: adb8c5d7d88c31f47909348532a5d800, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2022174984669497281, guid: adb8c5d7d88c31f47909348532a5d800, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2022174984669497281, guid: adb8c5d7d88c31f47909348532a5d800, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2022174984669497281, guid: adb8c5d7d88c31f47909348532a5d800, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.8848247
+      objectReference: {fileID: 0}
+    - target: {fileID: 2022174984669497281, guid: adb8c5d7d88c31f47909348532a5d800, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.09147132
+      objectReference: {fileID: 0}
+    - target: {fileID: 2022174984669497281, guid: adb8c5d7d88c31f47909348532a5d800, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.4126005
+      objectReference: {fileID: 0}
+    - target: {fileID: 2022174984669497281, guid: adb8c5d7d88c31f47909348532a5d800, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.19616088
+      objectReference: {fileID: 0}
+    - target: {fileID: 2022174984669497281, guid: adb8c5d7d88c31f47909348532a5d800, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2022174984669497281, guid: adb8c5d7d88c31f47909348532a5d800, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2022174984669497281, guid: adb8c5d7d88c31f47909348532a5d800, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4156255140563051269, guid: adb8c5d7d88c31f47909348532a5d800, type: 3}
+      propertyPath: m_Name
+      value: Knife
+      objectReference: {fileID: 0}
+    - target: {fileID: 4156255140563051269, guid: adb8c5d7d88c31f47909348532a5d800, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: adb8c5d7d88c31f47909348532a5d800, type: 3}
+--- !u!4 &8964442 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2022174984669497281, guid: adb8c5d7d88c31f47909348532a5d800, type: 3}
+  m_PrefabInstance: {fileID: 8964441}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8964443 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4156255140563051269, guid: adb8c5d7d88c31f47909348532a5d800, type: 3}
+  m_PrefabInstance: {fileID: 8964441}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &23296043
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,6 +227,7 @@ Transform:
   - {fileID: 1130807433}
   - {fileID: 1567728670}
   - {fileID: 1513492585}
+  - {fileID: 8964442}
   m_Father: {fileID: 963194228}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -10, z: 0}
@@ -5152,7 +5224,19 @@ MonoBehaviour:
     m_ActionId: 4bd26f6d-10e2-4d66-9562-c5679c506479
     m_ActionName: Player/Ability1[/Keyboard/q]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1525501200}
+        m_TargetAssemblyTypeName: PlayerInventory, Assembly-CSharp
+        m_MethodName: Melee
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 038d3021-6ed7-40eb-9dd0-feb17375939c
     m_ActionName: Player/Ability2[/Keyboard/e]
   - m_PersistentCalls:
@@ -5309,9 +5393,11 @@ MonoBehaviour:
   sniperPrefab: {fileID: 360549070}
   flamethrowerPrefab: {fileID: 1513492586}
   grenadePrefab: {fileID: 438953134324340195, guid: e6fd5ba0b270c3b48befc4373cacd1c8, type: 3}
+  knifePrefab: {fileID: 8964443}
   switchWeaponAudio: {fileID: 8300000, guid: 96273f02ad816ef4cbe5021356e87f9d, type: 3}
   throwGrenadeAudio: {fileID: 8300000, guid: 06c15b0e5f54ace458e6c81481d28766, type: 3}
   currentWeaponInt: 0
+  refill: 0
 --- !u!4 &1567728670 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6004580148071293505, guid: 9d5fd577287f8e243af1558c7ca70a2f, type: 3}

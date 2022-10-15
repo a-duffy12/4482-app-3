@@ -7,7 +7,6 @@ public class Sniper : MonoBehaviour
     [Header("Stats")]
     [SerializeField] private LayerMask hitMask;
     [SerializeField] private ParticleSystem muzzleFlash;
-    [SerializeField] private GameObject bulletHole;
     [SerializeField] private GameObject adsOverlay;
     public string weaponName = "sniper";
     public int weaponInt = 2;
@@ -29,9 +28,8 @@ public class Sniper : MonoBehaviour
     AudioSource audioSource;
     Camera eyes;
 
-    [HideInInspector] public int ammo { get { return currentAmmo; } }
+    [HideInInspector] public int currentAmmo;
     [HideInInspector] public bool scoped;
-    private int currentAmmo;
     private float lastFireTime;
     private float resetRecoilTime;
     private Vector3 weaponRotation;
@@ -79,6 +77,11 @@ public class Sniper : MonoBehaviour
         if (needsReset && Time.time >= resetRecoilTime)
         {
             ResetRecoil();
+        }
+
+        if (currentAmmo > maxAmmo)
+        {
+            currentAmmo = maxAmmo;
         }
     }
 
