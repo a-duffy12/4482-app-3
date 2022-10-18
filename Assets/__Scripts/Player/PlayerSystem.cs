@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerSystem : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class PlayerSystem : MonoBehaviour
 
     [Header("GameObjects")]
     [SerializeField] private GameObject damageOverlay;
+    [SerializeField] private Image healthBar;
 
     [Header("Audio")]
     public AudioClip deathAudio;
@@ -36,11 +38,15 @@ public class PlayerSystem : MonoBehaviour
         currentHp = maxHp;
 
         damageOverlay.SetActive(false);
+
+        healthBar.fillAmount = Mathf.Clamp(currentHp/maxHp, 0, maxHp);
     }
 
     public void DamagePlayer(float damage, string attacker = "")
     {
         currentHp -= damage;
+        healthBar.fillAmount = Mathf.Clamp(currentHp/maxHp, 0, maxHp);
+
         if (currentHp > maxHp)
         {
             currentHp = maxHp;
@@ -65,11 +71,6 @@ public class PlayerSystem : MonoBehaviour
             }
             
             Time.timeScale = 0f;
-        }
-        else
-        {
-            // damage audio
-            Debug.Log("hp: " + currentHp);
         }
     }
 

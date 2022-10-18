@@ -44,6 +44,7 @@ public class Config
     [HideInInspector] public static bool flamethrowerUnlocked = true;
     [HideInInspector] public static bool knifeUnlocked = true;
     [HideInInspector] public static bool grenadeUnlocked = true;
+    [HideInInspector] public static bool dashUnlocked = true;
     [HideInInspector] public static bool rewindUnlocked = true;
 
     [Header("Player")]
@@ -157,6 +158,7 @@ public class Config
             Config.flamethrowerUnlocked = savedData.flamethrowerUnlocked;
             Config.knifeUnlocked = savedData.knifeUnlocked;
             Config.grenadeUnlocked = savedData.grenadeUnlocked;
+            Config.dashUnlocked = savedData.dashUnlocked;
             Config.rewindUnlocked = savedData.rewindUnlocked;
         }
     }

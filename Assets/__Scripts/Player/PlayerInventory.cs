@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerInventory : MonoBehaviour
 {
@@ -14,6 +15,18 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private GameObject flamethrowerPrefab;
     [SerializeField] private GameObject grenadePrefab;
     [SerializeField] private GameObject knifePrefab;
+    [SerializeField] private GameObject knifeSlider;
+    [SerializeField] private GameObject grenadeSlider;
+    [SerializeField] private GameObject assaultRifleSlider;
+    [SerializeField] private GameObject shotgunSlider;
+    [SerializeField] private GameObject sniperSlider;
+    [SerializeField] private GameObject flamethrowerSlider;
+    [SerializeField] private Image knifeBar;
+    [SerializeField] private Image grenadeBar;
+    [SerializeField] private Image assaultRifleBar;
+    [SerializeField] private Image shotgunBar;
+    [SerializeField] private Image sniperBar;
+    [SerializeField] private Image flamethrowerBar;
 
     [Header("Audio")]
     public AudioClip switchWeaponAudio;
@@ -32,6 +45,11 @@ public class PlayerInventory : MonoBehaviour
     private float shootAutoWeapon;
     private float nextGrenadeTime;
     private float nextKnifeTime;
+
+    private bool assaultRifleActivated = false;
+    private bool shotgunActivated = false;
+    private bool sniperActivated = false;
+    private bool flamethrowerActivated = false;
 
     void Awake()
     {
@@ -52,6 +70,66 @@ public class PlayerInventory : MonoBehaviour
 
         SwitchWeapons(assaultRifle.weaponInt);
         knifePrefab.SetActive(false);
+
+        if (Config.knifeUnlocked) // knife ui
+        {
+            knifeSlider.SetActive(true);
+            knifeBar.fillAmount = 1 - Mathf.Clamp((nextKnifeTime - Time.time)/Config.knifeCooldown, 0, Config.knifeCooldown);
+        }
+        else
+        {
+            knifeSlider.SetActive(false);
+        }
+
+        if (Config.grenadeUnlocked) // grenade ui
+        {
+            grenadeSlider.SetActive(true);
+            grenadeBar.fillAmount = 1 - Mathf.Clamp((nextGrenadeTime - Time.time)/Config.grenadeCooldown, 0, Config.grenadeCooldown);
+        }
+        else
+        {
+            grenadeSlider.SetActive(false);
+        }
+
+        if (Config.assaultRifleUnlocked) // assault rifle ui
+        {
+            assaultRifleSlider.SetActive(true);
+            assaultRifleBar.fillAmount = assaultRifleActivated ? Mathf.Clamp((float)assaultRifle.currentAmmo/Config.assaultRifleMaxAmmo, 0, Config.assaultRifleMaxAmmo) : 1;
+        }
+        else
+        {
+            assaultRifleSlider.SetActive(false);
+        }
+
+        if (Config.shotgunUnlocked) // shotgun ui
+        {
+            shotgunSlider.SetActive(true);
+            shotgunBar.fillAmount = shotgunActivated ? Mathf.Clamp((float)shotgun.currentAmmo/Config.shotgunMaxAmmo, 0, Config.shotgunMaxAmmo) : 1;
+        }
+        else
+        {
+            shotgunSlider.SetActive(false);
+        }
+
+        if (Config.sniperUnlocked) // sniper ui
+        {
+            sniperSlider.SetActive(true);
+            sniperBar.fillAmount = sniperActivated ? Mathf.Clamp((float)sniper.currentAmmo/Config.sniperMaxAmmo, 0, Config.sniperMaxAmmo) : 1;
+        }
+        else
+        {
+            sniperSlider.SetActive(false);
+        }
+
+        if (Config.flamethrowerUnlocked) // flamethrower ui
+        {
+            flamethrowerSlider.SetActive(true);
+            flamethrowerBar.fillAmount = flamethrowerActivated ? Mathf.Clamp((float)flamethrower.currentAmmo/Config.flamethrowerMaxAmmo, 0, Config.flamethrowerMaxAmmo) : 1;
+        }
+        else
+        {
+            flamethrowerSlider.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -77,6 +155,36 @@ public class PlayerInventory : MonoBehaviour
             sniper.currentAmmo += (int) (Config.sniperMaxAmmo * Config.knifeRefillFraction);
             flamethrower.currentAmmo += (int) (Config.flamethrowerMaxAmmo * Config.knifeRefillFraction);
         }
+
+        if (Config.knifeUnlocked) // knife ui
+        {
+            knifeBar.fillAmount = 1 - Mathf.Clamp((nextKnifeTime - Time.time)/Config.knifeCooldown, 0, Config.knifeCooldown);
+        }
+
+        if (Config.grenadeUnlocked) // grenade ui
+        {
+            grenadeBar.fillAmount = 1 - Mathf.Clamp((nextGrenadeTime - Time.time)/Config.grenadeCooldown, 0, Config.grenadeCooldown);
+        }
+
+        if (Config.assaultRifleUnlocked) // assault rifle ui
+        {
+            assaultRifleBar.fillAmount = assaultRifleActivated ? Mathf.Clamp((float)assaultRifle.currentAmmo/Config.assaultRifleMaxAmmo, 0, Config.assaultRifleMaxAmmo) : 1;
+        }
+
+        if (Config.shotgunUnlocked) // shotgun ui
+        {
+            shotgunBar.fillAmount = shotgunActivated ? Mathf.Clamp((float)shotgun.currentAmmo/Config.shotgunMaxAmmo, 0, Config.shotgunMaxAmmo) : 1;
+        }
+
+        if (Config.sniperUnlocked) // sniper ui
+        {
+            sniperBar.fillAmount = sniperActivated ? Mathf.Clamp((float)sniper.currentAmmo/Config.sniperMaxAmmo, 0, Config.sniperMaxAmmo) : 1;
+        }
+
+        if (Config.flamethrowerUnlocked) // flamethrower ui
+        {
+            flamethrowerBar.fillAmount = flamethrowerActivated ? Mathf.Clamp((float)flamethrower.currentAmmo/Config.flamethrowerMaxAmmo, 0, Config.flamethrowerMaxAmmo) : 1;
+        }
     }
 
     void SwitchWeapons(int weaponInt)
@@ -99,6 +207,11 @@ public class PlayerInventory : MonoBehaviour
             flamethrowerPrefab.SetActive(false);
             
             assaultRifle.OverrideLastFireTime(); // allow shooting right after swapping
+
+            if (!assaultRifleActivated)
+            {
+                assaultRifleActivated = true;
+            }
         }
         else if (currentWeaponInt == 1)
         {
@@ -108,6 +221,11 @@ public class PlayerInventory : MonoBehaviour
             flamethrowerPrefab.SetActive(false);
 
             shotgun.OverrideLastFireTime(); // allow shooting right after swapping
+
+            if (!shotgunActivated)
+            {
+                shotgunActivated = true;
+            }
         }
         else if (currentWeaponInt == 2)
         {
@@ -117,6 +235,11 @@ public class PlayerInventory : MonoBehaviour
             flamethrowerPrefab.SetActive(false);
 
             sniper.OverrideLastFireTime(); // allow shooting right after swapping
+
+            if (!sniperActivated)
+            {
+                sniperActivated = true;
+            }
         }
         else if (currentWeaponInt == 3)
         {
@@ -126,6 +249,11 @@ public class PlayerInventory : MonoBehaviour
             flamethrowerPrefab.SetActive(true);
 
             flamethrower.OverrideLastFireTime(); // allow shooting right after swapping
+
+            if (!flamethrowerActivated)
+            {
+                flamethrowerActivated = true;
+            }
         }
     }
 

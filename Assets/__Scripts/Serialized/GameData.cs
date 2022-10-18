@@ -20,6 +20,7 @@ public class GameData
     public bool flamethrowerUnlocked;
     public bool knifeUnlocked;
     public bool grenadeUnlocked;
+    public bool dashUnlocked;
     public bool rewindUnlocked;
 
     // function to get all data that needs saving
@@ -38,6 +39,7 @@ public class GameData
         flamethrowerUnlocked = Config.flamethrowerUnlocked;
         knifeUnlocked = Config.knifeUnlocked;
         grenadeUnlocked = Config.grenadeUnlocked;
+        dashUnlocked = Config.dashUnlocked;
         rewindUnlocked = Config.rewindUnlocked;
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,6 +14,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [Range(0f, 0.5f)] [SerializeField] private float groundRadius = 0.15f;
     [SerializeField] private Transform inventory;
+
+    [Header("Gameobjects")]
+    [SerializeField] private GameObject dashSlider;
+    [SerializeField] private GameObject rewindSlider;
+    [SerializeField] private Image dashBar;
+    [SerializeField] private Image rewindBar;
 
     [Header("Audio")]
     public AudioClip sprintAudio;
@@ -85,10 +92,43 @@ public class PlayerController : MonoBehaviour
         
         movementSource.playOnAwake = false;
         movementSource.spatialBlend = 1f;
-        movementSource.volume = 0.4f;
+        movementSource.volume = 0.7f;
 
         timeToRewind = Time.time;
         positionToRewind = transform.position;
+
+        if (Config.dashUnlocked) // dash ui
+        {
+            dashSlider.SetActive(true);
+            dashBar.fillAmount = 1 - Mathf.Clamp((nextDashTime - Time.time)/Config.dashCooldown, 0, Config.dashCooldown);
+        }
+        else
+        {
+            dashSlider.SetActive(false);
+        }
+
+        if (Config.rewindUnlocked) // rewind ui
+        {
+            rewindSlider.SetActive(true);
+            rewindBar.fillAmount = 1 - Mathf.Clamp((nextRewindTime - Time.time)/Config.rewindCooldown, 0, Config.rewindCooldown);
+        }
+        else
+        {
+            rewindSlider.SetActive(false);
+        }
+    }
+
+    void Update()
+    {
+        if (Config.dashUnlocked) // dash ui
+        {
+            dashBar.fillAmount = 1 - Mathf.Clamp((nextDashTime - Time.time)/Config.dashCooldown, 0, Config.dashCooldown);
+        }
+
+        if (Config.rewindUnlocked) // rewind ui
+        {
+            rewindBar.fillAmount = 1 - Mathf.Clamp((nextRewindTime - Time.time)/Config.rewindCooldown, 0, Config.rewindCooldown);
+        }
     }
 
     void FixedUpdate()
