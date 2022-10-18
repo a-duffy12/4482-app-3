@@ -112,7 +112,7 @@ public class Config
     [HideInInspector] public static float knifeRefillFraction = 0.5f;
     [HideInInspector] public static float knifeDamage = 500f;
     [HideInInspector] public static float knifeRange = 2.0f;
-    [HideInInspector] public static float knifeDuration = 0.6f;
+    [HideInInspector] public static float knifeDuration = 0.4f;
 
     [Header("Ogre")]
     [HideInInspector] public static string ogreName = "Ogre";

@@ -40,20 +40,20 @@ public class Knife : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (stabCounter == 30)
+        if (stabCounter == 20)
         {
             stab = false;
         }
 
-        if (stab && stabCounter < 15)
+        if (stab && stabCounter < 10)
         {
             stabCounter++;
-            transform.position += (transform.right * 0.1f);
+            transform.position += (transform.right * 0.15f);
         }
-        else if (stab && stabCounter >= 15 && stabCounter < 30)
+        else if (stab && stabCounter >= 10 && stabCounter < 20)
         {
             stabCounter++;
-            transform.position += (transform.right * -0.1f);
+            transform.position += (transform.right * -0.15f);
         }
     }
 
@@ -69,7 +69,6 @@ public class Knife : MonoBehaviour
         }
 
         yield return new WaitForSeconds(Config.knifeDuration * 0.4f);
-        Debug.Log("stab");
 
         if (Physics.Raycast(firePoint.position, firePoint.transform.forward, out RaycastHit hit, range, hitMask))
         {
