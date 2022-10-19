@@ -149,17 +149,22 @@ MonoBehaviour:
   maxHp: 150
   deathPosition: 0
   invulnerable: 0
+  unstunnable: 0
   nonflammable: 1
-  onFire: 0
   healthBar: {fileID: 4616037848961179013}
   healthBarCanvas: {fileID: 4239771277043873189}
   deathParticle: {fileID: 3363900976838243673, guid: abccc726eb2c74c41b0741406151cc0f, type: 3}
   currentHp: 0
   damaged: 0
+  stunned: 0
+  onFire: 0
   player: {fileID: 0}
   enemySource: {fileID: 0}
   rb: {fileID: 0}
   playerSystem: {fileID: 0}
+  unStunTime: 0
+  unFireTime: 0
+  nextFireTickTime: 0
   hurtAudio: {fileID: 8300000, guid: 7c2bab62df7a3ef4d80f587b4cc0fe98, type: 3}
   moveAudio: {fileID: 8300000, guid: 93524281fb7d0594c91566161c027e45, type: 3}
   attackAudio: {fileID: 8300000, guid: da5aeec65dfce4d449024607b399a5ec, type: 3}
@@ -469,7 +474,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: dd878339b57d0d948a83f0cee6b0f0f6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9468e39f4be63ec4fb85448821d9c370, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
