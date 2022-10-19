@@ -26,6 +26,62 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private Button blueButton;
     [SerializeField] private Button purpleButton;
 
+    [Header("Keybinds")]
+    [SerializeField] private InputActionReference forwardAction;
+    [SerializeField] private Button forwardButton;
+    [SerializeField] private Text forwardText;
+    [SerializeField] private InputActionReference backwardAction;
+    [SerializeField] private Button backwardButton;
+    [SerializeField] private Text backwardText;
+    [SerializeField] private InputActionReference leftAction;
+    [SerializeField] private Button leftButton;
+    [SerializeField] private Text leftText;
+    [SerializeField] private InputActionReference rightAction;
+    [SerializeField] private Button rightButton;
+    [SerializeField] private Text rightText;
+    [SerializeField] private InputActionReference jumpAction;
+    [SerializeField] private Button jumpButton;
+    [SerializeField] private Text jumpText;
+    [SerializeField] private InputActionReference crouchAction;
+    [SerializeField] private Button crouchButton;
+    [SerializeField] private Text crouchText;
+    [SerializeField] private InputActionReference dashAction;
+    [SerializeField] private Button dashButton;
+    [SerializeField] private Text dashText;
+    [SerializeField] private InputActionReference rewindAction;
+    [SerializeField] private Button rewindButton;
+    [SerializeField] private Text rewindText;
+    [SerializeField] private InputActionReference shootAction;
+    [SerializeField] private Button shootButton;
+    [SerializeField] private Text shootText;
+    [SerializeField] private InputActionReference scopeAction;
+    [SerializeField] private Button scopeButton;
+    [SerializeField] private Text scopeText;
+    [SerializeField] private InputActionReference assaultRifleAction;
+    [SerializeField] private Button assaultRifleButton;
+    [SerializeField] private Text assaultRifleText;
+    [SerializeField] private InputActionReference shotgunAction;
+    [SerializeField] private Button shotgunButton;
+    [SerializeField] private Text shotgunText;
+    [SerializeField] private InputActionReference sniperAction;
+    [SerializeField] private Button sniperButton;
+    [SerializeField] private Text sniperText;
+    [SerializeField] private InputActionReference flamethrowerAction;
+    [SerializeField] private Button flamethrowerButton;
+    [SerializeField] private Text flamethrowerText;
+    [SerializeField] private InputActionReference knifeAction;
+    [SerializeField] private Button knifeButton;
+    [SerializeField] private Text knifeText;
+    [SerializeField] private InputActionReference grenadeAction;
+    [SerializeField] private Button grenadeButton;
+    [SerializeField] private Text grenadeText;
+    [SerializeField] private InputActionReference pauseAction;
+    [SerializeField] private Button pauseButton;
+    [SerializeField] private Text pauseText;
+    [SerializeField] private InputActionReference toggleHudAction;
+    [SerializeField] private Button toggleHudButton;
+    [SerializeField] private Text toggleHudText;
+
     [Header("Text")]
     [SerializeField] private Text fovText;
     [SerializeField] private Text sensText;
@@ -39,6 +95,7 @@ public class PlayerUI : MonoBehaviour
     AudioSource uiSource;
     Camera eyes; // player camera
     PlayerInput input; // component that manages input actions
+    InputActionRebindingExtensions.RebindingOperation ro;
 
     private bool playing;
 
@@ -100,6 +157,7 @@ public class PlayerUI : MonoBehaviour
         fovText.text = fovSlider.value.ToString("0");
         sensText.text = (sensSlider.value/10).ToString("0.0");
 
+        // set difficulty text value
         if (Config.difficultyLevel == Difficulty.Level.Easy)
         {
            difficultyText.text = easyText; 
@@ -117,6 +175,7 @@ public class PlayerUI : MonoBehaviour
            difficultyText.text = funText; 
         }
 
+        // set nsfw text value
         if (Config.nsfwEnabled)
         {
             nsfwText.text = "Enabled";
@@ -126,6 +185,7 @@ public class PlayerUI : MonoBehaviour
             nsfwText.text = "Disabled";
         }
 
+        // set crosshair color value
         if (Config.crosshairColor == "red")
         {
             crosshairColorText.text = redText;
@@ -146,6 +206,46 @@ public class PlayerUI : MonoBehaviour
             crosshairColorText.text = purpleText;
             crosshairDot.color = new Color32(200, 0, 255, 255);
         }
+
+        // set keybindings text values
+        SetBindText(forwardAction, forwardText);
+        SetBindText(backwardAction, backwardText);
+        SetBindText(leftAction, leftText);
+        SetBindText(rightAction, rightText);
+        SetBindText(jumpAction, jumpText);
+        SetBindText(crouchAction, crouchText);
+        SetBindText(dashAction, dashText);
+        SetBindText(rewindAction, rewindText);
+        SetBindText(shootAction, shootText);
+        SetBindText(scopeAction, scopeText);
+        SetBindText(assaultRifleAction, assaultRifleText);
+        SetBindText(shotgunAction, shotgunText);
+        SetBindText(sniperAction, sniperText);
+        SetBindText(flamethrowerAction, flamethrowerText);
+        SetBindText(knifeAction, knifeText);
+        SetBindText(grenadeAction, grenadeText);
+        SetBindText(pauseAction, pauseText);
+        SetBindText(toggleHudAction, toggleHudText);
+
+        // set button listeners for keybinds
+        forwardButton.onClick.AddListener(() => { Rebind(forwardAction, forwardText); });
+        backwardButton.onClick.AddListener(() => { Rebind(backwardAction, backwardText); });
+        leftButton.onClick.AddListener(() => { Rebind(leftAction, leftText); });
+        rightButton.onClick.AddListener(() => { Rebind(rightAction, rightText); });
+        jumpButton.onClick.AddListener(() => { Rebind(jumpAction, jumpText); });
+        crouchButton.onClick.AddListener(() => { Rebind(crouchAction, crouchText); });
+        dashButton.onClick.AddListener(() => { Rebind(dashAction, dashText); });
+        rewindButton.onClick.AddListener(() => { Rebind(rewindAction, rewindText); });
+        shootButton.onClick.AddListener(() => { Rebind(shootAction, shootText); });
+        scopeButton.onClick.AddListener(() => { Rebind(scopeAction, scopeText); });
+        assaultRifleButton.onClick.AddListener(() => { Rebind(assaultRifleAction, assaultRifleText); });
+        shootButton.onClick.AddListener(() => { Rebind(shotgunAction, shotgunText); });
+        sniperButton.onClick.AddListener(() => { Rebind(sniperAction, sniperText); });
+        flamethrowerButton.onClick.AddListener(() => { Rebind(flamethrowerAction, flamethrowerText); });
+        knifeButton.onClick.AddListener(() => { Rebind(knifeAction, knifeText); });
+        grenadeButton.onClick.AddListener(() => { Rebind(grenadeAction, grenadeText); });
+        pauseButton.onClick.AddListener(() => { Rebind(pauseAction, pauseText); });
+        toggleHudButton.onClick.AddListener(() => { Rebind(toggleHudAction, toggleHudText); });
     }
 
     // Update is called once per frame
@@ -266,6 +366,31 @@ public class PlayerUI : MonoBehaviour
     void CloseHUD()
     {
         hud.SetActive(false);
+    }
+
+    void SetBindText(InputActionReference action, Text text)
+    {
+        int bindIndex = action.action.GetBindingIndexForControl(action.action.controls[0]); // get index of bind passed in
+        text.text = InputControlPath.ToHumanReadableString(action.action.bindings[bindIndex].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice); // set text to new value
+    }
+
+    public void Rebind(InputActionReference action, Text text)
+    {
+        action.action.Disable(); // disable action momentarily
+        text.text = "- - -";
+
+        ro = action.action.PerformInteractiveRebinding()
+            .OnMatchWaitForAnother(0.1f)
+            .OnComplete(operation => RebindComplete(action, text))
+            .Start();
+    }
+
+    private void RebindComplete(InputActionReference action, Text text)
+    {
+        ro.Dispose();
+        SetBindText(action, text);
+        // save game data WIP
+        action.action.Enable(); // re-enable action
     }
 
     #region input functions

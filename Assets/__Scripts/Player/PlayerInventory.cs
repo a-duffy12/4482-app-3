@@ -320,11 +320,6 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
-    public void Reload(InputAction.CallbackContext con)
-    {
-       
-    }
-
     public void Item1(InputAction.CallbackContext con)
     {
         if (Config.assaultRifleUnlocked && con.performed)
