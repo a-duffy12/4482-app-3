@@ -340,6 +340,7 @@ public class PlayerUI : MonoBehaviour
     void OpenPauseMenu()
     {
         Time.timeScale = 0f;
+        input.SwitchCurrentActionMap("Menu");
 
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
@@ -355,6 +356,7 @@ public class PlayerUI : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
+        input.SwitchCurrentActionMap("Player");
         Time.timeScale = 1f;
     }
 
