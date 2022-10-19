@@ -11,6 +11,7 @@ public class Config
     [Range(0, 3)] public static Difficulty.Level difficultyLevel = Difficulty.Level.Normal;
     [Range(0, 2)] public static float difficultyMod = 0.4f;
     public static bool nsfwEnabled = true;
+    public static string crosshairColor = "red";
 
     [Header("Jumping")]
     [Range(0f, 100)] public static float gravity = -9.81f;
@@ -62,7 +63,7 @@ public class Config
     [Header("Assault Rifle")]
     [HideInInspector] public static float assaultRifleFireRate = 10.0f;
     [HideInInspector] public static float assaultRifleReloadTime = 3.0f;
-    [HideInInspector] public static int assaultRifleMaxAmmo = 200;
+    [HideInInspector] public static int assaultRifleMaxAmmo = 120;
     [HideInInspector] public static float assaultRifleDamage = 25;
     [HideInInspector] public static float assaultRifleFireVelocity = 4500;
     [HideInInspector] public static float assaultRifleRange = 150;
@@ -71,7 +72,7 @@ public class Config
     [Header("Shotgun")]
     [HideInInspector] public static float shotgunFireRate = 1.2f;
     [HideInInspector] public static float shotgunReloadTime = 2.6f;
-    [HideInInspector] public static int shotgunMaxAmmo = 20;
+    [HideInInspector] public static int shotgunMaxAmmo = 12;
     [HideInInspector] public static float shotgunDamage = 14;
     [HideInInspector] public static float shotgunFireVelocity = 1200;
     [HideInInspector] public static float shotgunRange = 20;
@@ -79,7 +80,7 @@ public class Config
     [Header("Sniper")]
     [HideInInspector] public static float sniperFireRate = 0.8f;
     [HideInInspector] public static float sniperReloadTime = 4.0f;
-    [HideInInspector] public static int sniperMaxAmmo = 20;
+    [HideInInspector] public static int sniperMaxAmmo = 10;
     [HideInInspector] public static float sniperDamage = 145;
     [HideInInspector] public static float sniperFireVelocity = 7000;
     [HideInInspector] public static float sniperRange = 500;
@@ -92,7 +93,7 @@ public class Config
     [Header("Flamethrower")]
     [HideInInspector] public static float flamethrowerFireRate = 20f;
     [HideInInspector] public static float flamethrowerReloadTime = 4.5f;
-    [HideInInspector] public static int flamethrowerMaxAmmo = 250;
+    [HideInInspector] public static int flamethrowerMaxAmmo = 180;
     [HideInInspector] public static float flamethrowerDamage = 8.0f;
     [HideInInspector] public static float flamethrowerFireVelocity = 1000;
     [HideInInspector] public static float flamethrowerRange = 25;
@@ -150,6 +151,7 @@ public class Config
             Config.difficultyLevel = savedData.difficultyLevel == 0 ? Difficulty.Level.Easy : savedData.difficultyLevel == 1 ? Difficulty.Level.Normal : savedData.difficultyLevel == 2 ? Difficulty.Level.Hard : savedData.difficultyLevel == 3 ? Difficulty.Level.Fun : Difficulty.Level.Normal;
             Config.difficultyMod = savedData.difficultyMod;
             Config.nsfwEnabled = savedData.nsfwEnabled;
+            Config.crosshairColor = savedData.crosshairColor;
         
             Config.levelCount = savedData.levelCount;
             Config.assaultRifleUnlocked = savedData.assaultRifleUnlocked;

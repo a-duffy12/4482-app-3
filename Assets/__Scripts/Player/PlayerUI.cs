@@ -10,7 +10,6 @@ public class PlayerUI : MonoBehaviour
     [Header("Menus")]
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject hud;
-    [SerializeField] private GameObject crosshair;
 
     [Header("Buttons and Sliders")]
     [SerializeField] private Button resumeButton;
@@ -22,14 +21,20 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private Button hardButton;
     [SerializeField] private Button funButton;
     [SerializeField] private Button nsfwButton;
+    [SerializeField] private Button redButton;
+    [SerializeField] private Button greenButton;
+    [SerializeField] private Button blueButton;
+    [SerializeField] private Button purpleButton;
 
     [Header("Text")]
     [SerializeField] private Text fovText;
     [SerializeField] private Text sensText;
     [SerializeField] private Text difficultyText;
     [SerializeField] private Text nsfwText;
+    [SerializeField] private Text crosshairColorText;
 
-    [Header("Audio")]
+    [Header("Gameobjects")]
+    [SerializeField] private Image crosshairDot;
 
     AudioSource uiSource;
     Camera eyes; // player camera
@@ -37,10 +42,14 @@ public class PlayerUI : MonoBehaviour
 
     private bool playing;
 
-    private string easyText = "EASY";
-    private string normalText = "NORMAL";
-    private string hardText = "HARD";
-    private string funText = "FUN";
+    private string easyText = "Difficulty - EASY";
+    private string normalText = "Difficulty - NORMAL";
+    private string hardText = "Difficulty - HARD";
+    private string funText = "Difficulty - FUN";
+    private string redText = "Crosshair Color - RED";
+    private string greenText = "Crosshair Color - GREEN";
+    private string blueText = "Crosshair Color - BLUE";
+    private string purpleText = "Crosshair Color - PURPLE";
 
     void Awake()
     {
@@ -70,11 +79,14 @@ public class PlayerUI : MonoBehaviour
         hardButton.onClick.AddListener(Hard);
         funButton.onClick.AddListener(Fun);
         nsfwButton.onClick.AddListener(Nsfw);
+        redButton.onClick.AddListener(Red);
+        greenButton.onClick.AddListener(Green);
+        blueButton.onClick.AddListener(Blue);
+        purpleButton.onClick.AddListener(Purple);
 
         uiSource.playOnAwake = false;
         uiSource.spatialBlend = 1f;
         uiSource.volume = 1f;
-        
 
         // set settings values
         fovSlider.minValue = 60;
@@ -112,6 +124,27 @@ public class PlayerUI : MonoBehaviour
         else
         {
             nsfwText.text = "Disabled";
+        }
+
+        if (Config.crosshairColor == "red")
+        {
+            crosshairColorText.text = redText;
+            crosshairDot.color = new Color32(255, 0, 0, 255);
+        }
+        else if (Config.crosshairColor == "green")
+        {
+            crosshairColorText.text = greenText;
+            crosshairDot.color = new Color32(0, 255, 0, 255);
+        }
+        else if (Config.crosshairColor == "blue")
+        {
+            crosshairColorText.text = blueText;
+            crosshairDot.color = new Color32(0, 200, 255, 255);
+        }
+        else if (Config.crosshairColor == "purple")
+        {
+            crosshairColorText.text = purpleText;
+            crosshairDot.color = new Color32(200, 0, 255, 255);
         }
     }
 
@@ -170,12 +203,39 @@ public class PlayerUI : MonoBehaviour
         }
     }
 
+    void Red()
+    {
+        Config.crosshairColor = "red";
+        crosshairColorText.text = redText;
+        crosshairDot.color = new Color32(255, 0, 0, 255);
+    }
+
+    void Green()
+    {
+        Config.crosshairColor = "green";
+        crosshairColorText.text = greenText;
+        crosshairDot.color = new Color32(0, 255, 0, 255);
+    }
+
+    void Blue()
+    {
+        Config.crosshairColor = "blue";
+        crosshairColorText.text = blueText;
+        crosshairDot.color = new Color32(0, 200, 255, 255);
+    }
+
+    void Purple()
+    {
+        Config.crosshairColor = "purple";
+        crosshairColorText.text = purpleText;
+        crosshairDot.color = new Color32(200, 0, 255, 255);
+    }
+
     void ReturnToMenu()
     {
         SaveLoad.SaveData();
         SceneManager.LoadScene("Menu");
     }
- 
 
     void OpenPauseMenu()
     {
