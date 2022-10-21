@@ -3896,7 +3896,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -9633,7 +9633,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -9949,7 +9949,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -11405,14 +11405,6 @@ MonoBehaviour:
     m_ActionId: 326f72dc-ac55-4fbc-b440-e06964682fcd
     m_ActionName: Player/SecondaryAction[/Mouse/rightButton]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 1c131e87-a6dc-446a-937d-3579c50531eb
-    m_ActionName: Player/TertiaryAction[/Mouse/middleButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 1ac70bdc-b293-489f-98f5-ed4d2d5f22a0
-    m_ActionName: Player/Reload[/Keyboard/r]
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1525501200}
         m_TargetAssemblyTypeName: PlayerInventory, Assembly-CSharp
@@ -11525,18 +11517,6 @@ MonoBehaviour:
     m_ActionId: 67e6bc26-b84a-41c0-a823-b83dbb6ef2ef
     m_ActionName: Player/Pause[/Keyboard/escape]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 117cebc6-9d93-4742-8bda-fd17edc40a7c
-    m_ActionName: Player/Scoreboard[/Keyboard/tab]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: f9260d31-fd45-4bf2-9fb4-bb09e8ed7409
-    m_ActionName: Player/Settings[/Keyboard/slash]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 7de43bbf-7bfb-4326-9efc-2385ecfe0abd
-    m_ActionName: Player/Enter[/Keyboard/enter]
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1525501199}
         m_TargetAssemblyTypeName: PlayerUI, Assembly-CSharp
@@ -11568,6 +11548,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 909fffcc-b4c1-4445-b89a-59f6d587fc82
     m_ActionName: Player/Throwable[/Keyboard/f]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 672ca3e4-40a4-4a23-b4db-2feb7ac14b4b
+    m_ActionName: Menu/New action
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -14005,7 +13989,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -15174,7 +15158,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2073938259
 RectTransform:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ public class GameData
     public float difficultyMod;
     public bool nsfwEnabled;
     public string crosshairColor;
+    public string keybinds;
     
     [Header("Game Status")]
     public int levelCount;
@@ -33,6 +34,7 @@ public class GameData
         difficultyMod = Config.difficultyMod;
         nsfwEnabled = Config.nsfwEnabled;
         crosshairColor = Config.crosshairColor;
+        keybinds = Config.keybinds;
         
         levelCount = Config.levelCount;
         assaultRifleUnlocked = Config.assaultRifleUnlocked;

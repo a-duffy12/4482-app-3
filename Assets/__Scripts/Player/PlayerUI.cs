@@ -110,9 +110,6 @@ public class PlayerUI : MonoBehaviour
 
     void Awake()
     {
-        // load saved settings
-        Config.GetSaveData();
-
         eyes = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         uiSource = GameObject.FindGameObjectWithTag("UI").GetComponent<AudioSource>();
         input = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
@@ -121,6 +118,10 @@ public class PlayerUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // load saved settings
+        Config.GetSaveData();
+        LoadKeybinds(input);
+
         eyes.fieldOfView = Config.fieldOfView;
 
         Time.timeScale = 1f;
@@ -239,7 +240,7 @@ public class PlayerUI : MonoBehaviour
         shootButton.onClick.AddListener(() => { Rebind(shootAction, shootText); });
         scopeButton.onClick.AddListener(() => { Rebind(scopeAction, scopeText); });
         assaultRifleButton.onClick.AddListener(() => { Rebind(assaultRifleAction, assaultRifleText); });
-        shootButton.onClick.AddListener(() => { Rebind(shotgunAction, shotgunText); });
+        shotgunButton.onClick.AddListener(() => { Rebind(shotgunAction, shotgunText); });
         sniperButton.onClick.AddListener(() => { Rebind(sniperAction, sniperText); });
         flamethrowerButton.onClick.AddListener(() => { Rebind(flamethrowerAction, flamethrowerText); });
         knifeButton.onClick.AddListener(() => { Rebind(knifeAction, knifeText); });
@@ -391,8 +392,18 @@ public class PlayerUI : MonoBehaviour
     {
         ro.Dispose();
         SetBindText(action, text);
-        // save game data WIP
+        SaveKeybinds(input);
         action.action.Enable(); // re-enable action
+    }
+
+    void SaveKeybinds(PlayerInput input)
+    {
+        Config.keybinds = input.actions.SaveBindingOverridesAsJson();
+    }
+
+    void LoadKeybinds(PlayerInput input)
+    {
+        input.actions.LoadBindingOverridesFromJson(Config.keybinds);
     }
 
     #region input functions

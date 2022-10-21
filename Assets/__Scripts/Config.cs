@@ -12,6 +12,7 @@ public class Config
     [Range(0, 2)] public static float difficultyMod = 0.4f;
     public static bool nsfwEnabled = true;
     public static string crosshairColor = "red";
+    public static string keybinds = "";
 
     [Header("Jumping")]
     [Range(0f, 100)] public static float gravity = -9.81f;
@@ -152,6 +153,7 @@ public class Config
             Config.difficultyMod = savedData.difficultyMod;
             Config.nsfwEnabled = savedData.nsfwEnabled;
             Config.crosshairColor = savedData.crosshairColor;
+            Config.keybinds = savedData.keybinds;
         
             Config.levelCount = savedData.levelCount;
             Config.assaultRifleUnlocked = savedData.assaultRifleUnlocked;
