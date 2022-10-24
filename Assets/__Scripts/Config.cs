@@ -141,6 +141,17 @@ public class Config
     [HideInInspector] public static float demonFireballSpeed = 1800f;
     [HideInInspector] public static float demonFireballFlyTime = 5.0f;
 
+    [Header("Ogre")]
+    [HideInInspector] public static string soulName = "Soul";
+    [HideInInspector] public static float soulMaxHp = 50;
+    [HideInInspector] public static float soulDeathPosition = 0.3f;
+    [HideInInspector] public static float soulMoveForce = 5000f;
+    [HideInInspector] public static float soulMoveDelay = 2.0f;
+    [HideInInspector] public static float soulAggroDistance = 50f;
+    [HideInInspector] public static float soulAttackDistance = 1.8f;
+    [HideInInspector] public static float soulDamage = 20f;
+    [HideInInspector] public static float soulAttackRate = 0.8f;
+
     public static void GetSaveData()
     {
         GameData savedData = SaveLoad.LoadData(); // load serialized data
