@@ -35,7 +35,6 @@ public class Demon : Enemy
 
         maxHp = Config.demonMaxHp;
         currentHp = maxHp;
-        nonflammable = true;
 
         enemyName = Config.demonName;
         deathPosition = Config.demonDeathPosition;
