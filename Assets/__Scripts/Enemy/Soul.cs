@@ -10,7 +10,7 @@ public class Soul : Enemy
     public AudioClip attackAudio;
 
     [Header("GameObjects")]
-    public GameObject fireParticle;
+    public ParticleSystem fireParticle;
 
     float moveForce;
     float moveDelay;
@@ -26,7 +26,7 @@ public class Soul : Enemy
     void Start()
     {
         system = player.GetComponent<PlayerSystem>();
-        fireParticle.SetActive(false);
+        fireParticle.Stop();
 
         enemySource.playOnAwake = false;
         enemySource.spatialBlend = 1f;
@@ -119,10 +119,10 @@ public class Soul : Enemy
         if (!nonflammable && onFire && Time.time >= unFireTime)
         {
             onFire = false;
-
-            if (fireParticle.activeInHierarchy)
+            
+            if (fireParticle.isPlaying)
             {
-                fireParticle.SetActive(false);
+                fireParticle.Stop();
             }
         }
         else if (!nonflammable && onFire && Time.time >= nextFireTickTime)
@@ -130,9 +130,9 @@ public class Soul : Enemy
             DamageEnemy(Config.flamethrowerBurnDamage, "flamethrower");
             nextFireTickTime = Time.time + (1/Config.flamethrowerFireRate);
     
-            if (!fireParticle.activeInHierarchy)
+            if (!fireParticle.isPlaying)
             {
-                fireParticle.SetActive(true);
+                fireParticle.Play();
             }
         }
     }

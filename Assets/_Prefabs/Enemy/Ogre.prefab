@@ -423,7 +423,7 @@ MonoBehaviour:
   hurtAudio: {fileID: 8300000, guid: 4b7373210833f194fa0c1891dd17394f, type: 3}
   moveAudio: {fileID: 8300000, guid: 9d2f117993c35dd4184e3243c45531d5, type: 3}
   attackAudio: {fileID: 8300000, guid: 29c3afa319a76cf46a442ee94aaebd68, type: 3}
-  fireParticle: {fileID: 7007089738205532335}
+  fireParticle: {fileID: 7007089738191165739}
 --- !u!65 &8003595000019543555
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -526,14 +526,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe5dbb105d9b402458a2ebc190c85725, type: 3}
+--- !u!198 &7007089738191165739 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 497314143857599820, guid: fe5dbb105d9b402458a2ebc190c85725, type: 3}
+  m_PrefabInstance: {fileID: 7483010511362309223}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7007089738205286551 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 497314143871790320, guid: fe5dbb105d9b402458a2ebc190c85725, type: 3}
-  m_PrefabInstance: {fileID: 7483010511362309223}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7007089738205532335 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 497314143872036040, guid: fe5dbb105d9b402458a2ebc190c85725, type: 3}
   m_PrefabInstance: {fileID: 7483010511362309223}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8416250360650769825

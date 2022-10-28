@@ -8,11 +8,14 @@ public class Rat : Enemy
     public AudioClip hurtAudio;
     public AudioClip moveAudio;
     public AudioClip attackAudio;
+    public AudioClip digAudio;
+    public AudioClip tunnelAudio;
+    public AudioClip resurfaceAudio;
 
     [Header("GameObjects")]
     public GameObject mudballPrefab;
     public Transform firePoint;
-    public GameObject fireParticle;
+    public ParticleSystem fireParticle;
 
     float movementSpeed;
     float aggroDistance;
@@ -21,12 +24,17 @@ public class Rat : Enemy
     float damage;
     float attackRate;
     float mudballSpeed;
+    float surfaceTime;
 
     private float lastAttackTime;
+    private float lastTunnelTime;
     private bool undergound;
+    private int tunnelCounter;
 
     void Start()
     {
+        fireParticle.Stop();
+
         enemySource.playOnAwake = false;
         enemySource.spatialBlend = 1f;
         enemySource.volume = 1f;
@@ -44,6 +52,7 @@ public class Rat : Enemy
         damage = Config.ratDamage;
         attackRate = Config.ratAttackRate;
         mudballSpeed = Config.ratMudballSpeed;
+        surfaceTime = Config.ratSurfaceTime;
     }
     
     void Update()
@@ -52,11 +61,53 @@ public class Rat : Enemy
 
         transform.LookAt(player.transform.position);
 
-        //Attack();
+        if (distanceToPlayer <= (aggroDistance * Config.enemyAggroRadiusModifier)) // only interact with player if they are within range
+        {
+            if (Time.time - surfaceTime > lastTunnelTime && !undergound && !stunned) // rat has been above ground for too long
+            {
+                StartTunnel();
+            }
+            else if (distanceToPlayer <= minDistance && !undergound && !stunned) // rat wants to get away from player
+            {
+                StartTunnel();
+            }
+            else if (distanceToPlayer >= maxDistance && !undergound && !stunned) // rat wants to get in range of player
+            {
+                Walk();
+            }
+            else if (!undergound && !stunned) // rat wants to attack
+            {
+                Attack();
+            }
+        }
+
+        if (undergound && !enemySource.isPlaying && rb.velocity.magnitude > 0.1f)
+        {
+            enemySource.clip = tunnelAudio;
+            enemySource.Play();
+        }
 
         HandleDamageAudio();
         HandleStun();
         HandleBurn();
+    }
+
+    void FixedUpdate()
+    {
+        if (undergound)
+        {
+            if (tunnelCounter < 20) // down for 400ms
+            {
+                tunnelCounter++;
+                transform.position -= (transform.up * 0.15f);
+            }
+
+            if (tunnelCounter == 20) // tunnel around
+            {
+                tunnelCounter = 0;
+                StartCoroutine(TunnelPort());
+            }
+        }
     }
 
     void Attack()
@@ -72,6 +123,48 @@ public class Rat : Enemy
             enemySource.clip = attackAudio;
             enemySource.Play();
         }
+    }
+
+    void Walk()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, movementSpeed * Time.deltaTime);
+
+        if (!enemySource.isPlaying && rb.velocity.magnitude > 0.1f)
+        {
+            enemySource.clip = moveAudio;
+            enemySource.Play();
+        }
+    }
+
+    void StartTunnel()
+    {
+        if (!undergound)
+        {
+            undergound = true;
+            rb.useGravity = false;
+            rb.isKinematic = true;
+            tunnelCounter = 0;
+            lastTunnelTime = Time.time;
+
+            enemySource.clip = digAudio;
+            enemySource.Play();
+        }        
+    }
+
+    IEnumerator TunnelPort()
+    {
+        Vector3 adjustment = (player.transform.forward * Random.Range(-7, -12)) + (player.transform.right * Random.Range(-3, 3));
+        adjustment.y = 2.0f;
+        transform.position = player.transform.position + adjustment;
+
+        yield return new WaitForSeconds(Config.ratTunnelTime);
+
+        enemySource.clip = resurfaceAudio;
+        enemySource.Play();
+
+        undergound = false;
+        rb.useGravity = true;
+        rb.isKinematic = false;
     }
 
     void HandleDamageAudio()
@@ -99,9 +192,9 @@ public class Rat : Enemy
         {
             onFire = false;
 
-            if (fireParticle.activeInHierarchy)
+            if (fireParticle.isPlaying)
             {
-                fireParticle.SetActive(false);
+                fireParticle.Stop();
             }
         }
         else if (!nonflammable && onFire && Time.time >= nextFireTickTime)
@@ -109,9 +202,9 @@ public class Rat : Enemy
             DamageEnemy(Config.flamethrowerBurnDamage, "flamethrower");
             nextFireTickTime = Time.time + (1/Config.flamethrowerFireRate);
     
-            if (!fireParticle.activeInHierarchy)
+            if (!fireParticle.isPlaying)
             {
-                fireParticle.SetActive(true);
+                fireParticle.Play();
             }
         }
     }

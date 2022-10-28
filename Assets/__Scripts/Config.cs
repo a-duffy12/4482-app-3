@@ -108,7 +108,7 @@ public class Config
     [HideInInspector] public static float grenadeBlastRadius = 3.0f;
     [HideInInspector] public static float grenadeDamage = 10f;
     [HideInInspector] public static float grenadeKnockbackForce = 500f;
-    [HideInInspector] public static float grenadeStunDuration = 2.0f;
+    [HideInInspector] public static float grenadeStunDuration = 3.0f;
 
     [Header("Knife")]
     [HideInInspector] public static float knifeCooldown = 5.0f;
@@ -156,14 +156,16 @@ public class Config
     [HideInInspector] public static string ratName = "Rat";
     [HideInInspector] public static float ratMaxHp = 100;
     [HideInInspector] public static float ratDeathPosition = 0.5f;
-    [HideInInspector] public static float ratMovementSpeed = 5f;
+    [HideInInspector] public static float ratMovementSpeed = 15f;
     [HideInInspector] public static float ratAggroDistance = 60f;
-    [HideInInspector] public static float ratMinDistance = 15f;
+    [HideInInspector] public static float ratMinDistance = 5f;
     [HideInInspector] public static float ratMaxDistance = 25f;
     [HideInInspector] public static float ratDamage = 5f;
     [HideInInspector] public static float ratAttackRate = 1.2f;
     [HideInInspector] public static float ratMudballSpeed = 2400f;
     [HideInInspector] public static float ratMudballFlyTime = 4.0f;
+    [HideInInspector] public static float ratSurfaceTime = 20.0f;
+    [HideInInspector] public static float ratTunnelTime = 6.0f;
 
     public static void GetSaveData()
     {

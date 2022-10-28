@@ -145,7 +145,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1.25}
+  m_AnchoredPosition: {x: 0, y: 1.35}
   m_SizeDelta: {x: 2, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &9190345287164447166
@@ -375,11 +375,15 @@ MonoBehaviour:
   unStunTime: 0
   unFireTime: 0
   nextFireTickTime: 0
-  hurtAudio: {fileID: 8300000, guid: 58df498e7bee165469217b7eb810f861, type: 3}
-  moveAudio: {fileID: 0}
-  attackAudio: {fileID: 8300000, guid: 30b15a8d3a88dc54fa354f0c848b5541, type: 3}
+  hurtAudio: {fileID: 8300000, guid: 978a336d1d4fd0041a97327054c1d859, type: 3}
+  moveAudio: {fileID: 8300000, guid: c3e8f2b682ee18b4f95ce96bfa42b18b, type: 3}
+  attackAudio: {fileID: 8300000, guid: 662b94dc1c819c64e93756e63db9283c, type: 3}
+  digAudio: {fileID: 8300000, guid: 37375fcba83f5fe48881bb6764d6c550, type: 3}
+  tunnelAudio: {fileID: 8300000, guid: d3ce1fb118bea924bb800d6f0e4e077a, type: 3}
+  resurfaceAudio: {fileID: 8300000, guid: b746a283eeff6e8419402d5fd68bc2cf, type: 3}
   mudballPrefab: {fileID: 7279070551310121985, guid: 7f8645435714a6946a427bde29b6ec8a, type: 3}
   firePoint: {fileID: 949937292913104884}
+  fireParticle: {fileID: 2745126519496052496}
 --- !u!65 &7517898984194539360
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -407,7 +411,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 64
   m_CollisionDetection: 0
 --- !u!1 &8779096363647930180
 GameObject:
@@ -498,11 +502,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 497314143871790320, guid: fe5dbb105d9b402458a2ebc190c85725, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 497314143871790320, guid: fe5dbb105d9b402458a2ebc190c85725, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 497314143871790320, guid: fe5dbb105d9b402458a2ebc190c85725, type: 3}
       propertyPath: m_LocalPosition.x
@@ -554,6 +558,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe5dbb105d9b402458a2ebc190c85725, type: 3}
+--- !u!198 &2745126519496052496 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 497314143857599820, guid: fe5dbb105d9b402458a2ebc190c85725, type: 3}
+  m_PrefabInstance: {fileID: 2377468023884343900}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2745126519515416236 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 497314143871790320, guid: fe5dbb105d9b402458a2ebc190c85725, type: 3}

@@ -27,7 +27,7 @@ public class Shotgun : MonoBehaviour
     [HideInInspector] public int currentAmmo;
     private float lastFireTime;
     private bool cycle;
-    private float cycleCounter;
+    private int cycleCounter;
 
     void Awake()
     {

@@ -18,7 +18,7 @@ public class Knife : MonoBehaviour
     PlayerInventory inventory;
 
     private bool stab;
-    private float stabCounter;
+    private int stabCounter;
 
      void Awake()
     {
