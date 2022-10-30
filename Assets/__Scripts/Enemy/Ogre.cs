@@ -68,7 +68,7 @@ public class Ogre : Enemy
     {
         transform.position = Vector3.MoveTowards(transform.position, player.transform.position, movementSpeed * Time.deltaTime);
 
-        if (!enemySource.isPlaying && rb.velocity.magnitude > 0.1f)
+        if (!enemySource.isPlaying && rb.velocity.magnitude > 0.1f && Time.timeScale > 0.1f)
         {
             enemySource.clip = moveAudio;
             enemySource.Play();
