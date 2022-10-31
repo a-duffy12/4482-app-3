@@ -13,6 +13,7 @@ public class Options : MonoBehaviour
     [SerializeField] private GameObject levelsMenu;
 
     [Header("Buttons and Sliders")]
+    [SerializeField] private Button boomButton;
     [SerializeField] private Button playButton;
     [SerializeField] private Button levelsButton;
     [SerializeField] private Button optionsButton;
@@ -97,10 +98,14 @@ public class Options : MonoBehaviour
     [Header("Scenes")]
     [SerializeField] private List<string> levelNames;
 
+    [Header("Audio")]
+    public AudioClip boomAudio;
+
     PlayerInput input; // component that manages input actions
     InputActionRebindingExtensions.RebindingOperation ro;
 
     private bool playing;
+    private AudioSource source;
 
     private string easyText = "Difficulty - EASY";
     private string normalText = "Difficulty - NORMAL";
@@ -114,6 +119,7 @@ public class Options : MonoBehaviour
     void Awake()
     {
         input = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
+        source = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>();
     }
 
     // Start is called before the first frame update
@@ -133,7 +139,12 @@ public class Options : MonoBehaviour
         optionsMenu.SetActive(false);
         levelsMenu.SetActive(false);
 
+        source.playOnAwake = false;
+        source.spatialBlend = 1f;
+        source.volume = 1f;
+
         // setup button listeners
+        boomButton.onClick.AddListener(Boom);
         playButton.onClick.AddListener(Play);
         levelsButton.onClick.AddListener(Levels);
         optionsButton.onClick.AddListener(OpenOptions);
@@ -259,6 +270,12 @@ public class Options : MonoBehaviour
             Config.fieldOfView = fovSlider.value;
             Config.sensitivity = sensSlider.value;
         }
+    }
+
+    void Boom()
+    {
+        source.clip = boomAudio;
+        source.Play();
     }
 
     void Play()
