@@ -17,8 +17,6 @@ public class MouseLook : MonoBehaviour
 
     void Start()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
         firstPersonCamera.fieldOfView = Config.fieldOfView; // set fov
         sensMod = 0.05f;
     }

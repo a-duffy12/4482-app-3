@@ -280,7 +280,6 @@ public class Options : MonoBehaviour
 
     void Play()
     {
-        Debug.Log("here");
         SceneManager.LoadScene(levelNames[Config.levelCount]);
     }
 

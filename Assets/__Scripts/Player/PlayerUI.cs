@@ -124,8 +124,6 @@ public class PlayerUI : MonoBehaviour
 
         eyes.fieldOfView = Config.fieldOfView;
 
-        Time.timeScale = 1f;
-
         pauseMenu.SetActive(false);
         hud.SetActive(true);
 

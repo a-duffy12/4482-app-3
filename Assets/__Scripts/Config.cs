@@ -40,14 +40,14 @@ public class Config
 
     [Header("Game Status")]
     [HideInInspector] public static int levelCount = 0;
-    [HideInInspector] public static bool assaultRifleUnlocked = true;
-    [HideInInspector] public static bool shotgunUnlocked = true;
-    [HideInInspector] public static bool sniperUnlocked = true;
-    [HideInInspector] public static bool flamethrowerUnlocked = true;
-    [HideInInspector] public static bool knifeUnlocked = true;
-    [HideInInspector] public static bool grenadeUnlocked = true;
-    [HideInInspector] public static bool dashUnlocked = true;
-    [HideInInspector] public static bool rewindUnlocked = true;
+    [HideInInspector] public static bool assaultRifleUnlocked = false;
+    [HideInInspector] public static bool shotgunUnlocked = false;
+    [HideInInspector] public static bool sniperUnlocked = false;
+    [HideInInspector] public static bool flamethrowerUnlocked = false;
+    [HideInInspector] public static bool knifeUnlocked = false;
+    [HideInInspector] public static bool grenadeUnlocked = false;
+    [HideInInspector] public static bool dashUnlocked = false;
+    [HideInInspector] public static bool rewindUnlocked = false;
 
     [Header("Player")]
     [HideInInspector] public static float playerMaxHp = 100f;

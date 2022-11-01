@@ -87,9 +87,6 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        
         movementSource.playOnAwake = false;
         movementSource.spatialBlend = 1f;
         movementSource.volume = 0.7f;
