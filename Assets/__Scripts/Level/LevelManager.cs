@@ -15,6 +15,7 @@ public class LevelManager : MonoBehaviour
     [Header("Gameobjects")]
     [SerializeField] private GameObject introPanel;
     [SerializeField] private Button continueButton;
+    [SerializeField] private Text levelTitle;
 
     [Header("Audio")]
     public AudioClip boomAudio;
@@ -39,7 +40,7 @@ public class LevelManager : MonoBehaviour
         Config.GetSaveData();
         
         levelName = scene.name;
-        Debug.Log("level count = "  + Config.levelCount.ToString());
+        levelTitle.text = levelName;
 
         Time.timeScale = 0f;
         input.SwitchCurrentActionMap("Menu");
@@ -180,6 +181,8 @@ public class LevelManager : MonoBehaviour
                 Config.flamethrowerUnlocked = true;
                 break;
         }
+
+        SaveLoad.SaveData();
     }
 
     void CheckEnemiesPresent()

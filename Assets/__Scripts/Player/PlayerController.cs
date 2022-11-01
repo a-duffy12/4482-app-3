@@ -419,7 +419,7 @@ public class PlayerController : MonoBehaviour
 
     public void Dash(InputAction.CallbackContext con)
 	{
-		if (con.performed && Time.time >= nextDashTime)
+		if (con.performed && Config.dashUnlocked && Time.time >= nextDashTime)
 		{
             dash = true;
             nextDashTime = Time.time + Config.dashCooldown;

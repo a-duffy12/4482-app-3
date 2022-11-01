@@ -9,6 +9,30 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: c1e290e46186134499ecf050f21b3755
   - enabled: 1
+    path: Assets/Scenes/Halloween Assault.unity
+    guid: cb594c51923efa04ea42bae3ce4c4246
+  - enabled: 1
+    path: Assets/Scenes/Shot in the Dark.unity
+    guid: 966443f595564f149897c9b6bd2f7a56
+  - enabled: 1
+    path: Assets/Scenes/Ogre Run.unity
+    guid: e47a28046b192ad48a8200d08214b03e
+  - enabled: 1
+    path: Assets/Scenes/On a Knife's Edge.unity
+    guid: d6467b71027b2d64393557a954c98e80
+  - enabled: 1
+    path: Assets/Scenes/High Noon.unity
+    guid: d516afbeba96c41459fc5fcfd5fd3c17
+  - enabled: 1
+    path: Assets/Scenes/Blast Gauntlet.unity
+    guid: 0e17399c3ad38d1428a8417b11607f12
+  - enabled: 1
+    path: Assets/Scenes/Infestation Station.unity
+    guid: 19d9dafb915e61a4d8870f0efe3c39ba
+  - enabled: 1
+    path: Assets/Scenes/Hell or High Water.unity
+    guid: 4c33e1d1fae889544a9b034612641764
+  - enabled: 0
     path: Assets/Scenes/_dev.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}

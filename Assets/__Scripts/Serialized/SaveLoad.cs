@@ -7,7 +7,7 @@ public class SaveLoad
     // function to save game data
     public static void SaveData()
     {
-        string path = Path.Combine(Application.persistentDataPath, "cubeGameData.acd"); // save data file location
+        string path = Path.Combine(Application.persistentDataPath, "boomGameData.acd"); // save data file location
 
         BinaryFormatter bf = new BinaryFormatter(); // create a formatter
         FileStream fs = new FileStream(path, FileMode.Create); // create the save data file
@@ -21,7 +21,7 @@ public class SaveLoad
     // function to load game data
     public static GameData LoadData()
     {
-        string path = Path.Combine(Application.persistentDataPath, "cubeGameData.acd"); // save data file location
+        string path = Path.Combine(Application.persistentDataPath, "boomGameData.acd"); // save data file location
 
         if (File.Exists(path)) // if there is existing save data
         {
@@ -35,9 +35,9 @@ public class SaveLoad
         }
         else // if there is no existing save data
         {
-            Debug.Log("CUBE game data file not found at " + path); 
+            Debug.Log("BOOM game data file not found at " + path); 
             SaveData(); // create a new save file
-            Debug.Log("New CUBE game data file created at " + path);
+            Debug.Log("New BOOM game data file created at " + path);
             return null;
         }
     }
