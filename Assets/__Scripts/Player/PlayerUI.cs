@@ -92,7 +92,6 @@ public class PlayerUI : MonoBehaviour
     [Header("Gameobjects")]
     [SerializeField] private Image crosshairDot;
 
-    AudioSource uiSource;
     Camera eyes; // player camera
     PlayerInput input; // component that manages input actions
     InputActionRebindingExtensions.RebindingOperation ro;
@@ -111,7 +110,6 @@ public class PlayerUI : MonoBehaviour
     void Awake()
     {
         eyes = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        uiSource = GameObject.FindGameObjectWithTag("UI").GetComponent<AudioSource>();
         input = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
     }
 
@@ -139,10 +137,6 @@ public class PlayerUI : MonoBehaviour
         greenButton.onClick.AddListener(Green);
         blueButton.onClick.AddListener(Blue);
         purpleButton.onClick.AddListener(Purple);
-
-        uiSource.playOnAwake = false;
-        uiSource.spatialBlend = 1f;
-        uiSource.volume = 1f;
 
         // set settings values
         fovSlider.minValue = 60;

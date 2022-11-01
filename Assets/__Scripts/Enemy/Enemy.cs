@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour
     [HideInInspector] public AudioSource enemySource;
     [HideInInspector] public Rigidbody rb;
     [HideInInspector] public PlayerSystem playerSystem;
+    [HideInInspector] public LevelManager levelManager;
 
     [HideInInspector] public float unStunTime;
     [HideInInspector] public float unFireTime;
@@ -65,6 +66,7 @@ public class Enemy : MonoBehaviour
             if (currentHp <= 0)
             {
                 playerSystem = player.GetComponent<PlayerSystem>();
+                levelManager = player.GetComponentInChildren<LevelManager>();
                 
                 if (blow == "assault_rifle")
                 {
@@ -88,6 +90,7 @@ public class Enemy : MonoBehaviour
                     Instantiate(deathParticle, transform.position + new Vector3(0, deathPosition, 0), transform.rotation);
                 }
                 
+                levelManager.checkEnemies = true; // see if any enemies remain
                 Destroy(gameObject);
             }
             else

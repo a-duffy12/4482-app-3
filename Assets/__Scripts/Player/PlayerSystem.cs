@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerSystem : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerSystem : MonoBehaviour
     [Header("GameObjects")]
     [SerializeField] private GameObject damageOverlay;
     [SerializeField] private Image healthBar;
+    [SerializeField] private Text deathText;
 
     [Header("Audio")]
     public AudioClip deathAudio;
@@ -38,6 +40,7 @@ public class PlayerSystem : MonoBehaviour
         currentHp = maxHp;
 
         damageOverlay.SetActive(false);
+        deathText.gameObject.SetActive(false);
 
         healthBar.fillAmount = Mathf.Clamp(currentHp/maxHp, 0, maxHp);
     }
@@ -61,16 +64,73 @@ public class PlayerSystem : MonoBehaviour
             playerSource.clip = deathAudio;
             playerSource.Play();
 
+            int deathTime = (int)Time.time % 10;
+
             if (attacker == Config.ogreName)
             {
-                Debug.Log("wow you suck lmao");
+                if (deathTime >= 0 && deathTime < 5)
+                {
+                    deathText.text = "Nom nom nom";
+                }
+                else if (deathTime >= 5 && deathTime < 9)
+                {
+                    deathText.text = "One eye > two eyes";
+                }
+                else if (deathTime == 9)
+                {
+                    deathText.text = "Shrek sends his regards";
+                }
             }
             else if (attacker == Config.demonName)
             {
-                Debug.Log("welcome to hell buddy");
+                if (deathTime >= 0 && deathTime < 5)
+                {
+                    deathText.text = "Crispy, just the way we like it";
+                }
+                else if (deathTime >= 5 && deathTime < 9)
+                {
+                    deathText.text = "NO SCOPED!";
+                }
+                else if (deathTime == 9)
+                {
+                    deathText.text = "Welcome to hell buddy";
+                }
             }
+            else if (attacker == Config.soulName)
+            {
+                if (deathTime >= 0 && deathTime < 5)
+                {
+                    deathText.text = "They all fall down...";
+                }
+                else if (deathTime >= 5 && deathTime < 9)
+                {
+                    deathText.text = "So glad you could join us...";
+                }
+                else if (deathTime == 9)
+                {
+                    deathText.text = "One of us! One of us!";
+                }
+            }
+            else if (attacker == Config.ratName)
+            {
+                if (deathTime >= 0 && deathTime < 5)
+                {
+                    deathText.text = "You need dodgeball practice";
+                }
+                else if (deathTime >= 5 && deathTime < 9)
+                {
+                    deathText.text = "REEEEETT";
+                }
+                else if (deathTime == 9)
+                {
+                    deathText.text = "That's for kidnapping Stuart Little";
+                }
+            }
+
+            deathText.gameObject.SetActive(true);
             
-            Time.timeScale = 0f;
+            Time.timeScale = 0.0001f;
+            StartCoroutine(KillPlayer());
         }
     }
 
@@ -81,6 +141,13 @@ public class PlayerSystem : MonoBehaviour
         yield return new WaitForSeconds(duration);
 
         damageOverlay.SetActive(false);
+    }
+
+    IEnumerator KillPlayer()
+    {
+        yield return new WaitForSeconds(0.0005f);
+
+        SceneManager.LoadScene(Config.levelNames[Config.levelCount]);
     }
 
     #region input functions

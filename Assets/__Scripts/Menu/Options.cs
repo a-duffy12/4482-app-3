@@ -95,9 +95,6 @@ public class Options : MonoBehaviour
     [SerializeField] private Text nsfwText;
     [SerializeField] private Text crosshairColorText;
 
-    [Header("Scenes")]
-    [SerializeField] private List<string> levelNames;
-
     [Header("Audio")]
     public AudioClip boomAudio;
 
@@ -280,7 +277,7 @@ public class Options : MonoBehaviour
 
     void Play()
     {
-        SceneManager.LoadScene(levelNames[Config.levelCount]);
+        SceneManager.LoadScene(Config.levelNames[Config.levelCount]);
     }
 
     void Levels()

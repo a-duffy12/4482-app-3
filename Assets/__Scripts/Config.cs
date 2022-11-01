@@ -48,6 +48,7 @@ public class Config
     [HideInInspector] public static bool grenadeUnlocked = false;
     [HideInInspector] public static bool dashUnlocked = false;
     [HideInInspector] public static bool rewindUnlocked = false;
+    public static List<string> levelNames = new List<string> { "_dev" };
 
     [Header("Player")]
     [HideInInspector] public static float playerMaxHp = 100f;

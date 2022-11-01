@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using System.Linq;
 
 public class LevelManager : MonoBehaviour
 {
@@ -15,20 +16,28 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject introPanel;
     [SerializeField] private Button continueButton;
 
+    [Header("Audio")]
+    public AudioClip boomAudio;
+
     Scene scene;
     PlayerInput input;
+    AudioSource levelSource;
+
+    [HideInInspector] public bool checkEnemies; // called on enemy death to signal to check if level is won
+    private float nextCheckTime;
+    private int checkCounter;
     
     void Awake()
     {
         scene = SceneManager.GetActiveScene();
         input = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
+        levelSource = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>();
     }
 
     void Start()
     {
         Config.GetSaveData();
-
-        Config.levelCount = levelId;
+        
         levelName = scene.name;
         Debug.Log("level count = "  + Config.levelCount.ToString());
 
@@ -41,12 +50,27 @@ public class LevelManager : MonoBehaviour
         introPanel.SetActive(true);
         SetupLevel(levelId);
 
+        levelSource.playOnAwake = false;
+        levelSource.spatialBlend = 1f;
+        levelSource.volume = 1f;
+
         continueButton.onClick.AddListener(ContinueToLevel);
     }
 
     void Update()
     {
-        // when all enemies are dead, start coroutine
+        if (checkEnemies)
+        {
+            checkEnemies = false;
+            nextCheckTime = Time.time + 0.5f;
+            checkCounter++;
+        }
+
+        if (Time.time >= nextCheckTime && checkCounter > 0)
+        {
+            checkCounter--;
+            CheckEnemiesPresent();
+        }
     }
 
     void ContinueToLevel()
@@ -60,6 +84,8 @@ public class LevelManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         introPanel.SetActive(false);
+
+        CheckEnemiesPresent();
     }
 
     void SetupLevel(int levelId)
@@ -156,8 +182,38 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    void CheckEnemiesPresent()
+    {
+        var objs = FindObjectsOfType<GameObject>();
+        List<GameObject> enemies = new List<GameObject>();
+
+        foreach (var obj in objs)
+        {
+            if (obj.layer == 8) // layer 8 is Enemy
+            {
+                enemies.Add(obj);
+            }
+        }
+
+        if (!enemies.Any()) // no more enemies left
+        {
+            StartCoroutine(NextLevel());
+        }
+    }
+
     IEnumerator NextLevel()
     {
-        return null;
+        if (levelId >= Config.levelCount) // only update level counter if it is the first time playing the level
+        {
+            Config.levelCount = levelId + 1;
+            SaveLoad.SaveData();
+        }
+
+        levelSource.clip = boomAudio;
+        levelSource.Play();
+
+        yield return new WaitForSeconds(5f);
+
+        SceneManager.LoadScene(Config.levelNames[Config.levelCount]);
     }
 }
