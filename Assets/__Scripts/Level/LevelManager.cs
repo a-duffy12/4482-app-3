@@ -217,6 +217,13 @@ public class LevelManager : MonoBehaviour
 
         yield return new WaitForSeconds(5f);
 
-        SceneManager.LoadScene(Config.levelNames[Config.levelCount]);
+        if (levelId + 1 == Config.levelCount)
+        {
+            SceneManager.LoadScene(Config.levelNames[Config.levelCount]);
+        }
+        else
+        {
+            SceneManager.LoadScene("Menu");
+        }
     }
 }
