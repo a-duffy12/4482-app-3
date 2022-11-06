@@ -126,6 +126,21 @@ public class PlayerSystem : MonoBehaviour
                     deathText.text = "That's for kidnapping Stuart Little";
                 }
             }
+            else if (attacker == Config.voidName)
+            {
+                if (deathTime >= 0 && deathTime < 5)
+                {
+                    deathText.text = "Bye bye!";
+                }
+                else if (deathTime >= 5 && deathTime < 9)
+                {
+                    deathText.text = "Help I've fallen but I cannot get up";
+                }
+                else if (deathTime == 9)
+                {
+                    deathText.text = "You can't quit the game that way";
+                }
+            }
 
             deathText.gameObject.SetActive(true);
             

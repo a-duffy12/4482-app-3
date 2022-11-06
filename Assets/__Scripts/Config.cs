@@ -48,6 +48,7 @@ public class Config
     [HideInInspector] public static bool grenadeUnlocked = false;
     [HideInInspector] public static bool dashUnlocked = false;
     [HideInInspector] public static bool rewindUnlocked = false;
+    [HideInInspector] public static string voidName = "void";
     public static List<string> levelNames = new List<string> { "Halloween Assault", "Shot in the Dark", "Ogre Run", "On a Knife's Edge", "High Noon", "Blast Gauntlet", "Infestation Station", "Hell or High Water" };
 
     [Header("Player")]
