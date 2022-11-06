@@ -30,6 +30,8 @@ public class Rat : Enemy
     private float lastTunnelTime;
     private bool undergound;
     private int tunnelCounter;
+    private LayerMask seeMask;
+    private bool playerVisible;
 
     void Start()
     {
@@ -53,6 +55,8 @@ public class Rat : Enemy
         attackRate = Config.ratAttackRate;
         mudballSpeed = Config.ratMudballSpeed;
         surfaceTime = Config.ratSurfaceTime;
+
+        seeMask = LayerMask.GetMask("Player");
     }
     
     void Update()
@@ -61,21 +65,27 @@ public class Rat : Enemy
 
         transform.LookAt(player.transform.position);
 
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, aggroDistance, seeMask))
+        {
+            PlayerController player = hit.collider.gameObject.GetComponent<PlayerController>();
+            playerVisible = player != null;
+        }
+
         if (distanceToPlayer <= (aggroDistance * Config.enemyAggroRadiusModifier)) // only interact with player if they are within range
         {
             if (Time.time - surfaceTime > lastTunnelTime && !undergound && !stunned) // rat has been above ground for too long
             {
                 StartTunnel();
             }
-            else if (distanceToPlayer <= minDistance && !undergound && !stunned) // rat wants to get away from player
+            else if (playerVisible && distanceToPlayer <= minDistance && !undergound && !stunned) // rat wants to get away from player
             {
                 StartTunnel();
             }
-            else if (distanceToPlayer >= maxDistance && !undergound && !stunned) // rat wants to get in range of player
+            else if (playerVisible && distanceToPlayer >= maxDistance && !undergound && !stunned) // rat wants to get in range of player
             {
                 Walk();
             }
-            else if (!undergound && !stunned) // rat wants to attack
+            else if (playerVisible && !undergound && !stunned) // rat wants to attack
             {
                 Attack();
             }

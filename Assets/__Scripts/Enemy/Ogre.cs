@@ -19,6 +19,8 @@ public class Ogre : Enemy
     float attackRate;
 
     private float lastAttackTime;
+    private LayerMask seeMask;
+    private bool playerVisible;
     PlayerSystem system;
 
     void Start()
@@ -41,6 +43,8 @@ public class Ogre : Enemy
         attackDistance = Config.ogreAttackDistance;
         damage = Config.ogreDamage;
         attackRate = Config.ogreAttackRate;
+
+        seeMask = LayerMask.GetMask("Player", "Ground");
     }
 
     void Update()
@@ -49,12 +53,18 @@ public class Ogre : Enemy
 
         transform.LookAt(player.transform.position);
 
-        if (distanceToPlayer <= (aggroDistance * Config.enemyAggroRadiusModifier) && distanceToPlayer > (attackDistance - 0.5f) && Time.time > lastAttackTime + (1/attackRate) && !stunned) // only move towards player if within aggro range, not too close, and is ready to attack
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, aggroDistance, seeMask))
+        {
+            PlayerController player = hit.collider.gameObject.GetComponent<PlayerController>();
+            playerVisible = player != null;
+        }
+
+        if (playerVisible && distanceToPlayer <= (aggroDistance * Config.enemyAggroRadiusModifier) && distanceToPlayer > (attackDistance - 0.5f) && Time.time > lastAttackTime + (1/attackRate) && !stunned) // only move towards player if within aggro range, not too close, and is ready to attack
         {
             Move();
         }
 
-        if (distanceToPlayer <= attackDistance && !stunned)
+        if (playerVisible && distanceToPlayer <= attackDistance && !stunned)
         {
             Attack(distanceToPlayer);
         }

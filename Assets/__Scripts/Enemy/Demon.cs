@@ -25,6 +25,8 @@ public class Demon : Enemy
     private float lastAttackTime;
     private float lastStartleTime;
     private bool startled;
+    private LayerMask seeMask;
+    private bool playerVisible;
 
     void Start()
     {
@@ -48,6 +50,8 @@ public class Demon : Enemy
         fireballSpeed = Config.demonFireballSpeed;
 
         nonflammable = true; // demons cannot be lit on fire
+
+        seeMask = LayerMask.GetMask("Player");
     }
 
     void Update()
@@ -56,7 +60,13 @@ public class Demon : Enemy
 
         transform.LookAt(player.transform.position);
 
-        if (distanceToPlayer <= (aggroDistance * Config.enemyAggroRadiusModifier)) // only move towards player if within aggro range
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, aggroDistance, seeMask))
+        {
+            PlayerController player = hit.collider.gameObject.GetComponent<PlayerController>();
+            playerVisible = player != null;
+        }
+
+        if (playerVisible && distanceToPlayer <= (aggroDistance * Config.enemyAggroRadiusModifier)) // only move towards player if within aggro range
         {
             if (Time.time > lastStartleTime + startleDelay && !stunned)
             {
