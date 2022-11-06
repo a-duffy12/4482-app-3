@@ -162,7 +162,8 @@ public class PlayerSystem : MonoBehaviour
     {
         yield return new WaitForSeconds(0.0005f);
 
-        SceneManager.LoadScene(Config.levelNames[Config.levelCount]);
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 
     #region input functions
