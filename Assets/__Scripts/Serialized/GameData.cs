@@ -11,6 +11,7 @@ public class GameData
     public int difficultyLevel;
     public float difficultyMod;
     public bool nsfwEnabled;
+    public bool showFps;
     public string crosshairColor;
     public string keybinds;
     
@@ -33,6 +34,7 @@ public class GameData
         difficultyLevel = (int) Config.difficultyLevel;
         difficultyMod = Config.difficultyMod;
         nsfwEnabled = Config.nsfwEnabled;
+        showFps = Config.showFps;
         crosshairColor = Config.crosshairColor;
         keybinds = Config.keybinds;
         

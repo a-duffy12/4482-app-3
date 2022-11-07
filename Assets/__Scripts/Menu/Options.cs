@@ -27,6 +27,7 @@ public class Options : MonoBehaviour
     [SerializeField] private Button hardButton;
     [SerializeField] private Button funButton;
     [SerializeField] private Button nsfwButton;
+    [SerializeField] private Button fpsButton;
     [SerializeField] private Button redButton;
     [SerializeField] private Button greenButton;
     [SerializeField] private Button blueButton;
@@ -93,6 +94,8 @@ public class Options : MonoBehaviour
     [SerializeField] private Text sensText;
     [SerializeField] private Text difficultyText;
     [SerializeField] private Text nsfwText;
+    [SerializeField] private Text fpsText;
+    [SerializeField] private Text fpsDisplayText;
     [SerializeField] private Text crosshairColorText;
 
     [Header("Audio")]
@@ -153,6 +156,7 @@ public class Options : MonoBehaviour
         hardButton.onClick.AddListener(Hard);
         funButton.onClick.AddListener(Fun);
         nsfwButton.onClick.AddListener(Nsfw);
+        fpsButton.onClick.AddListener(Fps);
         redButton.onClick.AddListener(Red);
         greenButton.onClick.AddListener(Green);
         blueButton.onClick.AddListener(Blue);
@@ -214,6 +218,16 @@ public class Options : MonoBehaviour
         else if (Config.crosshairColor == "purple")
         {
             crosshairColorText.text = purpleText;
+        }
+
+        // set fps text value
+        if (Config.showFps)
+        {
+            fpsText.text = "Enabled";
+        }
+        else
+        {
+            fpsText.text = "Disabled";
         }
 
         // set keybindings text values
@@ -385,6 +399,20 @@ public class Options : MonoBehaviour
     {
         Config.crosshairColor = "purple";
         crosshairColorText.text = purpleText;
+    }
+
+    void Fps()
+    {
+        if (Config.showFps)
+        {
+            Config.showFps = false;
+            fpsText.text = "Disabled";
+        }
+        else
+        {
+            Config.showFps = true;
+            fpsText.text = "Enabled";
+        }
     }
 
     void SetBindText(InputActionReference action, Text text)

@@ -21,6 +21,7 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private Button hardButton;
     [SerializeField] private Button funButton;
     [SerializeField] private Button nsfwButton;
+    [SerializeField] private Button fpsButton;
     [SerializeField] private Button redButton;
     [SerializeField] private Button greenButton;
     [SerializeField] private Button blueButton;
@@ -87,6 +88,8 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private Text sensText;
     [SerializeField] private Text difficultyText;
     [SerializeField] private Text nsfwText;
+    [SerializeField] private Text fpsText;
+    [SerializeField] private Text fpsDisplayText;
     [SerializeField] private Text crosshairColorText;
 
     [Header("Gameobjects")]
@@ -97,6 +100,9 @@ public class PlayerUI : MonoBehaviour
     InputActionRebindingExtensions.RebindingOperation ro;
 
     private bool playing;
+    private float lastFpsDisplayUpdateTime;
+    private float nextFpsDisplayUpdateTime;
+    private int frameCount;
 
     private string easyText = "Difficulty - EASY";
     private string normalText = "Difficulty - NORMAL";
@@ -133,6 +139,7 @@ public class PlayerUI : MonoBehaviour
         hardButton.onClick.AddListener(Hard);
         funButton.onClick.AddListener(Fun);
         nsfwButton.onClick.AddListener(Nsfw);
+        fpsButton.onClick.AddListener(Fps);
         redButton.onClick.AddListener(Red);
         greenButton.onClick.AddListener(Green);
         blueButton.onClick.AddListener(Blue);
@@ -200,6 +207,16 @@ public class PlayerUI : MonoBehaviour
             crosshairDot.color = new Color32(200, 0, 255, 255);
         }
 
+        // set fps text value
+        if (Config.showFps)
+        {
+            fpsText.text = "Enabled";
+        }
+        else
+        {
+            fpsText.text = "Disabled";
+        }
+
         // set keybindings text values
         SetBindText(forwardAction, forwardText);
         SetBindText(backwardAction, backwardText);
@@ -239,6 +256,17 @@ public class PlayerUI : MonoBehaviour
         grenadeButton.onClick.AddListener(() => { Rebind(grenadeAction, grenadeText); });
         pauseButton.onClick.AddListener(() => { Rebind(pauseAction, pauseText); });
         toggleHudButton.onClick.AddListener(() => { Rebind(toggleHudAction, toggleHudText); });
+
+        if (Config.showFps)
+        {
+            fpsDisplayText.text = "??? FPS";
+        }
+        else
+        {
+            fpsDisplayText.text = "";
+        }
+        lastFpsDisplayUpdateTime = Time.time;
+        nextFpsDisplayUpdateTime = Time.time + 0.1f;
     }
 
     // Update is called once per frame
@@ -251,6 +279,24 @@ public class PlayerUI : MonoBehaviour
             Config.fieldOfView = fovSlider.value;
             Config.sensitivity = sensSlider.value;
             eyes.fieldOfView = Config.fieldOfView;
+        }
+
+        if (Config.showFps)
+        {
+            frameCount++;
+
+            if (Time.time >= nextFpsDisplayUpdateTime)
+            {
+                int fps = (int)(frameCount / (Time.time - lastFpsDisplayUpdateTime));
+                fpsDisplayText.text = fps.ToString() + " FPS";
+                frameCount = 0;
+                lastFpsDisplayUpdateTime = Time.time;
+                nextFpsDisplayUpdateTime = Time.time + 0.5f;
+            }
+        }
+        else
+        {
+            fpsDisplayText.text = "";
         }
     }
 
@@ -322,6 +368,20 @@ public class PlayerUI : MonoBehaviour
         Config.crosshairColor = "purple";
         crosshairColorText.text = purpleText;
         crosshairDot.color = new Color32(200, 0, 255, 255);
+    }
+
+    void Fps()
+    {
+        if (Config.showFps)
+        {
+            Config.showFps = false;
+            fpsText.text = "Disabled";
+        }
+        else
+        {
+            Config.showFps = true;
+            fpsText.text = "Enabled";
+        }
     }
 
     void ReturnToMenu()

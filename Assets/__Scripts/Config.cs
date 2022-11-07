@@ -11,6 +11,7 @@ public class Config
     [Range(0, 3)] public static Difficulty.Level difficultyLevel = Difficulty.Level.Normal;
     [Range(0, 2)] public static float difficultyMod = 0.4f;
     public static bool nsfwEnabled = true;
+    public static bool showFps = false;
     public static string crosshairColor = "red";
     public static string keybinds = "";
 
@@ -180,6 +181,7 @@ public class Config
             Config.difficultyLevel = savedData.difficultyLevel == 0 ? Difficulty.Level.Easy : savedData.difficultyLevel == 1 ? Difficulty.Level.Normal : savedData.difficultyLevel == 2 ? Difficulty.Level.Hard : savedData.difficultyLevel == 3 ? Difficulty.Level.Fun : Difficulty.Level.Normal;
             Config.difficultyMod = savedData.difficultyMod;
             Config.nsfwEnabled = savedData.nsfwEnabled;
+            Config.showFps = savedData.showFps;
             Config.crosshairColor = savedData.crosshairColor;
             Config.keybinds = savedData.keybinds;
         
