@@ -94,25 +94,7 @@ public class PlayerController : MonoBehaviour
         timeToRewind = Time.time;
         positionToRewind = transform.position;
 
-        if (Config.dashUnlocked) // dash ui
-        {
-            dashSlider.SetActive(true);
-            dashBar.fillAmount = 1 - Mathf.Clamp((nextDashTime - Time.time)/Config.dashCooldown, 0, Config.dashCooldown);
-        }
-        else
-        {
-            dashSlider.SetActive(false);
-        }
-
-        if (Config.rewindUnlocked) // rewind ui
-        {
-            rewindSlider.SetActive(true);
-            rewindBar.fillAmount = 1 - Mathf.Clamp((nextRewindTime - Time.time)/Config.rewindCooldown, 0, Config.rewindCooldown);
-        }
-        else
-        {
-            rewindSlider.SetActive(false);
-        }
+        ShowAbilityBars();
     }
 
     void Update()
@@ -211,6 +193,29 @@ public class PlayerController : MonoBehaviour
         }
 
         inventory.localRotation = Quaternion.Euler(wsTilt, -10, adTilt);
+    }
+
+    public void ShowAbilityBars()
+    {
+        if (Config.dashUnlocked) // dash ui
+        {
+            dashSlider.SetActive(true);
+            dashBar.fillAmount = 1 - Mathf.Clamp((nextDashTime - Time.time)/Config.dashCooldown, 0, Config.dashCooldown);
+        }
+        else
+        {
+            dashSlider.SetActive(false);
+        }
+
+        if (Config.rewindUnlocked) // rewind ui
+        {
+            rewindSlider.SetActive(true);
+            rewindBar.fillAmount = 1 - Mathf.Clamp((nextRewindTime - Time.time)/Config.rewindCooldown, 0, Config.rewindCooldown);
+        }
+        else
+        {
+            rewindSlider.SetActive(false);
+        }
     }
 
     #region movement methods

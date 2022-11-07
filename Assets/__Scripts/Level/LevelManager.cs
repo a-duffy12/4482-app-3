@@ -183,6 +183,18 @@ public class LevelManager : MonoBehaviour
         }
 
         SaveLoad.SaveData();
+
+        PlayerInventory inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
+        if (inventory != null)
+        {
+            inventory.ShowInventoryBars();
+        }
+
+        PlayerController controller = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        if (controller != null)
+        {
+            controller.ShowAbilityBars();
+        }
     }
 
     void CheckEnemiesPresent()

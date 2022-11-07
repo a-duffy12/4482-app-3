@@ -71,65 +71,7 @@ public class PlayerInventory : MonoBehaviour
         SwitchWeapons(assaultRifle.weaponInt);
         knifePrefab.SetActive(false);
 
-        if (Config.knifeUnlocked) // knife ui
-        {
-            knifeSlider.SetActive(true);
-            knifeBar.fillAmount = 1 - Mathf.Clamp((nextKnifeTime - Time.time)/Config.knifeCooldown, 0, Config.knifeCooldown);
-        }
-        else
-        {
-            knifeSlider.SetActive(false);
-        }
-
-        if (Config.grenadeUnlocked) // grenade ui
-        {
-            grenadeSlider.SetActive(true);
-            grenadeBar.fillAmount = 1 - Mathf.Clamp((nextGrenadeTime - Time.time)/Config.grenadeCooldown, 0, Config.grenadeCooldown);
-        }
-        else
-        {
-            grenadeSlider.SetActive(false);
-        }
-
-        if (Config.assaultRifleUnlocked) // assault rifle ui
-        {
-            assaultRifleSlider.SetActive(true);
-            assaultRifleBar.fillAmount = assaultRifleActivated ? Mathf.Clamp((float)assaultRifle.currentAmmo/Config.assaultRifleMaxAmmo, 0, Config.assaultRifleMaxAmmo) : 1;
-        }
-        else
-        {
-            assaultRifleSlider.SetActive(false);
-        }
-
-        if (Config.shotgunUnlocked) // shotgun ui
-        {
-            shotgunSlider.SetActive(true);
-            shotgunBar.fillAmount = shotgunActivated ? Mathf.Clamp((float)shotgun.currentAmmo/Config.shotgunMaxAmmo, 0, Config.shotgunMaxAmmo) : 1;
-        }
-        else
-        {
-            shotgunSlider.SetActive(false);
-        }
-
-        if (Config.sniperUnlocked) // sniper ui
-        {
-            sniperSlider.SetActive(true);
-            sniperBar.fillAmount = sniperActivated ? Mathf.Clamp((float)sniper.currentAmmo/Config.sniperMaxAmmo, 0, Config.sniperMaxAmmo) : 1;
-        }
-        else
-        {
-            sniperSlider.SetActive(false);
-        }
-
-        if (Config.flamethrowerUnlocked) // flamethrower ui
-        {
-            flamethrowerSlider.SetActive(true);
-            flamethrowerBar.fillAmount = flamethrowerActivated ? Mathf.Clamp((float)flamethrower.currentAmmo/Config.flamethrowerMaxAmmo, 0, Config.flamethrowerMaxAmmo) : 1;
-        }
-        else
-        {
-            flamethrowerSlider.SetActive(false);
-        }
+        ShowInventoryBars();
     }
 
     // Update is called once per frame
@@ -254,6 +196,69 @@ public class PlayerInventory : MonoBehaviour
             {
                 flamethrowerActivated = true;
             }
+        }
+    }
+
+    public void ShowInventoryBars()
+    {
+        if (Config.knifeUnlocked) // knife ui
+        {
+            knifeSlider.SetActive(true);
+            knifeBar.fillAmount = 1 - Mathf.Clamp((nextKnifeTime - Time.time)/Config.knifeCooldown, 0, Config.knifeCooldown);
+        }
+        else
+        {
+            knifeSlider.SetActive(false);
+        }
+
+        if (Config.grenadeUnlocked) // grenade ui
+        {
+            grenadeSlider.SetActive(true);
+            grenadeBar.fillAmount = 1 - Mathf.Clamp((nextGrenadeTime - Time.time)/Config.grenadeCooldown, 0, Config.grenadeCooldown);
+        }
+        else
+        {
+            grenadeSlider.SetActive(false);
+        }
+
+        if (Config.assaultRifleUnlocked) // assault rifle ui
+        {
+            assaultRifleSlider.SetActive(true);
+            assaultRifleBar.fillAmount = assaultRifleActivated ? Mathf.Clamp((float)assaultRifle.currentAmmo/Config.assaultRifleMaxAmmo, 0, Config.assaultRifleMaxAmmo) : 1;
+        }
+        else
+        {
+            assaultRifleSlider.SetActive(false);
+        }
+
+        if (Config.shotgunUnlocked) // shotgun ui
+        {
+            shotgunSlider.SetActive(true);
+            shotgunBar.fillAmount = shotgunActivated ? Mathf.Clamp((float)shotgun.currentAmmo/Config.shotgunMaxAmmo, 0, Config.shotgunMaxAmmo) : 1;
+        }
+        else
+        {
+            shotgunSlider.SetActive(false);
+        }
+
+        if (Config.sniperUnlocked) // sniper ui
+        {
+            sniperSlider.SetActive(true);
+            sniperBar.fillAmount = sniperActivated ? Mathf.Clamp((float)sniper.currentAmmo/Config.sniperMaxAmmo, 0, Config.sniperMaxAmmo) : 1;
+        }
+        else
+        {
+            sniperSlider.SetActive(false);
+        }
+
+        if (Config.flamethrowerUnlocked) // flamethrower ui
+        {
+            flamethrowerSlider.SetActive(true);
+            flamethrowerBar.fillAmount = flamethrowerActivated ? Mathf.Clamp((float)flamethrower.currentAmmo/Config.flamethrowerMaxAmmo, 0, Config.flamethrowerMaxAmmo) : 1;
+        }
+        else
+        {
+            flamethrowerSlider.SetActive(false);
         }
     }
 
