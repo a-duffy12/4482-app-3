@@ -161,8 +161,8 @@ public class Config
     [HideInInspector] public static float ratDeathPosition = 0.5f;
     [HideInInspector] public static float ratMovementSpeed = 15f;
     [HideInInspector] public static float ratAggroDistance = 25f;
-    [HideInInspector] public static float ratMinDistance = 5f;
-    [HideInInspector] public static float ratMaxDistance = 15f;
+    [HideInInspector] public static float ratMinDistance = 3f;
+    [HideInInspector] public static float ratMaxDistance = 18f;
     [HideInInspector] public static float ratDamage = 5f;
     [HideInInspector] public static float ratAttackRate = 1.2f;
     [HideInInspector] public static float ratMudballSpeed = 2400f;

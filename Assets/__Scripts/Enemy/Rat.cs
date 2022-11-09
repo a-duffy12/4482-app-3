@@ -163,7 +163,7 @@ public class Rat : Enemy
 
     IEnumerator TunnelPort()
     {
-        Vector3 adjustment = (player.transform.forward * Random.Range(-7, -12)) + (player.transform.right * Random.Range(-3, 3));
+        Vector3 adjustment = (player.transform.forward * Random.Range(-2, -4)) + (player.transform.right * Random.Range(-1, 1));
         adjustment.y = 2.0f;
         transform.position = player.transform.position + adjustment;
 
