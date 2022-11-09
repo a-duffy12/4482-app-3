@@ -1,0 +1,41 @@
+Wavefront OBJ material file
+# Contains 3 materials
+
+newmtl Cut_Sandstone
+Ns 0
+Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+map_Ka 5-RGB.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd 5-RGB.png
+illum 2
+# d 1
+# Tr 0
+
+newmtl Cut_Red_Sandstone
+Ns 0
+Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+map_Ka 5-RGB.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd 5-RGB.png
+illum 2
+# d 1
+# Tr 0
+
+newmtl Cut_Red_Sandstone_Slab
+Ns 0
+Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+map_Ka 5-RGB.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd 5-RGB.png
+illum 2
+# d 1
+# Tr 0

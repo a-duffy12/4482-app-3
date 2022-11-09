@@ -125,7 +125,7 @@ public class Config
     [HideInInspector] public static float ogreMaxHp = 200;
     [HideInInspector] public static float ogreDeathPosition = 0.5f;
     [HideInInspector] public static float ogreMovementSpeed = 9f;
-    [HideInInspector] public static float ogreAggroDistance = 80f;
+    [HideInInspector] public static float ogreAggroDistance = 20f;
     [HideInInspector] public static float ogreAttackDistance = 2.4f;
     [HideInInspector] public static float ogreDamage = 60f;
     [HideInInspector] public static float ogreAttackRate = 0.6f;
@@ -135,11 +135,11 @@ public class Config
     [HideInInspector] public static float demonMaxHp = 150;
     [HideInInspector] public static float demonDeathPosition = 0.5f;
     [HideInInspector] public static float demonMovementSpeed = 7f;
-    [HideInInspector] public static float demonAggroDistance = 100f;
-    [HideInInspector] public static float demonMinDistance = 20f;
-    [HideInInspector] public static float demonMaxDistance = 30f;
+    [HideInInspector] public static float demonAggroDistance = 30f;
+    [HideInInspector] public static float demonMinDistance = 10f;
+    [HideInInspector] public static float demonMaxDistance = 20f;
     [HideInInspector] public static float demonDamage = 50f;
-    [HideInInspector] public static float demonAttackRate = 0.3f;
+    [HideInInspector] public static float demonAttackRate = 0.6f;
     [HideInInspector] public static float demonStartleDelay = 2.0f;
     [HideInInspector] public static float demonFireballSpeed = 1800f;
     [HideInInspector] public static float demonFireballFlyTime = 5.0f;
@@ -150,7 +150,7 @@ public class Config
     [HideInInspector] public static float soulDeathPosition = 0.3f;
     [HideInInspector] public static float soulMoveForce = 5000f;
     [HideInInspector] public static float soulMoveDelay = 2.0f;
-    [HideInInspector] public static float soulAggroDistance = 50f;
+    [HideInInspector] public static float soulAggroDistance = 15f;
     [HideInInspector] public static float soulAttackDistance = 1.8f;
     [HideInInspector] public static float soulDamage = 20f;
     [HideInInspector] public static float soulAttackRate = 0.8f;
@@ -160,9 +160,9 @@ public class Config
     [HideInInspector] public static float ratMaxHp = 100;
     [HideInInspector] public static float ratDeathPosition = 0.5f;
     [HideInInspector] public static float ratMovementSpeed = 15f;
-    [HideInInspector] public static float ratAggroDistance = 60f;
+    [HideInInspector] public static float ratAggroDistance = 25f;
     [HideInInspector] public static float ratMinDistance = 5f;
-    [HideInInspector] public static float ratMaxDistance = 25f;
+    [HideInInspector] public static float ratMaxDistance = 15f;
     [HideInInspector] public static float ratDamage = 5f;
     [HideInInspector] public static float ratAttackRate = 1.2f;
     [HideInInspector] public static float ratMudballSpeed = 2400f;
