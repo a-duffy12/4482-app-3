@@ -218,7 +218,7 @@ public class LevelManager : MonoBehaviour
 
     IEnumerator NextLevel()
     {
-        if (levelId >= Config.levelCount) // only update level counter if it is the first time playing the level
+        if (levelId >= Config.levelCount  && levelName != Config.levelNames.LastOrDefault()) // only update level counter if it is the first time playing the level and not the last level
         {
             Config.levelCount = levelId + 1;
             SaveLoad.SaveData();
@@ -229,7 +229,7 @@ public class LevelManager : MonoBehaviour
 
         yield return new WaitForSeconds(5f);
 
-        if (levelId + 1 == Config.levelCount)
+        if (levelId + 1 == Config.levelCount && levelName != Config.levelNames.LastOrDefault())
         {
             SceneManager.LoadScene(Config.levelNames[Config.levelCount]);
         }
