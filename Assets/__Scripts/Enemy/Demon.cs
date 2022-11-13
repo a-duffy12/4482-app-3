@@ -51,7 +51,7 @@ public class Demon : Enemy
 
         nonflammable = true; // demons cannot be lit on fire
 
-        seeMask = LayerMask.GetMask("Player");
+        seeMask = LayerMask.GetMask("Player", "Ground");
     }
 
     void Update()

@@ -70,15 +70,55 @@ public class Knife : MonoBehaviour
 
         yield return new WaitForSeconds(Config.knifeDuration * 0.4f);
 
-        if (Physics.Raycast(firePoint.position, firePoint.transform.forward, out RaycastHit hit, range, hitMask))
+        if (Physics.Raycast(firePoint.position, firePoint.transform.forward, out RaycastHit hit1, range, hitMask))
         {
-            Enemy enemy = hit.collider.gameObject.GetComponent<Enemy>();
+            Enemy enemy = hit1.collider.gameObject.GetComponent<Enemy>();
             if (enemy != null)
             {
                 enemy.DamageEnemy(damage, weaponName); // deal big damage
         
                 inventory.refill = true; // tell inventory to refill ammo
             }
-        }        
+        }
+        else if (Physics.Raycast(firePoint.position, Quaternion.Euler(0, 10.0f, 0) * firePoint.transform.forward, out RaycastHit hit2, range, hitMask))        
+        {
+           Enemy enemy = hit2.collider.gameObject.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                enemy.DamageEnemy(damage, weaponName); // deal big damage
+        
+                inventory.refill = true; // tell inventory to refill ammo
+            } 
+        }
+        else if (Physics.Raycast(firePoint.position, Quaternion.Euler(0, -10.0f, 0) * firePoint.transform.forward, out RaycastHit hit3, range, hitMask))        
+        {
+           Enemy enemy = hit3.collider.gameObject.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                enemy.DamageEnemy(damage, weaponName); // deal big damage
+        
+                inventory.refill = true; // tell inventory to refill ammo
+            } 
+        }
+        else if (Physics.Raycast(firePoint.position, Quaternion.Euler(10.0f, 0, 0) * firePoint.transform.forward, out RaycastHit hit4, range, hitMask))        
+        {
+           Enemy enemy = hit4.collider.gameObject.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                enemy.DamageEnemy(damage, weaponName); // deal big damage
+        
+                inventory.refill = true; // tell inventory to refill ammo
+            } 
+        }
+        else if (Physics.Raycast(firePoint.position, Quaternion.Euler(-10.0f, 0, 0) * firePoint.transform.forward, out RaycastHit hit5, range, hitMask))        
+        {
+           Enemy enemy = hit5.collider.gameObject.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                enemy.DamageEnemy(damage, weaponName); // deal big damage
+        
+                inventory.refill = true; // tell inventory to refill ammo
+            } 
+        }
     }
 }

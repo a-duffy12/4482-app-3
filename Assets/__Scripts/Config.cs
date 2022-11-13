@@ -114,10 +114,10 @@ public class Config
     [HideInInspector] public static float grenadeStunDuration = 3.0f;
 
     [Header("Knife")]
-    [HideInInspector] public static float knifeCooldown = 5.0f;
+    [HideInInspector] public static float knifeCooldown = 10.0f;
     [HideInInspector] public static float knifeRefillFraction = 0.5f;
-    [HideInInspector] public static float knifeDamage = 500f;
-    [HideInInspector] public static float knifeRange = 2.0f;
+    [HideInInspector] public static float knifeDamage = 200f;
+    [HideInInspector] public static float knifeRange = 2.5f;
     [HideInInspector] public static float knifeDuration = 0.4f;
 
     [Header("Ogre")]
@@ -169,6 +169,20 @@ public class Config
     [HideInInspector] public static float ratMudballFlyTime = 4.0f;
     [HideInInspector] public static float ratSurfaceTime = 20.0f;
     [HideInInspector] public static float ratTunnelTime = 6.0f;
+
+    [Header("Beetle")]
+    [HideInInspector] public static string beetleName = "Beetle";
+    [HideInInspector] public static float beetleMaxHp = 1200;
+    [HideInInspector] public static float beetleDeathPosition = 1.5f;
+    [HideInInspector] public static float beetleMovementSpeed = 4f;
+    [HideInInspector] public static float beetleAggroDistance = 40f;
+    [HideInInspector] public static float beetleMaxDistance = 15f;
+    [HideInInspector] public static float beetleLungeDistance = 7f;
+    [HideInInspector] public static float beetleLungeDamage = 70f;
+    [HideInInspector] public static float beetleLungeRate = 0.5f;
+    [HideInInspector] public static float beetleBlindDistance = 30f;
+    [HideInInspector] public static float beetleBlindDuration = 2.5f;
+    [HideInInspector] public static float beetleBlindRate = 0.15f;
 
     public static void GetSaveData()
     {

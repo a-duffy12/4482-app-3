@@ -12,6 +12,7 @@ public class PlayerSystem : MonoBehaviour
 
     [Header("GameObjects")]
     [SerializeField] private GameObject damageOverlay;
+    [SerializeField] private GameObject blindOverlay;
     [SerializeField] private Image healthBar;
     [SerializeField] private Text deathText;
 
@@ -20,6 +21,8 @@ public class PlayerSystem : MonoBehaviour
 
     [HideInInspector] public float hp { get { return currentHp; } }
     private float currentHp;
+
+    [HideInInspector] public bool blind;
 
     AudioSource playerSource;
 
@@ -40,6 +43,7 @@ public class PlayerSystem : MonoBehaviour
         currentHp = maxHp;
 
         damageOverlay.SetActive(false);
+        blindOverlay.SetActive(false);
         deathText.gameObject.SetActive(false);
 
         healthBar.fillAmount = Mathf.Clamp(currentHp/maxHp, 0, maxHp);
@@ -141,6 +145,21 @@ public class PlayerSystem : MonoBehaviour
                     deathText.text = "You can't quit the game that way";
                 }
             }
+            else if (attacker == Config.beetleName)
+            {
+                if (deathTime >= 0 && deathTime < 5)
+                {
+                    deathText.text = "Bet you didn't see that coming";
+                }
+                else if (deathTime >= 5 && deathTime < 9)
+                {
+                    deathText.text = "Get spit on!";
+                }
+                else if (deathTime == 9)
+                {
+                    deathText.text = "Orkin has had its revenge...";
+                }
+            }
 
             deathText.gameObject.SetActive(true);
             
@@ -164,6 +183,17 @@ public class PlayerSystem : MonoBehaviour
 
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
+    }
+
+    public IEnumerator BlindPlayer(float duration)
+    {
+        blind = true;
+        blindOverlay.SetActive(true);
+
+        yield return new WaitForSeconds(duration);
+
+        blindOverlay.SetActive(false);
+        blind = false;
     }
 
     #region input functions

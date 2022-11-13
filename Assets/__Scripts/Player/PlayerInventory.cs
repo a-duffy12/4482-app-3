@@ -137,6 +137,10 @@ public class PlayerInventory : MonoBehaviour
             inventorySource.clip = switchWeaponAudio;
             inventorySource.Play();
         }
+        else
+        {
+            return;
+        }
 
         sniper.scoped = false;
         Config.sniperScopedIn = false;

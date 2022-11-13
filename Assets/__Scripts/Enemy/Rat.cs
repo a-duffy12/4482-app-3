@@ -56,7 +56,7 @@ public class Rat : Enemy
         mudballSpeed = Config.ratMudballSpeed;
         surfaceTime = Config.ratSurfaceTime;
 
-        seeMask = LayerMask.GetMask("Player");
+        seeMask = LayerMask.GetMask("Player", "Ground");
     }
     
     void Update()
@@ -153,6 +153,7 @@ public class Rat : Enemy
             undergound = true;
             rb.useGravity = false;
             rb.isKinematic = true;
+            invulnerable = true;
             tunnelCounter = 0;
             lastTunnelTime = Time.time;
 
@@ -175,6 +176,7 @@ public class Rat : Enemy
         undergound = false;
         rb.useGravity = true;
         rb.isKinematic = false;
+        invulnerable = false;
     }
 
     void HandleDamageAudio()
