@@ -32,6 +32,7 @@ public class Options : MonoBehaviour
     [SerializeField] private Button greenButton;
     [SerializeField] private Button blueButton;
     [SerializeField] private Button purpleButton;
+    [SerializeField] private List<Button> levelButtons;
 
     [Header("Keybinds")]
     [SerializeField] private InputActionReference forwardAction;
@@ -97,6 +98,7 @@ public class Options : MonoBehaviour
     [SerializeField] private Text fpsText;
     [SerializeField] private Text fpsDisplayText;
     [SerializeField] private Text crosshairColorText;
+    [SerializeField] private List<Text> levelTexts;
 
     [Header("Audio")]
     public AudioClip boomAudio;
@@ -115,6 +117,8 @@ public class Options : MonoBehaviour
     private string greenText = "Crosshair Color - GREEN";
     private string blueText = "Crosshair Color - BLUE";
     private string purpleText = "Crosshair Color - PURPLE";
+
+    private List<int> levelNumbers;
 
     void Awake()
     {
@@ -269,6 +273,28 @@ public class Options : MonoBehaviour
         grenadeButton.onClick.AddListener(() => { Rebind(grenadeAction, grenadeText); });
         pauseButton.onClick.AddListener(() => { Rebind(pauseAction, pauseText); });
         toggleHudButton.onClick.AddListener(() => { Rebind(toggleHudAction, toggleHudText); });
+
+        if (Config.levelNames.Count == levelButtons.Count && Config.levelNames.Count == levelTexts.Count)
+        {
+            for (int i = 0; i < Config.levelNames.Count; i++)
+            {
+                
+                levelTexts[i].text = Config.levelNames[i];
+            }
+
+            levelButtons[0].onClick.AddListener(() => PlayLevel(0));
+            levelButtons[1].onClick.AddListener(() => PlayLevel(1));
+            levelButtons[2].onClick.AddListener(() => PlayLevel(2));
+            levelButtons[3].onClick.AddListener(() => PlayLevel(3));
+            levelButtons[4].onClick.AddListener(() => PlayLevel(4));
+            levelButtons[5].onClick.AddListener(() => PlayLevel(5));
+            levelButtons[6].onClick.AddListener(() => PlayLevel(6));
+            levelButtons[7].onClick.AddListener(() => PlayLevel(7));
+        }
+        else
+        {
+            Debug.Log("Incorrect number of levels, level menu will not work!");
+        }
     }
 
     // Update is called once per frame
@@ -413,6 +439,11 @@ public class Options : MonoBehaviour
             Config.showFps = true;
             fpsText.text = "Enabled";
         }
+    }
+
+    void PlayLevel(int levelNumber)
+    {
+        SceneManager.LoadScene(Config.levelNames[levelNumber]);
     }
 
     void SetBindText(InputActionReference action, Text text)
