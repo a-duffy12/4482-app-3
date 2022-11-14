@@ -2584,7 +2584,7 @@ MonoBehaviour:
   m_Text: 'The Assault Rifle is your trustiest weapon for general combat.
 
     Packs
-    a forgiving magasinze size and fair range.'
+    a forgiving magazine size and fair range.'
 --- !u!222 &408898285
 CanvasRenderer:
   m_ObjectHideFlags: 0
